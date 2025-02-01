@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../constant/values/size_config.dart';
+import 'package:solari/core/constants/size_configuration.dart';
 
 class AppSpacer extends StatelessWidget {
   final double widthRatio;

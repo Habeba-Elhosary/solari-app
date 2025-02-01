@@ -3,13 +3,17 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:solari/core/constants/theme/app_material_theme.dart';
+import 'package:solari/core/utils/app_navigation/app_navigator.dart';
+import 'package:solari/core/widgets/handle_error_screen.dart';
+import 'package:solari/features/auth/auth_cubits.dart';
+import 'package:solari/features/auth/presentation/cubit/auto_signin/auto_signin_cubit.dart';
+import 'package:solari/features/auth/presentation/pages/signin/signin_screen.dart';
 import 'package:solari/features/check_internet/cubit/check_internet_cubit.dart';
 import 'package:solari/features/check_internet/cubit/check_internet_state.dart';
 import 'package:solari/features/check_internet/pages/no_internet_dialog.dart';
-import 'core/constant/styles/material_app_theme.dart';
-import 'core/util/font_scale_handler.dart';
-import 'core/util/router.dart';
+import 'package:solari/injection_container.dart';
+import 'generated/locale_keys.g.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -19,9 +23,8 @@ class MyApp extends StatelessWidget {
     final botToastBuilder = BotToastInit();
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => InternetConnectionCubit(),
-        ),
+        ...authBlocs(),
+        BlocProvider(create: (context) => InternetConnectionCubit()),
       ],
       child: BlocConsumer<InternetConnectionCubit, InternetConnectionState>(
         listener: (context, state) {
@@ -29,8 +32,8 @@ class MyApp extends StatelessWidget {
             Future.delayed(
               Duration(seconds: 3),
               () {
-                if (MagicRouter.canPop()) {
-                  MagicRouter.pop();
+                if (appNavigator.canPop()) {
+                  appNavigator.pop();
                 }
               },
             );
@@ -39,10 +42,7 @@ class MyApp extends StatelessWidget {
             Future.delayed(
               Duration(),
               () {
-                MagicRouter.showDialog(
-                  isDismissible: false,
-                  child: NoInternetDialog(),
-                );
+                appNavigator.showDialog(child: NoInternetDialog());
               },
             );
           }
@@ -51,29 +51,42 @@ class MyApp extends StatelessWidget {
           return ScreenUtilInit(
             designSize: const Size(430, 971),
             minTextAdapt: true,
-            fontSizeResolver: (num fontSize, ScreenUtil instance) {
-              return FontScaleHandler.calculateFontSize(fontSize.toDouble());
-            },
             splitScreenMode: true,
             builder: (BuildContext context, Widget? child) {
               return MaterialApp(
                 navigatorObservers: [
                   BotToastNavigatorObserver(),
-                  SentryNavigatorObserver(),
                 ],
                 debugShowCheckedModeBanner: false,
-                // onGenerateTitle: (context) => LocaleKeys.app_name.tr(),
-                theme: MaterialAppTheme.appTheme,
+                onGenerateTitle: (context) => LocaleKeys.app_name.tr(),
+                theme: AppMaterialTheme.lightTheme,
                 locale: context.locale,
                 supportedLocales: context.supportedLocales,
-                localizationsDelegates: [
-                  ...context.localizationDelegates,
-                ],
-                navigatorKey: navigatorKey,
-                onGenerateRoute: onGenerateRoute,
-                home: const Text('test'),
+                localizationsDelegates: [...context.localizationDelegates],
+                navigatorKey: sl<AppNavigator>().navigatorKey,
+                home: BlocBuilder<AutoSignInCubit, AutoSignInState>(
+                  builder: (context, state) {
+                    if (state is AutoSignInHasUser) {
+                      return const HomeScreen();
+                    }
+                    if (state is AutoSignInNoUser) {
+                      return const SignInScreen();
+                    }
+                    if (state is AutoSignInInitial ||
+                        state is AutoSignInLoading) {
+                      return const CircularProgressIndicator();
+                    }
+                    if (state is AutoSignInError) {
+                      return const SignInScreen();
+                    }
+                    if (state is AutoSignInSeenIntro) {
+                      return const HomeScreen();
+                    }
+                    return const CircularProgressIndicator();
+                  },
+                ),
                 builder: (context, child) {
-                  // handelErrorScreen(context);
+                  handleErrorScreen(context);
                   child = botToastBuilder(context, child!);
                   return child;
                 },
@@ -81,6 +94,27 @@ class MyApp extends StatelessWidget {
             },
           );
         },
+      ),
+    );
+  }
+}
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: TextButton(
+          onPressed: () {},
+          child: const Text('name'),
+        ),
       ),
     );
   }

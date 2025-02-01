@@ -1,9 +1,6 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-
-import '../constant/values/colors.dart';
+import 'package:solari/core/constants/app_colors.dart';
 import 'shimmer.dart';
 
 class AppCashedImage extends StatelessWidget {
@@ -44,7 +41,7 @@ class AppCashedImage extends StatelessWidget {
       child: CachedNetworkImage(
         imageBuilder: (context, imageProvider) => Container(
           decoration: BoxDecoration(
-            color: color ?? AppColors.primary.withOpacity(.2),
+            color: color ?? AppColors.primary,
             shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
             borderRadius: isCircular
                 ? null

@@ -8,7 +8,7 @@ void main() {
     name: 'PROD',
     location: BannerLocation.bottomEnd,
     variables: <String, dynamic>{
-      'baseUrl': '',
+      'baseUrl': 'http://solari.rf.gd/api/v1/website/',
     },
   );
   runner.main();

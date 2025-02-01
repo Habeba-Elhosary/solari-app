@@ -12,9 +12,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await ServiceLocator.init();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
@@ -26,7 +24,7 @@ void main() async {
       path: 'assets/translations',
       supportedLocales: const [Locale('en', 'US'), Locale('ar', 'EG')],
       fallbackLocale: const Locale('en', 'US'),
-      startLocale: const Locale('ar', 'EG'),
+      startLocale: const Locale('en', 'US'),
       assetLoader: const CodegenLoader(),
       child: FirebaseNotificationsHandler(child: const MyApp()),
     ),

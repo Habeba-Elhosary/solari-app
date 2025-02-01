@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../constant/values/colors.dart';
-import '../constant/values/fonts.dart';
-import '../constant/values/text_styles.dart';
+import 'package:solari/core/constants/app_colors.dart';
+import 'package:solari/core/constants/app_text_styles.dart';
 
 void showAppSnackBar({
   required BuildContext context,
   required String message,
-  required ToastType type,
+  required SnackBarType type,
   SnackBarBehavior? behavior = SnackBarBehavior.floating,
   Duration duration = const Duration(milliseconds: 1750),
 }) {
@@ -26,7 +24,7 @@ void showAppSnackBar({
 SnackBar buildAppSnackBar({
   required BuildContext context,
   required String message,
-  required ToastType type,
+  required SnackBarType type,
   required SnackBarBehavior? behavior,
   required Duration duration,
 }) {
@@ -45,21 +43,19 @@ SnackBar buildAppSnackBar({
   );
 }
 
-Widget _buildContent(String message, ToastType type) {
+Widget _buildContent(String message, SnackBarType type) {
   return Wrap(
     crossAxisAlignment: WrapCrossAlignment.center,
     children: <Widget>[
       Icon(
         type.icon,
         color: AppColors.white,
-        size: 32.r,
+        size: 32.sp,
       ),
-      SizedBox(width: 8.w),
+      SizedBox(width: 8.sp),
       Text(
         message,
-        style: TextStyles.regular16
-            .copyWith(color: AppColors.white)
-            .copyWith(fontFamily: AppFonts.fontName),
+        style: TextStyles.regular16.copyWith(color: AppColors.white),
         overflow: TextOverflow.clip,
       ),
     ],
@@ -67,7 +63,7 @@ Widget _buildContent(String message, ToastType type) {
 }
 
 EdgeInsetsGeometry get _padding =>
-    EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h);
+    EdgeInsets.symmetric(horizontal: 16.sp, vertical: 8.sp);
 
 EdgeInsetsGeometry? _getMargin(
     BuildContext context, SnackBarBehavior? behavior) {
@@ -75,42 +71,42 @@ EdgeInsetsGeometry? _getMargin(
     return null;
   }
   return EdgeInsetsDirectional.only(
-    bottom: 16.h,
-    start: 16.w,
-    end: 16.w,
+    bottom: 16.sp,
+    start: 16.sp,
+    end: 16.sp,
   );
 }
 
-enum ToastType {
+enum SnackBarType {
   success,
   error,
   warning,
   info,
 }
 
-extension ToastTypeColor on ToastType {
+extension SnackBarTypeColor on SnackBarType {
   Color get color {
     switch (this) {
-      case ToastType.success:
+      case SnackBarType.success:
         return AppColors.success;
-      case ToastType.error:
-        return AppColors.red;
-      case ToastType.warning:
-        return AppColors.yellow;
-      case ToastType.info:
+      case SnackBarType.error:
+        return AppColors.failed;
+      case SnackBarType.warning:
+        return AppColors.warning;
+      case SnackBarType.info:
         return AppColors.info;
     }
   }
 
   IconData get icon {
     switch (this) {
-      case ToastType.success:
+      case SnackBarType.success:
         return Icons.check_circle_rounded;
-      case ToastType.error:
-        return Icons.error_rounded;
-      case ToastType.warning:
+      case SnackBarType.error:
+        return Icons.close_rounded;
+      case SnackBarType.warning:
         return Icons.warning_rounded;
-      case ToastType.info:
+      case SnackBarType.info:
         return Icons.info_rounded;
     }
   }

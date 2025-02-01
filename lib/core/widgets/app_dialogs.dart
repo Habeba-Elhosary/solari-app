@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../constant/values/colors.dart';
+import 'package:solari/core/constants/app_colors.dart';
 
 class AppDialogs {
   static void showAppSheet(BuildContext context, Widget child) {

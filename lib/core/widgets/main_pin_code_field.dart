@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../constant/values/text_styles.dart';
-import '../constant/values/colors.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:solari/core/constants/app_colors.dart';
+import 'package:solari/core/constants/app_text_styles.dart';
 
 class PinCodeFields extends StatelessWidget {
   const PinCodeFields({
@@ -43,7 +43,7 @@ class PinCodeFields extends StatelessWidget {
                     fieldWidth: 56.w,
                     borderRadius: BorderRadius.circular(10.r),
                     activeColor: AppColors.primary,
-                    inactiveColor: AppColors.greyDark,
+                    inactiveColor: AppColors.grey,
                     selectedColor: AppColors.primary,
                   ),
                   animationDuration: const Duration(milliseconds: 300),

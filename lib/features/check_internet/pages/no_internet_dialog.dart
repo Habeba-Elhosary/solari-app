@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:solari/core/constants/app_text_styles.dart';
 import '../../../core/widgets/app_spacer.dart';
 
 class NoInternetDialog extends StatelessWidget {
@@ -15,11 +16,11 @@ class NoInternetDialog extends StatelessWidget {
           children: [
             AppSpacer(heightRatio: .5),
             // Assets.images.noInternet.svg(),
-            // Text(
-            //   LocaleKeys.no_internet_title.tr(),
-            //   textAlign: TextAlign.center,
-            //   style: TextStyles.medium18,
-            // ),
+            Text(
+              'LocaleKeys.no_internet_title.tr()',
+              textAlign: TextAlign.center,
+              style: TextStyles.medium18,
+            ),
             AppSpacer(heightRatio: 1.3),
             // AppProgressButton(
             //   text: LocaleKeys.no_internet_subTitle.tr(),
