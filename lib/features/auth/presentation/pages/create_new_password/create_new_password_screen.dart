@@ -1,6 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:solari/core/constants/app_assets.dart';
+import 'package:solari/core/constants/app_fonts.dart';
 import 'package:solari/core/constants/app_text_styles.dart';
 import 'package:solari/core/constants/size_configuration.dart';
 import 'package:solari/core/utils/app_validator/app_validator.dart';
@@ -9,9 +12,7 @@ import '../../../../../core/widgets/app_spacer.dart';
 import '../../cubits/create_new_password/create_new_password_cubit.dart';
 
 class CreateNewPasswordScreen extends StatefulWidget {
-  const CreateNewPasswordScreen({
-    super.key,
-  });
+  const CreateNewPasswordScreen({super.key});
 
   @override
   State<CreateNewPasswordScreen> createState() =>
@@ -26,54 +27,61 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: SizeConfig.paddingSymmetric,
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Text(
-                  tr('create_new_password'),
-                  style: TextStyles.bold20,
-                ),
-                Text(
-                  tr('enter_your_data'),
-                  style: TextStyles.light16,
-                ),
-                const AppSpacer(
-                  heightRatio: 0.5,
-                ),
-                PasswordTextFormField(
-                    labelText: tr('new_password'),
-                    validator: (String? value) => Validator.password(
-                          value,
-                        ),
-                    controller: passwordController),
-                const AppSpacer(),
-                PasswordTextFormField(
+      appBar: AppBar(),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: SizeConfig.paddingSymmetric,
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Image.asset(
+                    AppAssets.appLogoBlue,
+                    height: 130.sp,
+                  ),
+                  const AppSpacer(heightRatio: 3),
+                  Text(
+                    tr('create_new_password'),
+                    style: TextStyles.bold18
+                        .copyWith(fontFamily: AppFonts.robotoSlab),
+                  ),
+                  const AppSpacer(heightRatio: 0.5),
+                  Text(
+                    tr('please_enter_the_code_sent_to_your_email'),
+                    style: TextStyles.bold14
+                        .copyWith(fontFamily: AppFonts.robotoSlab),
+                  ),
+                  const AppSpacer(heightRatio: 1),
+                  PasswordTextFormField(
+                    labelText: tr('password'),
+                    validator: (String? value) => Validator.password(value),
+                    controller: passwordController,
+                  ),
+                  const AppSpacer(),
+                  PasswordTextFormField(
                     labelText: tr('confirm_new_password'),
                     validator: (String? value) => Validator.confirmPassword(
                         value, passwordController.text),
-                    controller: confirmPasswordController),
-                const AppSpacer(
-                  heightRatio: 1,
-                ),
-                TextButton(
-                  onPressed: () {
-                    if (!_formKey.currentState!.validate()) {
-                      return;
-                    }
-                    context
-                        .read<CreateNewPasswordCubit>()
-                        .createNewPasswordEvent(
-                            password: passwordController.text,
-                            confirmPassword: confirmPasswordController.text);
-                  },
-                  child: Text(tr('confirm')),
-                )
-              ],
+                    controller: confirmPasswordController,
+                  ),
+                  const AppSpacer(heightRatio: 1),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (!_formKey.currentState!.validate()) {
+                        return;
+                      }
+                      context
+                          .read<CreateNewPasswordCubit>()
+                          .createNewPasswordEvent(
+                              password: passwordController.text,
+                              confirmPassword: confirmPasswordController.text);
+                    },
+                    child: Text(tr('confirm')),
+                  )
+                ],
+              ),
             ),
           ),
         ),
