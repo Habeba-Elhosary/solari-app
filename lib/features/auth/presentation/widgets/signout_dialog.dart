@@ -5,7 +5,7 @@ import 'package:solari/core/constants/app_colors.dart';
 import 'package:solari/core/constants/app_text_styles.dart';
 import 'package:solari/injection_container.dart';
 import '../../../../../core/widgets/app_spacer.dart';
-import '../cubit/signout/signout_cubit.dart';
+import '../cubits/signout/signout_cubit.dart';
 
 class LogoutDialog extends StatelessWidget {
   const LogoutDialog({

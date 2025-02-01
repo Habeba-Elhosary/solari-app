@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:solari/core/errors/failures.dart';
 import 'package:solari/core/usecases/no_params.dart';
-import 'package:solari/features/auth/presentation/cubit/signin/signin_cubit.dart';
+import 'package:solari/features/auth/presentation/cubits/signin/signin_cubit.dart';
 import '../../../../../injection_container.dart';
 import '../../../domain/entities/signin_response.dart';
 import '../../../domain/usecases/auto_signin.dart';

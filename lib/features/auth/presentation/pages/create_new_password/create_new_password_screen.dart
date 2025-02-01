@@ -6,7 +6,7 @@ import 'package:solari/core/constants/size_configuration.dart';
 import 'package:solari/core/utils/app_validator/app_validator.dart';
 import 'package:solari/core/widgets/password_text_form_field.dart';
 import '../../../../../core/widgets/app_spacer.dart';
-import '../../cubit/create_new_password/create_new_password_cubit.dart';
+import '../../cubits/create_new_password/create_new_password_cubit.dart';
 
 class CreateNewPasswordScreen extends StatefulWidget {
   const CreateNewPasswordScreen({
@@ -46,14 +46,14 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                   heightRatio: 0.5,
                 ),
                 PasswordTextFormField(
-                    hintText: tr('new_password'),
+                    labelText: tr('new_password'),
                     validator: (String? value) => Validator.password(
                           value,
                         ),
                     controller: passwordController),
                 const AppSpacer(),
                 PasswordTextFormField(
-                    hintText: tr('confirm_new_password'),
+                    labelText: tr('confirm_new_password'),
                     validator: (String? value) => Validator.confirmPassword(
                         value, passwordController.text),
                     controller: confirmPasswordController),

@@ -6,8 +6,8 @@ import 'package:solari/features/auth/domain/repositories/auth_repository.dart';
 import '../../domain/entities/forget_password_reponse.dart';
 import '../../domain/entities/verification_code_reponse.dart';
 
+const String signInAPI = 'auth/sign/in';
 const String signUpAPI = '/client-api/v1/auth/register';
-const String signInAPI = '/client-api/v1/auth/login';
 const String signOutAPI = '/client-api/v1/auth/logout';
 const String deleteAccountAPI = '/client-api/v1/auth/delete-account';
 const String forgetPasswordAPI = '/client-api/v1/auth/forget-password';

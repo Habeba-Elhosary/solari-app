@@ -22,7 +22,7 @@ class AuthRepositoryImpl implements AuthRepository {
       await authLocalDataSource.cacheUserAccessToken(
           token: user.data.accessToken);
       await authLocalDataSource.cacheUserCredentials(
-        phone: params.phone,
+        phone: params.email,
         password: params.password,
       );
       return right(user.data.user);
@@ -37,7 +37,7 @@ class AuthRepositoryImpl implements AuthRepository {
       final (String phone, String password) =
           await authLocalDataSource.getCacheUserCredentials();
       final SignInResponse signInResponse = await authRemoteDataSource.signIn(
-        SignInParams(phone: phone, password: password),
+        SignInParams(email: phone, password: password),
       );
       return right(signInResponse.data.user);
     } on ServerException catch (error) {

@@ -22,13 +22,13 @@ class SignInCubit extends Cubit<SignInState> {
   set setUser(User user) => _user = user;
 
   Future<void> signInEvent({
-    required String phone,
+    required String email,
     required String password,
   }) async {
     emit(SignInLoading());
     final Either<Failure, User> response = await signInUseCase(
       SignInParams(
-        phone: phone,
+        email: email,
         password: password,
       ),
     );
@@ -39,7 +39,7 @@ class SignInCubit extends Cubit<SignInState> {
       if (!user.isVerified) {
         appNavigator.push(
           screen: OTPVerficationScreen(
-            phone: phone,
+            phone: email,
             forceSendOTP: true,
             isForgetPassword: false,
           ),

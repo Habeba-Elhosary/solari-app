@@ -7,9 +7,9 @@ import 'package:solari/core/constants/app_colors.dart';
 import 'package:solari/core/constants/app_text_styles.dart';
 import 'package:solari/core/constants/size_configuration.dart';
 import 'package:solari/core/widgets/app_spacer.dart';
-import '../../cubit/send_otp/send_otp_cubit.dart';
-import '../../cubit/verfiy_code/timer_verfiy_code.dart';
-import '../../cubit/verfiy_code/verfiy_code_cubit.dart';
+import '../../cubits/send_otp/send_otp_cubit.dart';
+import '../../cubits/verfiy_code/timer_verfiy_code.dart';
+import '../../cubits/verfiy_code/verfiy_code_cubit.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OTPVerficationScreen extends StatefulWidget {

@@ -2,5 +2,11 @@
   "app_name": "SOLARI",
   "skip": "Skip",
   "please_try_again" : "Please try again",
-  "done" : "Done"
+  "done" : "Done",
+  "welcome_back" : "Welcome Back !",
+  "enter_your_credentials_to_access_your_personalized_space": "Enter your credentials to access your personalized space",
+  "email" : "Email",
+  "password" : "Password",
+  "forgot_password" : "Forgot Password ?",
+  "sign_in" : "Sign In"
 }

@@ -6,7 +6,7 @@ import 'package:solari/core/constants/size_configuration.dart';
 import 'package:solari/core/utils/app_validator/app_validator.dart';
 import 'package:solari/core/widgets/app_spacer.dart';
 import 'package:solari/core/widgets/password_text_form_field.dart';
-import 'package:solari/features/auth/presentation/cubit/signup/signup_cubit.dart';
+import 'package:solari/features/auth/presentation/cubits/signup/signup_cubit.dart';
 
 class RequestRegisterScreen extends StatefulWidget {
   const RequestRegisterScreen({super.key});
@@ -22,7 +22,7 @@ class _RequestRegisterScreenState extends State<RequestRegisterScreen> {
   final TextEditingController confirmPasswordController =
       TextEditingController();
   bool isAcceptTerms = false;
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  // final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -128,7 +128,7 @@ class _RegiserFormState extends State<RegiserForm> {
                   ),
                   PasswordTextFormField(
                     controller: confirmPasswordController,
-                    hintText: tr('confirm_password'),
+                    labelText: tr('confirm_password'),
                     validator: (String? value) => Validator.confirmPassword(
                         value, passwordController.text),
                   ),

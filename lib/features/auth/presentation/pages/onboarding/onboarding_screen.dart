@@ -127,7 +127,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     icon: Icon(
                       Icons.arrow_forward_rounded,
                       color: AppColors.primary,
-                      size: 24.sp,
+                      size: 26.sp,
                     ),
                   )
                 ],

@@ -1,4 +1,4 @@
-import 'package:solari/features/auth/presentation/cubit/signin/signin_cubit.dart';
+import 'package:solari/features/auth/presentation/cubits/signin/signin_cubit.dart';
 import '../../injection_container.dart';
 import 'data/datasources/auth_local_datasource.dart';
 import 'data/datasources/auth_remote_datasource.dart';
@@ -12,13 +12,13 @@ import 'domain/usecases/signout.dart';
 import 'domain/usecases/signup.dart';
 import 'domain/usecases/send_otp_code.dart';
 import 'domain/usecases/verfiy_code.dart';
-import 'presentation/cubit/auto_signin/auto_signin_cubit.dart';
-import 'presentation/cubit/create_new_password/create_new_password_cubit.dart';
-import 'presentation/cubit/forget_password/forget_password_cubit.dart';
-import 'presentation/cubit/signout/signout_cubit.dart';
-import 'presentation/cubit/signup/signup_cubit.dart';
-import 'presentation/cubit/send_otp/send_otp_cubit.dart';
-import 'presentation/cubit/verfiy_code/verfiy_code_cubit.dart';
+import 'presentation/cubits/auto_signin/auto_signin_cubit.dart';
+import 'presentation/cubits/create_new_password/create_new_password_cubit.dart';
+import 'presentation/cubits/forget_password/forget_password_cubit.dart';
+import 'presentation/cubits/signout/signout_cubit.dart';
+import 'presentation/cubits/signup/signup_cubit.dart';
+import 'presentation/cubits/send_otp/send_otp_cubit.dart';
+import 'presentation/cubits/verfiy_code/verfiy_code_cubit.dart';
 
 void initAuthInjection() async {
   //* Cubits

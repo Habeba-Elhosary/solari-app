@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:solari/features/auth/presentation/cubit/auto_signin/auto_signin_cubit.dart';
-import 'package:solari/features/auth/presentation/cubit/create_new_password/create_new_password_cubit.dart';
-import 'package:solari/features/auth/presentation/cubit/forget_password/forget_password_cubit.dart';
-import 'package:solari/features/auth/presentation/cubit/send_otp/send_otp_cubit.dart';
-import 'package:solari/features/auth/presentation/cubit/signin/signin_cubit.dart';
-import 'package:solari/features/auth/presentation/cubit/signout/signout_cubit.dart';
-import 'package:solari/features/auth/presentation/cubit/signup/signup_cubit.dart';
-import 'package:solari/features/auth/presentation/cubit/verfiy_code/verfiy_code_cubit.dart';
+import 'package:solari/features/auth/presentation/cubits/auto_signin/auto_signin_cubit.dart';
+import 'package:solari/features/auth/presentation/cubits/create_new_password/create_new_password_cubit.dart';
+import 'package:solari/features/auth/presentation/cubits/forget_password/forget_password_cubit.dart';
+import 'package:solari/features/auth/presentation/cubits/send_otp/send_otp_cubit.dart';
+import 'package:solari/features/auth/presentation/cubits/signin/signin_cubit.dart';
+import 'package:solari/features/auth/presentation/cubits/signout/signout_cubit.dart';
+import 'package:solari/features/auth/presentation/cubits/signup/signup_cubit.dart';
+import 'package:solari/features/auth/presentation/cubits/verfiy_code/verfiy_code_cubit.dart';
 import 'package:solari/injection_container.dart';
 
 List<BlocProvider<Cubit<Object>>> authBlocs() => <BlocProvider<Cubit<Object>>>[

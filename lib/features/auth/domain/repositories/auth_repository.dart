@@ -22,15 +22,15 @@ abstract class AuthRepository {
 
 // ======================= SIGN IN PARAMS ==========================
 class SignInParams {
-  final String phone;
+  final String email;
   final String password;
-  SignInParams({required this.phone, required this.password});
+  SignInParams({required this.email, required this.password});
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
-        'mobile': phone,
-        'password': password,
-      };
+      'email': email,
+      'password': password,
+    };
   }
 }
 

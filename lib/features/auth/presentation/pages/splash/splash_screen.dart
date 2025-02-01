@@ -43,12 +43,8 @@ class _SplashScreenState extends State<SplashScreen> {
                   fontFamily: AppFonts.robotoSlab,
                   color: AppColors.white,
                   fontSize: 32.sp),
-            )
-                .animate()
-                .fadeIn(duration: 800.ms)
-                .slideY(
-                    begin: 0.5, end: 0, duration: 800.ms, curve: Curves.easeOut)
-                .shimmer(duration: 2.seconds),
+            ).animate().fadeIn(duration: 600.ms).slideY(
+                begin: 0.5, end: 0, duration: 600.ms, curve: Curves.easeOut),
           ],
         ),
       ),

@@ -10,11 +10,13 @@ class AppMaterialTheme {
 
   static ElevatedButtonThemeData elevatedButtonTheme = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      backgroundColor: Colors.purple,
+      disabledBackgroundColor: AppColors.greyLight,
+      disabledForegroundColor: AppColors.white,
+      backgroundColor: AppColors.primary,
       foregroundColor: AppColors.white,
-      textStyle: TextStyles.bold14,
+      textStyle: TextStyles.bold16,
       elevation: 0.0,
-      shape: const StadiumBorder(),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
       padding: EdgeInsets.symmetric(
         horizontal: SizeConfig.hPadding,
         vertical: 16.sp,
@@ -22,12 +24,41 @@ class AppMaterialTheme {
     ),
   );
 
+  static InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
+    disabledBorder: InputBorder.none,
+    floatingLabelStyle: TextStyles.regular14.copyWith(color: AppColors.primary),
+    errorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(16.r),
+      borderSide: BorderSide(color: AppColors.red),
+    ),
+    focusedErrorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(16.r),
+      borderSide: BorderSide(color: AppColors.red),
+    ),
+    filled: true,
+    fillColor: AppColors.white,
+    floatingLabelAlignment: FloatingLabelAlignment.start,
+    contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+    labelStyle: TextStyles.regular14,
+    errorStyle: TextStyles.regular12.copyWith(color: AppColors.red),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(16.r),
+      borderSide: BorderSide(color: AppColors.primary, width: 1.sp),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(16.r),
+      borderSide: BorderSide(color: AppColors.greyLight, width: 1.sp),
+    ),
+  );
+
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
+    primaryColor: AppColors.primary,
     fontFamily: AppFonts.roboto,
-    scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor,
+    scaffoldBackgroundColor: AppColors.white,
     textTheme: TextTheme(titleMedium: TextStyles.medium14),
     appBarTheme: appBarTheme,
+    inputDecorationTheme: inputDecorationTheme,
     elevatedButtonTheme: elevatedButtonTheme,
   );
 
@@ -38,5 +69,6 @@ class AppMaterialTheme {
     textTheme: TextTheme(titleMedium: TextStyles.medium14),
     appBarTheme: appBarTheme,
     elevatedButtonTheme: elevatedButtonTheme,
+    inputDecorationTheme: inputDecorationTheme,
   );
 }
