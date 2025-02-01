@@ -32,9 +32,9 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
       appNavigator.popToFirst();
       appNavigator.push(
           screen: OTPVerficationScreen(
-        phone: phone,
-        forceSendOTP: false,
-        isForgetPassword: true,
+        // phone: phone,
+        // forceSendOTP: false,
+        // isForgetPassword: true,
       ));
     });
   }

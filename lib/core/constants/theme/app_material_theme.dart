@@ -6,7 +6,12 @@ import 'package:solari/core/constants/app_text_styles.dart';
 import 'package:solari/core/constants/size_configuration.dart';
 
 class AppMaterialTheme {
-  static AppBarTheme appBarTheme = const AppBarTheme();
+  static AppBarTheme appBarTheme = AppBarTheme(
+    backgroundColor: AppColors.white,
+    elevation: 0.0,
+    titleTextStyle: TextStyles.bold16,
+    centerTitle: true,
+  );
 
   static ElevatedButtonThemeData elevatedButtonTheme = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
@@ -53,7 +58,15 @@ class AppMaterialTheme {
 
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
-    primaryColor: AppColors.primary,
+    actionIconTheme: ActionIconThemeData(
+      backButtonIconBuilder: (context) {
+        return Icon(
+          Icons.arrow_back_rounded,
+          color: AppColors.primary,
+          size: 24.sp,
+        );
+      },
+    ),
     fontFamily: AppFonts.roboto,
     scaffoldBackgroundColor: AppColors.white,
     textTheme: TextTheme(titleMedium: TextStyles.medium14),

@@ -39,9 +39,9 @@ class SignInCubit extends Cubit<SignInState> {
       if (!user.isVerified) {
         appNavigator.push(
           screen: OTPVerficationScreen(
-            phone: email,
-            forceSendOTP: true,
-            isForgetPassword: false,
+            // phone: email,
+            // forceSendOTP: true,
+            // isForgetPassword: false,
           ),
         );
         return;
