@@ -1,3 +1,4 @@
 abstract class AppFonts {
-  static const String fontName = 'Cairo';
+  static const String roboto = 'Roboto';
+  static const String robotoSlab = 'RobotoSlab';
 }

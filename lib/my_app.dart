@@ -9,11 +9,11 @@ import 'package:solari/core/widgets/handle_error_screen.dart';
 import 'package:solari/features/auth/auth_cubits.dart';
 import 'package:solari/features/auth/presentation/cubit/auto_signin/auto_signin_cubit.dart';
 import 'package:solari/features/auth/presentation/pages/signin/signin_screen.dart';
+import 'package:solari/features/auth/presentation/pages/splash/splash_screen.dart';
 import 'package:solari/features/check_internet/cubit/check_internet_cubit.dart';
 import 'package:solari/features/check_internet/cubit/check_internet_state.dart';
 import 'package:solari/features/check_internet/pages/no_internet_dialog.dart';
 import 'package:solari/injection_container.dart';
-import 'generated/locale_keys.g.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -58,11 +58,13 @@ class MyApp extends StatelessWidget {
                   BotToastNavigatorObserver(),
                 ],
                 debugShowCheckedModeBanner: false,
-                onGenerateTitle: (context) => LocaleKeys.app_name.tr(),
                 theme: AppMaterialTheme.lightTheme,
+                onGenerateTitle: (context) => tr('app_name'),
                 locale: context.locale,
                 supportedLocales: context.supportedLocales,
-                localizationsDelegates: [...context.localizationDelegates],
+                localizationsDelegates: [
+                  ...context.localizationDelegates,
+                ],
                 navigatorKey: sl<AppNavigator>().navigatorKey,
                 home: BlocBuilder<AutoSignInCubit, AutoSignInState>(
                   builder: (context, state) {
@@ -72,17 +74,13 @@ class MyApp extends StatelessWidget {
                     if (state is AutoSignInNoUser) {
                       return const SignInScreen();
                     }
-                    if (state is AutoSignInInitial ||
-                        state is AutoSignInLoading) {
-                      return const CircularProgressIndicator();
-                    }
                     if (state is AutoSignInError) {
                       return const SignInScreen();
                     }
                     if (state is AutoSignInSeenIntro) {
                       return const HomeScreen();
                     }
-                    return const CircularProgressIndicator();
+                    return const SplashScreen();
                   },
                 ),
                 builder: (context, child) {

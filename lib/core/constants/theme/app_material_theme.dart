@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:solari/core/constants/app_colors.dart';
+import 'package:solari/core/constants/app_fonts.dart';
 import 'package:solari/core/constants/app_text_styles.dart';
 import 'package:solari/core/constants/size_configuration.dart';
 
@@ -23,6 +24,7 @@ class AppMaterialTheme {
 
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
+    fontFamily: AppFonts.roboto,
     scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor,
     textTheme: TextTheme(titleMedium: TextStyles.medium14),
     appBarTheme: appBarTheme,
@@ -31,6 +33,7 @@ class AppMaterialTheme {
 
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
+    fontFamily: AppFonts.roboto,
     scaffoldBackgroundColor: AppColors.black,
     textTheme: TextTheme(titleMedium: TextStyles.medium14),
     appBarTheme: appBarTheme,

@@ -4,7 +4,6 @@ import 'package:firebase_notifications_handler/firebase_notifications_handler.da
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:solari/firebase_options.dart';
-import 'package:solari/generated/codegen_loader.g.dart';
 import 'package:solari/injection_container.dart';
 import 'package:solari/my_app.dart';
 
@@ -22,10 +21,10 @@ void main() async {
   runApp(
     EasyLocalization(
       path: 'assets/translations',
-      supportedLocales: const [Locale('en', 'US'), Locale('ar', 'EG')],
-      fallbackLocale: const Locale('en', 'US'),
-      startLocale: const Locale('en', 'US'),
-      assetLoader: const CodegenLoader(),
+      supportedLocales: const [Locale('en'), Locale('ar')],
+      fallbackLocale: const Locale('en'),
+      startLocale: const Locale('en'),
+      assetLoader: const RootBundleAssetLoader(),
       child: FirebaseNotificationsHandler(child: const MyApp()),
     ),
   );

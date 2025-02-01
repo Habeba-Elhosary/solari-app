@@ -12,6 +12,6 @@ class AppColors {
   static const Color info = Color(0xFF296CAF);
   static const Color warning = Color(0xFFF7B313);
 
-  static const Color primary = Color(0xFF000000);
+  static const Color primary = Color(0xFF151ABD);
   static const Color grey = Color(0xFF000000);
 }
