@@ -7,7 +7,7 @@ import 'package:solari/core/constants/app_colors.dart';
 import 'package:solari/core/constants/app_fonts.dart';
 import 'package:solari/core/constants/app_text_styles.dart';
 import 'package:solari/core/constants/size_configuration.dart';
-import 'package:solari/features/auth/presentation/pages/onboarding/onboarding_page.dart';
+import 'package:solari/features/auth/presentation/widgets/onboarding_one_page.dart';
 import 'package:solari/features/auth/presentation/pages/signin/signin_screen.dart';
 import 'package:solari/injection_container.dart';
 
@@ -58,7 +58,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               });
             },
             itemBuilder: (context, index) {
-              return OnboardingPage(
+              return OnboardingOnePage(
                 firstTitle: onboardingData[index]['first_title']!,
                 secondTitle: onboardingData[index]['second_title']!,
                 thirdTitle: onboardingData[index]['third_title']!,
