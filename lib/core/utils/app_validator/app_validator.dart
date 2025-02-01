@@ -131,7 +131,6 @@ class Validator {
     }
     return null;
   }
-//TODO: TRANSLATE
   // static String? naturalNumbers(String? value) {
   //   if (value != null) {
   //     value = value.trim();

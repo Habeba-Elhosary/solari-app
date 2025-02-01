@@ -34,6 +34,7 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
           onTapOutside: (PointerDownEvent event) {
             FocusScope.of(context).unfocus();
           },
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           cursorColor: AppColors.primary,
           controller: widget.controller,
           decoration: InputDecoration(

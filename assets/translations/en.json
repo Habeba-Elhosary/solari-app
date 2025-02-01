@@ -21,5 +21,15 @@
   "sec" : "sec",
   "create_new_password" : "Create New Password",
   "create_new_password_description" : "Enter your new password and confirm it ... ",
-  "confirm_password" : "Confirm Password"
+  "confirm_password" : "Confirm Password",
+  "error_filed_required": "This field is required.",
+  "name_must_trio": "Name must consist of at least three parts.",
+  "name_short_input": "Name is too short.",
+  "short_address": "Address is too short.",
+  "enter_correct_name": "Please enter a valid name.",
+  "error_email_regex": "Please enter a valid email address.",
+  "error_password_validation": "Password must be at least 8 characters long.",
+  "error_wrong_password_confirm": "Passwords do not match.",
+  "error_wrong_input": "Please enter a valid number.",
+  "invalid_phone": "Please enter a valid phone number."
 }
