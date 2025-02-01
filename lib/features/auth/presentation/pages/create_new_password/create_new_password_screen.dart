@@ -49,7 +49,7 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                   ),
                   const AppSpacer(heightRatio: 0.5),
                   Text(
-                    tr('please_enter_the_code_sent_to_your_email'),
+                    tr('create_new_password_description'),
                     style: TextStyles.bold14
                         .copyWith(fontFamily: AppFonts.robotoSlab),
                   ),
@@ -61,7 +61,7 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                   ),
                   const AppSpacer(),
                   PasswordTextFormField(
-                    labelText: tr('confirm_new_password'),
+                    labelText: tr('confirm_password'),
                     validator: (String? value) => Validator.confirmPassword(
                         value, passwordController.text),
                     controller: confirmPasswordController,

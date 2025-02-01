@@ -18,5 +18,8 @@
   "did_not_get_code" : "Did not get code ?",
   "resend_code" : "Resend Code",
   "otp_will_be_sent_in" : "OTP will be sent in",
-  "sec" : "sec"
+  "sec" : "sec",
+  "create_new_password" : "Create New Password",
+  "create_new_password_description" : "Enter your new password and confirm it ... ",
+  "confirm_password" : "Confirm Password"
 }
