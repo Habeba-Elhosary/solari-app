@@ -1,5 +1,6 @@
 {
   "app_name": "SOLARI",
   "skip": "Skip",
-  "please_try_again" : "Please try again"
+  "please_try_again" : "Please try again",
+  "done" : "Done"
 }
