@@ -76,7 +76,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           style: TextStyles.bold18
                               .copyWith(fontFamily: AppFonts.robotoSlab),
                         ),
-                        const AppSpacer(heightRatio: 0.5),
+                        const AppSpacer(heightRatio: 0.7),
                         Text(
                           tr('enter_your_credentials_to_access_your_personalized_space'),
                           style: TextStyles.bold14
@@ -96,25 +96,14 @@ class _SignInScreenState extends State<SignInScreen> {
                             FocusScope.of(context).unfocus();
                           },
                         ),
-                        const AppSpacer(heightRatio: 0.5),
+                        const AppSpacer(heightRatio: 0.7),
                         PasswordTextFormField(
                           labelText: tr('password'),
                           controller: passwordController,
                           validator: (String? value) =>
                               Validator.password(value),
                         ),
-                        AppSpacer(heightRatio: 0.7),
-                        GestureDetector(
-                          onTap: () => appNavigator.push(
-                            screen: const ForgetPasswordScreen(),
-                          ),
-                          child: Text(
-                            tr('forgot_password'),
-                            textAlign: TextAlign.end,
-                            style: TextStyles.regular14,
-                          ),
-                        ),
-                        const AppSpacer(heightRatio: 1.5),
+                        const AppSpacer(heightRatio: 0.7),
                         BlocBuilder<SignInCubit, SignInState>(
                           builder:
                               (BuildContext context, SignInState signInState) {
@@ -145,7 +134,18 @@ class _SignInScreenState extends State<SignInScreen> {
                             );
                           },
                         ),
-                        const AppSpacer(),
+                        const AppSpacer(heightRatio: 0.7),
+                        GestureDetector(
+                          onTap: () => appNavigator.push(
+                            screen: const ForgetPasswordScreen(),
+                          ),
+                          child: Text(
+                            tr('forgot_password'),
+                            textAlign: TextAlign.center,
+                            style: TextStyles.regular14
+                                .copyWith(color: AppColors.grey),
+                          ),
+                        ),
                       ],
                     ),
                   ),
