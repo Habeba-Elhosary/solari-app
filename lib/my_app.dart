@@ -9,6 +9,7 @@ import 'package:solari/core/widgets/handle_error_screen.dart';
 import 'package:solari/features/auth/auth_cubits.dart';
 import 'package:solari/features/auth/presentation/cubits/auto_signin/auto_signin_cubit.dart';
 import 'package:solari/features/auth/presentation/pages/onboarding/onboarding_screen.dart';
+import 'package:solari/features/auth/presentation/pages/signin/signin_screen.dart';
 import 'package:solari/features/auth/presentation/pages/splash/splash_screen.dart';
 import 'package:solari/features/check_internet/cubit/check_internet_cubit.dart';
 import 'package:solari/features/check_internet/cubit/check_internet_state.dart';
@@ -78,7 +79,7 @@ class MyApp extends StatelessWidget {
                       return const OnboardingScreen();
                     }
                     if (state is AutoSignInSeenIntro) {
-                      return const HomeScreen();
+                      return const SignInScreen();
                     }
                     return const SplashScreen();
                   },

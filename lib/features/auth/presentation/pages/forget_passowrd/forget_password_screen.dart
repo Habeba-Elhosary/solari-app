@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:solari/core/constants/app_assets.dart';
 import 'package:solari/core/constants/app_colors.dart';
@@ -8,6 +9,7 @@ import 'package:solari/core/constants/app_text_styles.dart';
 import 'package:solari/core/constants/size_configuration.dart';
 import 'package:solari/core/utils/app_validator/app_validator.dart';
 import 'package:solari/core/widgets/app_spacer.dart';
+import 'package:solari/features/auth/presentation/cubits/forget_password/forget_password_cubit.dart';
 import 'package:solari/features/auth/presentation/pages/verify_otp/verify_otp_screen.dart';
 import 'package:solari/injection_container.dart';
 
@@ -71,18 +73,33 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       ),
                     ),
                     const AppSpacer(heightRatio: 1),
-                    ElevatedButton(
-                      onPressed: () {
-                        appNavigator.push(screen: const OTPVerficationScreen());
-                        // TODO : send code
-                        // if (!_formKey.currentState!.validate()) {
-                        //   return;
-                        // }
-                        // context
-                        //     .read<ForgetPasswordCubit>()
-                        //     .forgetPasswordEvent(phone: emailController.text);
+                    BlocConsumer<ForgetPasswordCubit, ForgetPasswordState>(
+                      listener: (context, state) {
+                        if (state is ForgetPasswordSuccess) {
+                          appNavigator.popToFirst();
+                          appNavigator.push(
+                            screen: OTPVerficationScreen(
+                              isForgetPassword: true,
+                              email: emailController.text,
+                              otpToken: state.otpToken,
+                            ),
+                          );
+                        }
                       },
-                      child: Text(tr('send_code')),
+                      builder: (context, state) {
+                        return ElevatedButton(
+                          onPressed: () {
+                            if (!_formKey.currentState!.validate()) {
+                              return;
+                            }
+                            context
+                                .read<ForgetPasswordCubit>()
+                                .forgetPasswordEvent(
+                                    email: emailController.text);
+                          },
+                          child: Text(tr('send_code')),
+                        );
+                      },
                     ),
                   ],
                 ),

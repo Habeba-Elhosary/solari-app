@@ -1,7 +1,7 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:solari/core/errors/failures.dart';
 import 'package:solari/core/usecases/basic_usecase.dart';
-import '../entities/forget_password_reponse.dart';
+import 'package:solari/features/auth/data/models/forget_password_response.dart';
 import '../repositories/auth_repository.dart';
 
 class ForgetPasswordUseCase

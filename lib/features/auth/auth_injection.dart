@@ -10,25 +10,24 @@ import 'domain/usecases/forget_password.dart';
 import 'domain/usecases/signin.dart';
 import 'domain/usecases/signout.dart';
 import 'domain/usecases/signup.dart';
-import 'domain/usecases/send_otp_code.dart';
 import 'domain/usecases/verfiy_code.dart';
 import 'presentation/cubits/auto_signin/auto_signin_cubit.dart';
 import 'presentation/cubits/create_new_password/create_new_password_cubit.dart';
 import 'presentation/cubits/forget_password/forget_password_cubit.dart';
 import 'presentation/cubits/signout/signout_cubit.dart';
 import 'presentation/cubits/signup/signup_cubit.dart';
-import 'presentation/cubits/send_otp/send_otp_cubit.dart';
 import 'presentation/cubits/verfiy_code/verfiy_code_cubit.dart';
 
 void initAuthInjection() async {
   //* Cubits
   sl.registerLazySingleton(() => AutoSignInCubit(autoSignInUseCase: sl()));
   sl.registerLazySingleton(() => SignInCubit(signInUseCase: sl()));
+  sl.registerLazySingleton(() => ForgetPasswordCubit(forgetPassword: sl()));
+
+
   sl.registerLazySingleton(() => SignUpCubit(signUpUseCase: sl()));
   sl.registerLazySingleton(() => SignOutCubit(signOutUseCase: sl()));
-
-  sl.registerLazySingleton(() => ForgetPasswordCubit(forgetPassword: sl()));
-  sl.registerLazySingleton(() => SendOtpCubit(sendOTPCodeUseCase: sl()));
+  // sl.registerLazySingleton(() => SendOtpCubit(sendOTPCodeUseCase: sl()));
   sl.registerLazySingleton(() => VerfiyCodeCubit(verfiyCode: sl()));
   sl.registerLazySingleton(
     () => CreateNewPasswordCubit(createNewPasswordUseCase: sl()),
@@ -37,11 +36,12 @@ void initAuthInjection() async {
   //* UseCases
   sl.registerLazySingleton(() => AutoSignInUseCase(authRepository: sl()));
   sl.registerLazySingleton(() => SignInUseCase(authRepository: sl()));
+  sl.registerLazySingleton(() => ForgetPasswordUseCase(authRepository: sl()));
+
+
   sl.registerLazySingleton(() => SignUpUseCase(authRepository: sl()));
   sl.registerLazySingleton(() => SignOutUseCase(authRepository: sl()));
-
-  sl.registerLazySingleton(() => ForgetPasswordUseCase(authRepository: sl()));
-  sl.registerLazySingleton(() => SendOTPCodeUseCase(authRepository: sl()));
+  // sl.registerLazySingleton(() => SendOTPCodeUseCase(authRepository: sl()));
   sl.registerLazySingleton(() => VerfiyCodeUseCase(authRepository: sl()));
   sl.registerLazySingleton(
     () => CreateNewPasswordUseCase(authRepository: sl()),

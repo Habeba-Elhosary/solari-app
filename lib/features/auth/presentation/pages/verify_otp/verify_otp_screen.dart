@@ -8,14 +8,22 @@ import 'package:solari/core/constants/app_fonts.dart';
 import 'package:solari/core/constants/app_text_styles.dart';
 import 'package:solari/core/constants/size_configuration.dart';
 import 'package:solari/core/widgets/app_spacer.dart';
+import 'package:solari/features/auth/presentation/cubits/forget_password/forget_password_cubit.dart';
 import 'package:solari/features/auth/presentation/pages/create_new_password/create_new_password_screen.dart';
 import 'package:solari/injection_container.dart';
-import '../../cubits/send_otp/send_otp_cubit.dart';
 import '../../cubits/verfiy_code/timer_verfiy_code.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OTPVerficationScreen extends StatefulWidget {
-  const OTPVerficationScreen({super.key});
+  final bool isForgetPassword;
+  final String? email;
+  final String otpToken;
+  const OTPVerficationScreen({
+    super.key,
+    required this.isForgetPassword,
+    this.email,
+    required this.otpToken,
+  });
 
   @override
   State<OTPVerficationScreen> createState() => _OTPVerficationScreenState();
@@ -27,9 +35,9 @@ class _OTPVerficationScreenState extends State<OTPVerficationScreen> {
   @override
   void initState() {
     super.initState();
-    // if (widget.forceSendOTP) {
-    //   context.read<SendOtpCubit>().sendOTP(widget.phone);
-    // }
+    if (!widget.isForgetPassword) {
+      // context.read<SendOtpCubit>().sendOTP(widget.phone);
+    }
     VerificatonCodeTimerStream.counterValue = 60;
     VerificatonCodeTimerStream.autoDecrement();
     VerificatonCodeTimerStream.listen();
@@ -101,6 +109,12 @@ class _OTPVerficationScreenState extends State<OTPVerficationScreen> {
                   const AppSpacer(heightRatio: 1),
                   ElevatedButton(
                     onPressed: () {
+                      if (widget.isForgetPassword) {
+                        // context.read<VerfiyCodeCubit>().verfiyCodeEvent(
+                        //       code: otpController.text,
+                        //       isForgetPassword: widget.isForgetPassword,
+                        //     );
+                      }
                       appNavigator.push(screen: CreateNewPasswordScreen());
                       // TODO : send otp
                       // context.read<VerfiyCodeCubit>().verfiyCodeEvent(
@@ -111,70 +125,135 @@ class _OTPVerficationScreenState extends State<OTPVerficationScreen> {
                     child: Text(tr('confirm')),
                   ),
                   const AppSpacer(heightRatio: 1.5),
-                  BlocBuilder<SendOtpCubit, SendOtpState>(
-                    builder: (BuildContext context, SendOtpState state) {
-                      if (state is SendOtpLoading) {
-                        return const Center(
-                            child: CircularProgressIndicator.adaptive());
-                      }
-                      return StreamBuilder<int>(
-                        stream: VerificatonCodeTimerStream.stream,
-                        builder: (BuildContext context,
-                            AsyncSnapshot<int> snapshot) {
-                          if (snapshot.hasData) {
-                            if (snapshot.data == 0) {
-                              return GestureDetector(
-                                onTap: () {
-                                  // TODO : send otp
-                                  // context
-                                  //     .read<SendOtpCubit>()
-                                  //     .sendOTP(widget.phone);
-                                },
-                                child: Text.rich(
-                                  TextSpan(children: <InlineSpan>[
-                                    TextSpan(
-                                      text: '${tr('did_not_get_code')} ',
-                                      style: TextStyles.regular14
-                                          .copyWith(color: AppColors.black),
-                                    ),
-                                    TextSpan(
-                                      text: tr('resend_code'),
-                                      style: TextStyles.bold14.copyWith(
-                                        color: AppColors.primary,
+                  if (widget.isForgetPassword) ...[
+                    BlocBuilder<ForgetPasswordCubit, ForgetPasswordState>(
+                      builder: (BuildContext context, state) {
+                        return StreamBuilder<int>(
+                          stream: VerificatonCodeTimerStream.stream,
+                          builder: (BuildContext context,
+                              AsyncSnapshot<int> snapshot) {
+                            if (snapshot.hasData) {
+                              if (snapshot.data == 0) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    context
+                                        .read<ForgetPasswordCubit>()
+                                        .forgetPasswordEvent(
+                                            email: widget.email!);
+                                  },
+                                  child: Text.rich(
+                                    TextSpan(children: <InlineSpan>[
+                                      TextSpan(
+                                        text: '${tr('did_not_get_code')} ',
+                                        style: TextStyles.regular14
+                                            .copyWith(color: AppColors.black),
                                       ),
-                                    ),
-                                  ]),
-                                  textAlign: TextAlign.center,
-                                ),
-                              );
-                            } else {
-                              return Column(
-                                children: <Widget>[
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        '${tr('otp_will_be_sent_in')}  ',
-                                        style: TextStyles.regular14,
-                                      ),
-                                      Text(
-                                        '${snapshot.data} ${tr('sec')}',
+                                      TextSpan(
+                                        text: tr('resend_code'),
                                         style: TextStyles.bold14.copyWith(
                                           color: AppColors.primary,
                                         ),
                                       ),
-                                    ],
+                                    ]),
+                                    textAlign: TextAlign.center,
                                   ),
-                                ],
-                              );
+                                );
+                              } else {
+                                return Column(
+                                  children: <Widget>[
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          '${tr('otp_will_be_sent_in')}  ',
+                                          style: TextStyles.regular14,
+                                        ),
+                                        Text(
+                                          '${snapshot.data} ${tr('sec')}',
+                                          style: TextStyles.bold14.copyWith(
+                                            color: AppColors.primary,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                );
+                              }
+                            } else {
+                              return const SizedBox.shrink();
                             }
-                          } else {
-                            return const SizedBox.shrink();
-                          }
-                        },
-                      );
-                    },
-                  ),
+                          },
+                        );
+                      },
+                    ),
+                  ] else
+                    ...[],
+
+                  // BlocBuilder<SendOtpCubit, SendOtpState>(
+                  //   builder: (BuildContext context, SendOtpState state) {
+                  //     if (state is SendOtpLoading) {
+                  //       return const Center(
+                  //           child: CircularProgressIndicator.adaptive());
+                  //     }
+                  //     return StreamBuilder<int>(
+                  //       stream: VerificatonCodeTimerStream.stream,
+                  //       builder: (BuildContext context,
+                  //           AsyncSnapshot<int> snapshot) {
+                  //         if (snapshot.hasData) {
+                  //           if (snapshot.data == 0) {
+                  //             return GestureDetector(
+                  //               onTap: () {
+                  //                 // TODO : send otp
+                  //                 // context
+                  //                 //     .read<SendOtpCubit>()
+                  //                 //     .sendOTP(widget.phone);
+                  //               },
+                  //               child: Text.rich(
+                  //                 TextSpan(children: <InlineSpan>[
+                  //                   TextSpan(
+                  //                     text: '${tr('did_not_get_code')} ',
+                  //                     style: TextStyles.regular14
+                  //                         .copyWith(color: AppColors.black),
+                  //                   ),
+                  //                   TextSpan(
+                  //                     text: tr('resend_code'),
+                  //                     style: TextStyles.bold14.copyWith(
+                  //                       color: AppColors.primary,
+                  //                     ),
+                  //                   ),
+                  //                 ]),
+                  //                 textAlign: TextAlign.center,
+                  //               ),
+                  //             );
+                  //           } else {
+                  //             return Column(
+                  //               children: <Widget>[
+                  //                 Row(
+                  //                   mainAxisAlignment: MainAxisAlignment.center,
+                  //                   children: [
+                  //                     Text(
+                  //                       '${tr('otp_will_be_sent_in')}  ',
+                  //                       style: TextStyles.regular14,
+                  //                     ),
+                  //                     Text(
+                  //                       '${snapshot.data} ${tr('sec')}',
+                  //                       style: TextStyles.bold14.copyWith(
+                  //                         color: AppColors.primary,
+                  //                       ),
+                  //                     ),
+                  //                   ],
+                  //                 ),
+                  //               ],
+                  //             );
+                  //           }
+                  //         } else {
+                  //           return const SizedBox.shrink();
+                  //         }
+                  //       },
+                  //     );
+                  //   },
+                  // ),
                 ],
               )),
         ),

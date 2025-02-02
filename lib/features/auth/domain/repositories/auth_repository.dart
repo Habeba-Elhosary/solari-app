@@ -1,19 +1,18 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:solari/core/errors/failures.dart';
-import 'package:solari/features/auth/domain/entities/signin_response.dart';
-import '../entities/forget_password_reponse.dart';
-import '../entities/verification_code_reponse.dart';
+import 'package:solari/features/auth/data/models/forget_password_response.dart';
+import 'package:solari/features/auth/data/models/signin_response.dart';
 
 abstract class AuthRepository {
-  Future<Either<Failure, User>> autoSignIn();
-  Future<Either<Failure, User>> signIn(SignInParams params);
+  Future<Either<Failure, SignInResponse>> signIn(SignInParams params);
+  Future<Either<Failure, SignInResponse>> autoSignIn();
+  Future<Either<Failure, ForgetPasswordResponse>> forgetPassword(
+      ForgetPasswordParams params);
+
   Future<Either<Failure, Unit>> signUp(SignUpParams params);
   Future<Either<Failure, Unit>> signOut();
   Future<Either<Failure, Unit>> deleteAccount();
-
-  Future<Either<Failure, ForgetPasswordResponse>> forgetPassword(
-      ForgetPasswordParams params);
-  Future<Either<Failure, VerificationCodeRepsonse>> sendOTPCode(
+  Future<Either<Failure, SignInResponse>> sendOTPCode(
       ForgetPasswordParams params);
   Future<Either<Failure, Unit>> verfiyCode(VerifyCodeParams params);
   Future<Either<Failure, Unit>> createNewPassword(
@@ -74,12 +73,12 @@ class CreateNewPasswordParams {
 
 // ======================= FORGET PASSWORD PARAMS ==========================
 class ForgetPasswordParams {
-  final String phone;
-  ForgetPasswordParams({required this.phone});
+  final String email;
+  ForgetPasswordParams({required this.email});
 
   Map<String, dynamic> toJson() {
     return {
-      'phone': phone,
+      'email': email,
     };
   }
 }

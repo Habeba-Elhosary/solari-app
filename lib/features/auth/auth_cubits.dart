@@ -33,7 +33,7 @@ List<BlocProvider<Cubit<Object>>> authBlocs() => <BlocProvider<Cubit<Object>>>[
       BlocProvider<CreateNewPasswordCubit>(
         create: (BuildContext context) => sl<CreateNewPasswordCubit>(),
       ),
-      BlocProvider<SendOtpCubit>(
-        create: (BuildContext context) => sl<SendOtpCubit>(),
-      ),
+      // BlocProvider<SendOtpCubit>(
+      //   create: (BuildContext context) => sl<SendOtpCubit>(),
+      // ),
     ];

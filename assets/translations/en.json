@@ -31,5 +31,6 @@
   "error_password_validation": "Password must be at least 8 characters long.",
   "error_wrong_password_confirm": "Passwords do not match.",
   "error_wrong_input": "Please enter a valid number.",
-  "invalid_phone": "Please enter a valid phone number."
+  "invalid_phone": "Please enter a valid phone number.",
+  "not_authenticated" : "You are not authenticated."
 }

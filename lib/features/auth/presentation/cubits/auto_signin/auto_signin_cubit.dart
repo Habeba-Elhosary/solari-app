@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:solari/core/errors/failures.dart';
 import 'package:solari/core/usecases/no_params.dart';
+import 'package:solari/features/auth/data/models/signin_response.dart';
 import 'package:solari/features/auth/presentation/cubits/signin/signin_cubit.dart';
 import '../../../../../injection_container.dart';
-import '../../../domain/entities/signin_response.dart';
 import '../../../domain/usecases/auto_signin.dart';
 part 'auto_signin_state.dart';
 
@@ -16,16 +16,17 @@ class AutoSignInCubit extends Cubit<AutoSignInState> {
 
   Future<void> autoSignInEvent() async {
     emit(AutoSignInLoading());
-    final Either<Failure, User> response = await autoSignInUseCase(NoParams());
+    final Either<Failure, SignInResponse> response =
+        await autoSignInUseCase(NoParams());
     response.fold(
       (Failure failure) async {
         await Future<dynamic>.delayed(const Duration(seconds: 2));
         emit(AutoSignInNoUser());
       },
-      (User user) async {
+      (SignInResponse response) async {
         await Future<dynamic>.delayed(const Duration(seconds: 2));
-        if (user.isVerified) {
-          sl<SignInCubit>().setUser = user;
+        if (response.data?.otpVerified == 1) {
+          sl<SignInCubit>().setUser = response.data!;
           emit(const AutoSignInHasUser());
         } else {
           emitSeenIntro();

@@ -11,14 +11,9 @@ final class FrogetPasswordInitial extends ForgetPasswordState {}
 
 final class ForgetPasswordLoading extends ForgetPasswordState {}
 
-final class ForgetPasswordHasActiveUser extends ForgetPasswordState {
-  final User detectUserResponse;
-
-  const ForgetPasswordHasActiveUser({required this.detectUserResponse});
-}
-
-final class ForgetPasswordHasInactiveUser extends ForgetPasswordState {
-  const ForgetPasswordHasInactiveUser();
+final class ForgetPasswordSuccess extends ForgetPasswordState {
+  final String otpToken;
+  const ForgetPasswordSuccess({required this.otpToken});
 }
 
 final class FrogetPasswordError extends ForgetPasswordState {

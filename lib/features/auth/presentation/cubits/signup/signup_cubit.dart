@@ -36,13 +36,14 @@ class SignUpCubit extends Cubit<SignUpState> {
       },
       (Unit verificationCodeResponse) {
         emit(SignUpSuccess());
-        appNavigator.push(
-          screen: OTPVerficationScreen(
-              // isForgetPassword: false,
-              // forceSendOTP: false,
-              // phone: phone,
-              ),
-        );
+        // appNavigator.push(
+        //   screen: OTPVerficationScreen(
+
+        //       isForgetPassword: false,
+        //       // forceSendOTP: false,
+        //       // phone: phone,
+        //       ),
+        // );
       },
     );
   }

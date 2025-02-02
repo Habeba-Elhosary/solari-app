@@ -3,11 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:solari/core/errors/failures.dart';
 import 'package:solari/core/widgets/toast.dart';
+import 'package:solari/features/auth/data/models/forget_password_response.dart';
 import 'package:solari/features/auth/domain/repositories/auth_repository.dart';
-import 'package:solari/features/auth/presentation/pages/verify_otp/verify_otp_screen.dart';
-import 'package:solari/injection_container.dart';
-import '../../../domain/entities/forget_password_reponse.dart';
-import '../../../domain/entities/signin_response.dart';
+import 'package:solari/features/auth/presentation/cubits/verfiy_code/timer_verfiy_code.dart';
 import '../../../domain/usecases/forget_password.dart';
 part 'forget_password_state.dart';
 
@@ -16,31 +14,17 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
   ForgetPasswordCubit({required this.forgetPassword})
       : super(FrogetPasswordInitial());
 
-  String? phone;
-
-  Future<void> forgetPasswordEvent({required String phone}) async {
+  Future<void> forgetPasswordEvent({required String email}) async {
     emit(ForgetPasswordLoading());
-
     final Either<Failure, ForgetPasswordResponse> response =
-        await forgetPassword(ForgetPasswordParams(phone: phone));
+        await forgetPassword(ForgetPasswordParams(email: email));
     response.fold((Failure fail) {
       showErrorToast(fail.message);
       emit(FrogetPasswordError(message: fail.message));
-    }, (ForgetPasswordResponse user) {
-      emit(const ForgetPasswordHasInactiveUser());
-      this.phone = phone;
-      appNavigator.popToFirst();
-      appNavigator.push(
-          screen: OTPVerficationScreen(
-        // phone: phone,
-        // forceSendOTP: false,
-        // isForgetPassword: true,
-      ));
+    }, (ForgetPasswordResponse response) {
+      emit(ForgetPasswordSuccess(otpToken: response.data?.otpToken ?? ''));
+      VerificatonCodeTimerStream.counterValue = 60;
+      VerificatonCodeTimerStream.autoDecrement();
     });
-  }
-
-  void deleteNumber() {
-    phone = null;
-    emit(FrogetPasswordInitial());
   }
 }

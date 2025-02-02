@@ -23,7 +23,7 @@ class ApiBaseHelper {
     dio.options.sendTimeout = const Duration(milliseconds: 30000);
     dio.options.connectTimeout = const Duration(milliseconds: 30000);
     dio.options.receiveTimeout = const Duration(milliseconds: 30000);
-
+    dio.interceptors.clear();
     dio.interceptors.add(
       PrettyDioLogger(
         requestHeader: true,
@@ -41,7 +41,7 @@ class ApiBaseHelper {
   Map<String, String> headers = <String, String>{
     'Content-Type': 'application/json',
     'Accept': 'application/json',
-    'Accept-Language': 'ar',
+    'Accept-Language': 'en',
   };
 
   set token(String? token) {
