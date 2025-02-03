@@ -106,13 +106,6 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, SignInResponse>> sendOTPCode(
-      ForgetPasswordParams params) {
-    // TODO: implement sendOTPCode
-    throw UnimplementedError();
-  }
-
-  @override
   Future<Either<Failure, ForgetPasswordResponse>> forgetPassword(
       ForgetPasswordParams params) async {
     try {
@@ -124,13 +117,12 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
-  // @override
-  // Future<Either<Failure, VerificationCodeRepsonse>> sendOTPCode(
-  //     ForgetPasswordParams params) async {
-  //   try {
-  //     return right(await authRemoteDataSource.sendOTPCode(params));
-  //   } on ServerException catch (error) {
-  //     return left(ServerFailure.formServerException(error));
-  //   }
-  // }
+  @override
+  Future<Either<Failure, ForgetPasswordResponse>> sendOTPCode() async {
+    try {
+      return right(await authRemoteDataSource.sendOTPCode());
+    } on ServerException catch (error) {
+      return left(ServerFailure.formServerException(error));
+    }
+  }
 }

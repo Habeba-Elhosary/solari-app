@@ -19,8 +19,11 @@ class VerfiyCodeCubit extends Cubit<VerfiyCodeState> {
   Future<void> verfiyCodeEvent(
       {required String code, required bool isForgetPassword}) async {
     emit(VerfiyCodeLoading());
-    final Either<Failure, Unit> response =
-        await verfiyCode(VerifyCodeParams(code: code));
+    final Either<Failure, Unit> response = await verfiyCode(VerifyCodeParams(
+        email: code,
+        isForgetPassword: isForgetPassword,
+        otp: '',
+        otpToken: ''));
 
     response.fold(
       (Failure failure) {

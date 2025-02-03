@@ -8,13 +8,12 @@ abstract class AuthRepository {
   Future<Either<Failure, SignInResponse>> autoSignIn();
   Future<Either<Failure, ForgetPasswordResponse>> forgetPassword(
       ForgetPasswordParams params);
+  Future<Either<Failure, ForgetPasswordResponse>> sendOTPCode();
 
+  Future<Either<Failure, Unit>> verfiyCode(VerifyCodeParams params);
   Future<Either<Failure, Unit>> signUp(SignUpParams params);
   Future<Either<Failure, Unit>> signOut();
   Future<Either<Failure, Unit>> deleteAccount();
-  Future<Either<Failure, SignInResponse>> sendOTPCode(
-      ForgetPasswordParams params);
-  Future<Either<Failure, Unit>> verfiyCode(VerifyCodeParams params);
   Future<Either<Failure, Unit>> createNewPassword(
       CreateNewPasswordParams params);
 }
@@ -29,6 +28,41 @@ class SignInParams {
     return <String, dynamic>{
       'email': email,
       'password': password,
+    };
+  }
+}
+
+// ======================= FORGET PASSWORD PARAMS ==========================
+class ForgetPasswordParams {
+  final String email;
+  ForgetPasswordParams({required this.email});
+
+  Map<String, dynamic> toJson() {
+    return {
+      'email': email,
+    };
+  }
+}
+
+// ======================= VERIFY CODE PARAMS ==========================
+class VerifyCodeParams {
+  final String otp;
+  final String otpToken;
+  final bool isForgetPassword;
+  final String? email;
+
+  VerifyCodeParams({
+    required this.otp,
+    required this.otpToken,
+    required this.isForgetPassword,
+    this.email,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'otp': otp,
+      'otp_token': otpToken,
+      if (isForgetPassword) 'email': email
     };
   }
 }
@@ -68,29 +102,5 @@ class CreateNewPasswordParams {
 
   Map<String, dynamic> toJson() {
     return {'password': password, 'password_confirmation': confirmPassword};
-  }
-}
-
-// ======================= FORGET PASSWORD PARAMS ==========================
-class ForgetPasswordParams {
-  final String email;
-  ForgetPasswordParams({required this.email});
-
-  Map<String, dynamic> toJson() {
-    return {
-      'email': email,
-    };
-  }
-}
-
-// ======================= VERIFY CODE PARAMS ==========================
-class VerifyCodeParams {
-  final String code;
-  VerifyCodeParams({required this.code});
-
-  Map<String, dynamic> toJson() {
-    return {
-      'code': code,
-    };
   }
 }

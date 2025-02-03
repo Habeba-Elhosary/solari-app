@@ -1,25 +1,22 @@
-// part of 'send_otp_cubit.dart';
+part of 'send_otp_cubit.dart';
 
-// sealed class SendOtpState extends Equatable {
-//   const SendOtpState();
+sealed class SendOtpState extends Equatable {
+  const SendOtpState();
 
-//   @override
-//   List<Object> get props => <Object>[];
-// }
+  @override
+  List<Object> get props => <Object>[];
+}
 
-// final class SendOtpInitial extends SendOtpState {}
+final class SendOtpInitial extends SendOtpState {}
 
-// final class SendOtpLoading extends SendOtpState {}
+final class SendOtpLoading extends SendOtpState {}
 
-// final class SendOtpSuccess extends SendOtpState {
-//   final String code;
+final class SendOtpSuccess extends SendOtpState {
+  const SendOtpSuccess();
+}
 
-//   const SendOtpSuccess({required this.code});
-// }
+final class SendOtpError extends SendOtpState {
+  final String message;
 
-// final class SendOtpError extends SendOtpState {
-//   final String message;
-
-//   const SendOtpError({required this.message});
-// }
-
+  const SendOtpError({required this.message});
+}

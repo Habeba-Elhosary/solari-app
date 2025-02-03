@@ -5,6 +5,7 @@ import 'package:solari/core/errors/failures.dart';
 import 'package:solari/core/widgets/toast.dart';
 import 'package:solari/features/auth/data/models/signin_response.dart';
 import 'package:solari/features/auth/domain/repositories/auth_repository.dart';
+import 'package:solari/features/auth/presentation/cubits/send_otp/send_otp_cubit.dart';
 import 'package:solari/features/auth/presentation/pages/verify_otp/verify_otp_screen.dart';
 import '../../../../../injection_container.dart';
 import '../../../domain/usecases/signin.dart';
@@ -36,13 +37,11 @@ class SignInCubit extends Cubit<SignInState> {
       showErrorToast(failure.message);
     }, (SignInResponse response) {
       if (response.data?.otpVerified == 0) {
+        sl<SendOtpCubit>().sendOTPEvent();
         appNavigator.push(
           screen: OTPVerficationScreen(
             isForgetPassword: false,
-            //TODO: forceSendOTP
-            otpToken: '',
-            // phone: email,
-            // forceSendOTP: true,
+            otpToken: sl<SendOtpCubit>().otpToken ?? '',
           ),
         );
         return;

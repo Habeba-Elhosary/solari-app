@@ -1,3 +1,5 @@
+import 'package:solari/features/auth/domain/usecases/send_otp_code.dart';
+import 'package:solari/features/auth/presentation/cubits/send_otp/send_otp_cubit.dart';
 import 'package:solari/features/auth/presentation/cubits/signin/signin_cubit.dart';
 import '../../injection_container.dart';
 import 'data/datasources/auth_local_datasource.dart';
@@ -23,11 +25,10 @@ void initAuthInjection() async {
   sl.registerLazySingleton(() => AutoSignInCubit(autoSignInUseCase: sl()));
   sl.registerLazySingleton(() => SignInCubit(signInUseCase: sl()));
   sl.registerLazySingleton(() => ForgetPasswordCubit(forgetPassword: sl()));
-
+  sl.registerLazySingleton(() => SendOtpCubit(sendOTPCodeUseCase: sl()));
 
   sl.registerLazySingleton(() => SignUpCubit(signUpUseCase: sl()));
   sl.registerLazySingleton(() => SignOutCubit(signOutUseCase: sl()));
-  // sl.registerLazySingleton(() => SendOtpCubit(sendOTPCodeUseCase: sl()));
   sl.registerLazySingleton(() => VerfiyCodeCubit(verfiyCode: sl()));
   sl.registerLazySingleton(
     () => CreateNewPasswordCubit(createNewPasswordUseCase: sl()),
@@ -37,11 +38,10 @@ void initAuthInjection() async {
   sl.registerLazySingleton(() => AutoSignInUseCase(authRepository: sl()));
   sl.registerLazySingleton(() => SignInUseCase(authRepository: sl()));
   sl.registerLazySingleton(() => ForgetPasswordUseCase(authRepository: sl()));
-
+  sl.registerLazySingleton(() => SendOTPCodeUseCase(authRepository: sl()));
 
   sl.registerLazySingleton(() => SignUpUseCase(authRepository: sl()));
   sl.registerLazySingleton(() => SignOutUseCase(authRepository: sl()));
-  // sl.registerLazySingleton(() => SendOTPCodeUseCase(authRepository: sl()));
   sl.registerLazySingleton(() => VerfiyCodeUseCase(authRepository: sl()));
   sl.registerLazySingleton(
     () => CreateNewPasswordUseCase(authRepository: sl()),
