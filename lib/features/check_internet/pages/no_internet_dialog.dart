@@ -1,6 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:solari/core/constants/app_assets.dart';
 import 'package:solari/core/constants/app_text_styles.dart';
 import '../../../core/widgets/app_spacer.dart';
+import 'package:app_settings/app_settings.dart';
 
 class NoInternetDialog extends StatelessWidget {
   const NoInternetDialog({super.key});
@@ -14,23 +18,24 @@ class NoInternetDialog extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            AppSpacer(heightRatio: .5),
-            // Assets.images.noInternet.svg(),
+            AppSpacer(heightRatio: 0.5),
+            Image.asset(AppAssets.noInternet, height: 100.sp),
             Text(
-              'LocaleKeys.no_internet_title.tr()',
+              tr('no_internet_title'),
               textAlign: TextAlign.center,
-              style: TextStyles.medium18,
+              style: TextStyles.semiBold16,
             ),
-            AppSpacer(heightRatio: 1.3),
-            // AppProgressButton(
-            //   text: LocaleKeys.no_internet_subTitle.tr(),
-            //   height: 30,
-            //   fontSize: 14.sp,
-            //   onPressed: (anim) async {
-            //     await AppSettings.openAppSettings(type: AppSettingsType.wifi);
-            //   },
-            // ),
-            AppSpacer(heightRatio: .5),
+            AppSpacer(heightRatio: 1),
+            ElevatedButton(
+              onPressed: () async {
+                await AppSettings.openAppSettings(type: AppSettingsType.wifi);
+              },
+              child: Text(
+                tr('no_internet_subTitle'),
+                style: TextStyles.semiBold16,
+              ),
+            ),
+            AppSpacer(heightRatio: 0.5),
           ],
         ),
       ),

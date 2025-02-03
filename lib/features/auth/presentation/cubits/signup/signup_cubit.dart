@@ -5,9 +5,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:solari/core/errors/failures.dart';
 import 'package:solari/core/widgets/toast.dart';
 import 'package:solari/features/auth/domain/repositories/auth_repository.dart';
-import '../../../../../injection_container.dart';
 import '../../../domain/usecases/signup.dart';
-import '../../pages/verify_otp/verify_otp_screen.dart';
 part 'signup_state.dart';
 
 class SignUpCubit extends Cubit<SignUpState> {

@@ -8,6 +8,7 @@ import 'package:solari/core/utils/app_navigation/app_navigator.dart';
 import 'package:solari/core/widgets/handle_error_screen.dart';
 import 'package:solari/features/auth/auth_cubits.dart';
 import 'package:solari/features/auth/presentation/cubits/auto_signin/auto_signin_cubit.dart';
+import 'package:solari/features/auth/presentation/cubits/signout/signout_cubit.dart';
 import 'package:solari/features/auth/presentation/pages/onboarding/onboarding_screen.dart';
 import 'package:solari/features/auth/presentation/pages/signin/signin_screen.dart';
 import 'package:solari/features/auth/presentation/pages/splash/splash_screen.dart';
@@ -75,9 +76,6 @@ class MyApp extends StatelessWidget {
                     if (state is AutoSignInNoUser) {
                       return const OnboardingScreen();
                     }
-                    if (state is AutoSignInError) {
-                      return const OnboardingScreen();
-                    }
                     if (state is AutoSignInSeenIntro) {
                       return const SignInScreen();
                     }
@@ -109,11 +107,17 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: TextButton(
-          onPressed: () {},
-          child: const Text('name'),
-        ),
+      body: BlocBuilder<SignOutCubit, SignOutState>(
+        builder: (context, state) {
+          return Center(
+            child: ElevatedButton(
+              onPressed: () {
+                context.read<SignOutCubit>().signOutEvent();
+              },
+              child: const Text('name'),
+            ),
+          );
+        },
       ),
     );
   }

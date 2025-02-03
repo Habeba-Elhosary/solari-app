@@ -2,6 +2,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:solari/core/errors/failures.dart';
 import 'package:solari/features/auth/data/models/forget_password_response.dart';
 import 'package:solari/features/auth/data/models/signin_response.dart';
+import 'package:solari/features/auth/data/models/verify_otp_response.dart';
 
 abstract class AuthRepository {
   Future<Either<Failure, SignInResponse>> signIn(SignInParams params);
@@ -9,10 +10,11 @@ abstract class AuthRepository {
   Future<Either<Failure, ForgetPasswordResponse>> forgetPassword(
       ForgetPasswordParams params);
   Future<Either<Failure, ForgetPasswordResponse>> sendOTPCode();
-
-  Future<Either<Failure, Unit>> verfiyCode(VerifyCodeParams params);
-  Future<Either<Failure, Unit>> signUp(SignUpParams params);
+  Future<Either<Failure, VerifyOtpResponse>> verifyCode(
+      VerifyCodeParams params);
   Future<Either<Failure, Unit>> signOut();
+
+  Future<Either<Failure, Unit>> signUp(SignUpParams params);
   Future<Either<Failure, Unit>> deleteAccount();
   Future<Either<Failure, Unit>> createNewPassword(
       CreateNewPasswordParams params);

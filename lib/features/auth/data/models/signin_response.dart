@@ -28,12 +28,14 @@ class SignInResponse extends ApiResponse<AuthData> {
 class AuthData {
   final String name;
   final String email;
+  final String? otpToken;
   final int otpVerified;
   final String token;
 
   AuthData({
     required this.name,
     required this.email,
+    required this.otpToken,
     required this.otpVerified,
     required this.token,
   });
@@ -42,6 +44,7 @@ class AuthData {
     return AuthData(
       name: json['name'],
       email: json['email'],
+      otpToken: json['otp_token'],
       otpVerified: json['otp_verified'],
       token: json['token'],
     );

@@ -13,9 +13,7 @@ class AutoSignInLoading extends AutoSignInState {}
 
 class AutoSignInNoUser extends AutoSignInState {}
 
-class AutoSignInHasUser extends AutoSignInState {
-  const AutoSignInHasUser();
-}
+class AutoSignInHasUser extends AutoSignInState {}
 
 class AutoSignInSeenIntro extends AutoSignInState {}
 

@@ -10,8 +10,7 @@ import 'package:solari/core/constants/size_configuration.dart';
 import 'package:solari/core/widgets/app_spacer.dart';
 import 'package:solari/features/auth/presentation/cubits/forget_password/forget_password_cubit.dart';
 import 'package:solari/features/auth/presentation/cubits/send_otp/send_otp_cubit.dart';
-import 'package:solari/features/auth/presentation/pages/create_new_password/create_new_password_screen.dart';
-import 'package:solari/injection_container.dart';
+import 'package:solari/features/auth/presentation/cubits/verfiy_code/verfiy_code_cubit.dart';
 import '../../cubits/verfiy_code/timer_verfiy_code.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -109,17 +108,19 @@ class _OTPVerficationScreenState extends State<OTPVerficationScreen> {
                   ElevatedButton(
                     onPressed: () {
                       if (widget.isForgetPassword) {
-                        // context.read<VerfiyCodeCubit>().verfiyCodeEvent(
-                        //       code: otpController.text,
-                        //       isForgetPassword: widget.isForgetPassword,
-                        //     );
+                        context.read<VerfiyCodeCubit>().verfiyCodeEvent(
+                              isForgetPassword: widget.isForgetPassword,
+                              email: widget.email!,
+                              otp: otpController.text,
+                              otpToken: widget.otpToken,
+                            );
+                      } else {
+                        context.read<VerfiyCodeCubit>().verfiyCodeEvent(
+                              isForgetPassword: widget.isForgetPassword,
+                              otp: otpController.text,
+                              otpToken: widget.otpToken,
+                            );
                       }
-                      appNavigator.push(screen: CreateNewPasswordScreen());
-                      // TODO : send otp
-                      // context.read<VerfiyCodeCubit>().verfiyCodeEvent(
-                      //       code: otpController.text,
-                      //       isForgetPassword: widget.isForgetPassword,
-                      //     );
                     },
                     child: Text(tr('confirm')),
                   ),

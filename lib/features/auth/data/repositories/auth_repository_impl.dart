@@ -4,6 +4,7 @@ import 'package:solari/core/errors/exceptions.dart';
 import 'package:solari/core/errors/failures.dart';
 import 'package:solari/features/auth/data/models/forget_password_response.dart';
 import 'package:solari/features/auth/data/models/signin_response.dart';
+import 'package:solari/features/auth/data/models/verify_otp_response.dart';
 // import 'package:solari/features/auth/domain/entities/signin_response.dart';
 // import '../../domain/entities/forget_password_reponse.dart';
 // import '../../domain/entities/verification_code_reponse.dart';
@@ -50,6 +51,16 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<Either<Failure, VerifyOtpResponse>> verifyCode(
+      VerifyCodeParams params) async {
+    try {
+      return right(await authRemoteDataSource.verfiyCode(params));
+    } on ServerException catch (error) {
+      return left(ServerFailure.formServerException(error));
+    }
+  }
+
+  @override
   Future<Either<Failure, Unit>> signUp(SignUpParams params) async {
     try {
       final String token = await authRemoteDataSource.signUp(params);
@@ -67,7 +78,7 @@ class AuthRepositoryImpl implements AuthRepository {
       await authLocalDataSource.clearData();
       return right(unit);
     } on ServerException catch (error) {
-      return left(ServerFailure(message: tr(error.message)));
+      return left(ServerFailure(message: error.message));
     } on CacheException {
       return left(CacheFailure(message: tr('cache_failure')));
     }
@@ -91,15 +102,6 @@ class AuthRepositoryImpl implements AuthRepository {
       CreateNewPasswordParams params) async {
     try {
       return right(await authRemoteDataSource.createNewPassword(params));
-    } on ServerException catch (error) {
-      return left(ServerFailure.formServerException(error));
-    }
-  }
-
-  @override
-  Future<Either<Failure, Unit>> verfiyCode(VerifyCodeParams params) async {
-    try {
-      return right(await authRemoteDataSource.verfiyCode(params));
     } on ServerException catch (error) {
       return left(ServerFailure.formServerException(error));
     }

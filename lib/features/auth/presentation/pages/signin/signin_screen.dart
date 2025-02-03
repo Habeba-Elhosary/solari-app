@@ -8,6 +8,7 @@ import 'package:solari/core/constants/app_fonts.dart';
 import 'package:solari/core/constants/app_text_styles.dart';
 import 'package:solari/core/constants/size_configuration.dart';
 import 'package:solari/core/utils/app_validator/app_validator.dart';
+import 'package:solari/core/widgets/loading.dart';
 import 'package:solari/core/widgets/password_text_form_field.dart';
 import 'package:solari/features/auth/presentation/cubits/signin/signin_cubit.dart';
 import 'package:solari/features/auth/presentation/pages/forget_passowrd/forget_password_screen.dart';
@@ -80,7 +81,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         Text(
                           tr('enter_your_credentials_to_access_your_personalized_space'),
                           style: TextStyles.bold14
-                              .copyWith(fontFamily: AppFonts.robotoSlab),
+                              .copyWith(color: AppColors.greyDark),
                         ),
                         const AppSpacer(heightRatio: 1.5),
                         TextFormField(
@@ -115,19 +116,23 @@ class _SignInScreenState extends State<SignInScreen> {
                               child: ValueListenableBuilder<bool>(
                                 valueListenable: isFormValid,
                                 builder: (context, isValid, child) {
-                                  return ElevatedButton(
-                                    onPressed: isValid
-                                        ? () {
-                                            context
-                                                .read<SignInCubit>()
-                                                .signInEvent(
-                                                  email: emailController.text,
-                                                  password:
-                                                      passwordController.text,
-                                                );
-                                          }
-                                        : null,
-                                    child: Text(tr('sign_in')),
+                                  return Visibility(
+                                    replacement: const Center(child: Loading()),
+                                    visible: SignInState is! SignInLoading,
+                                    child: ElevatedButton(
+                                      onPressed: isValid
+                                          ? () {
+                                              context
+                                                  .read<SignInCubit>()
+                                                  .signInEvent(
+                                                    email: emailController.text,
+                                                    password:
+                                                        passwordController.text,
+                                                  );
+                                            }
+                                          : null,
+                                      child: Text(tr('sign_in')),
+                                    ),
                                   );
                                 },
                               ),
@@ -143,7 +148,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             tr('forgot_password'),
                             textAlign: TextAlign.center,
                             style: TextStyles.regular14
-                                .copyWith(color: AppColors.grey),
+                                .copyWith(color: AppColors.greyDark),
                           ),
                         ),
                       ],

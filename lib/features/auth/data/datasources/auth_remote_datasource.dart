@@ -2,27 +2,36 @@ import 'package:fpdart/fpdart.dart';
 import 'package:solari/core/utils/app_api_base_helper/app_api_base_helper.dart';
 import 'package:solari/features/auth/data/models/forget_password_response.dart';
 import 'package:solari/features/auth/data/models/signin_response.dart';
+import 'package:solari/features/auth/data/models/verify_otp_response.dart';
 import 'package:solari/features/auth/domain/repositories/auth_repository.dart';
 
 const String signInAPI = 'auth/sign/in';
 const String forgetPasswordAPI = 'password/forgot';
 const String sendOtpCodAPI = 'otp';
+String verfiyCodeAPI(bool isForgetPassword) {
+  String route = '';
+  if (isForgetPassword) {
+    route = 'password/verify-otp';
+  } else {
+    route = 'otp/verify';
+  }
+  return route;
+}
+const String signOutAPI = 'auth/sign/out';
 
 const String signUpAPI = '/client-api/v1/auth/register';
-const String signOutAPI = '/client-api/v1/auth/logout';
 const String deleteAccountAPI = '/client-api/v1/auth/delete-account';
-const String verfiyCodeAPI = '/client-api/v1/auth/verify-otp';
 const String createNewPasswordAPI = '/client-api/v1/auth/reset-password';
 
 abstract class AuthRemoteDataSource {
   Future<SignInResponse> signIn(SignInParams params);
   Future<ForgetPasswordResponse> forgetPassword(ForgetPasswordParams params);
   Future<ForgetPasswordResponse> sendOTPCode();
+  Future<VerifyOtpResponse> verfiyCode(VerifyCodeParams params);
+  Future<Unit> signOut();
 
   Future<String> signUp(SignUpParams params);
-  Future<Unit> signOut();
   Future<Unit> deleteAccount();
-  Future<Unit> verfiyCode(VerifyCodeParams params);
   Future<Unit> createNewPassword(CreateNewPasswordParams params);
 }
 
@@ -39,6 +48,17 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       );
       apiBaseHelper.token = SignInResponse.fromJson(response).data?.token ?? '';
       return SignInResponse.fromJson(response);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<VerifyOtpResponse> verfiyCode(VerifyCodeParams params) async {
+    try {
+      final dynamic response = await apiBaseHelper.post(
+          url: verfiyCodeAPI(params.isForgetPassword), body: params.toJson());
+      return VerifyOtpResponse.fromJson(response);
     } catch (e) {
       rethrow;
     }
@@ -82,16 +102,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         url: createNewPasswordAPI,
         body: params.toJson(),
       );
-      return unit;
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future<Unit> verfiyCode(VerifyCodeParams params) async {
-    try {
-      await apiBaseHelper.post(url: verfiyCodeAPI, body: params.toJson());
       return unit;
     } catch (e) {
       rethrow;

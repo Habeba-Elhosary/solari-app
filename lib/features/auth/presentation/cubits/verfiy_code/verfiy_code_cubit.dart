@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:solari/core/errors/failures.dart';
 import 'package:solari/core/widgets/toast.dart';
+import 'package:solari/features/auth/data/models/verify_otp_response.dart';
 import 'package:solari/features/auth/domain/repositories/auth_repository.dart';
 import '../../../../../injection_container.dart';
 import '../../../domain/usecases/verfiy_code.dart';
@@ -16,22 +17,28 @@ class VerfiyCodeCubit extends Cubit<VerfiyCodeState> {
 
   VerfiyCodeCubit({required this.verfiyCode}) : super(VerfiyCodeInitial());
 
-  Future<void> verfiyCodeEvent(
-      {required String code, required bool isForgetPassword}) async {
+  Future<void> verfiyCodeEvent({
+    required String otp,
+    required String otpToken,
+    String? email,
+    required bool isForgetPassword,
+  }) async {
     emit(VerfiyCodeLoading());
-    final Either<Failure, Unit> response = await verfiyCode(VerifyCodeParams(
-        email: code,
+    final Either<Failure, VerifyOtpResponse> response = await verfiyCode(
+      VerifyCodeParams(
+        otp: otp,
+        otpToken: otpToken,
+        email: email,
         isForgetPassword: isForgetPassword,
-        otp: '',
-        otpToken: ''));
+      ),
+    );
 
     response.fold(
       (Failure failure) {
         emit(VerfiyCodeError(message: failure.message));
         showErrorToast(tr(failure.message));
       },
-      (Unit success) {
-        showSuccessToast(tr('verified_successfully'));
+      (VerifyOtpResponse success) {
         if (isForgetPassword) {
           appNavigator.pushReplacement(screen: const CreateNewPasswordScreen());
         } else {

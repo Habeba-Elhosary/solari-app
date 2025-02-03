@@ -52,8 +52,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     const AppSpacer(heightRatio: 0.5),
                     Text(
                       tr('forgot_password_description'),
-                      style: TextStyles.bold14
-                          .copyWith(fontFamily: AppFonts.robotoSlab),
+                      style:
+                          TextStyles.bold14.copyWith(color: AppColors.greyDark),
                     ),
                     const AppSpacer(heightRatio: 1),
                     Form(

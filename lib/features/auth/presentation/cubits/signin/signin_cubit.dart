@@ -5,7 +5,6 @@ import 'package:solari/core/errors/failures.dart';
 import 'package:solari/core/widgets/toast.dart';
 import 'package:solari/features/auth/data/models/signin_response.dart';
 import 'package:solari/features/auth/domain/repositories/auth_repository.dart';
-import 'package:solari/features/auth/presentation/cubits/send_otp/send_otp_cubit.dart';
 import 'package:solari/features/auth/presentation/pages/verify_otp/verify_otp_screen.dart';
 import '../../../../../injection_container.dart';
 import '../../../domain/usecases/signin.dart';
@@ -37,25 +36,17 @@ class SignInCubit extends Cubit<SignInState> {
       showErrorToast(failure.message);
     }, (SignInResponse response) {
       if (response.data?.otpVerified == 0) {
-        sl<SendOtpCubit>().sendOTPEvent();
         appNavigator.push(
           screen: OTPVerficationScreen(
             isForgetPassword: false,
-            otpToken: sl<SendOtpCubit>().otpToken ?? '',
+            otpToken: response.data?.otpToken ?? '',
           ),
         );
         return;
       }
-      _user = user;
+      _user = response.data!;
       emit(SignInSuccess());
       sl<AutoSignInCubit>().emitHasUserAsState();
     });
-  }
-
-  void emitUserVerified() {
-    emit(SignInInitial());
-    // _user = _user.copyWith(isVerified: true);
-    emit(SignInSuccess());
-    sl<AutoSignInCubit>().emitHasUserAsState();
   }
 }
