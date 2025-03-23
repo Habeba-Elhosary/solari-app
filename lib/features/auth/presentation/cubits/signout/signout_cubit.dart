@@ -22,7 +22,6 @@ class SignOutCubit extends Cubit<SignOutState> {
       showErrorToast(tr(failure.message));
     }, (Unit success) {
       emit(SignOutSuccess());
-      // appNavigator.popToFirst();
       sl<AutoSignInCubit>().signOut();
     });
   }
