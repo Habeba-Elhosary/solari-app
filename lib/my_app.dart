@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
           }
           if (state is InternetLostState) {
             Future.delayed(
-              Duration(),
+              Duration(seconds: 3),
               () {
                 appNavigator.showDialog(child: NoInternetDialog());
               },
