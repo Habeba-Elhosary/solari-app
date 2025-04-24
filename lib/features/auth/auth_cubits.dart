@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:solari/features/auth/presentation/cubits/auto_signin/auto_signin_cubit.dart';
 import 'package:solari/features/auth/presentation/cubits/create_new_password/create_new_password_cubit.dart';
-import 'package:solari/features/auth/presentation/cubits/forget_password/forget_password_cubit.dart';
 import 'package:solari/features/auth/presentation/cubits/send_otp/send_otp_cubit.dart';
 import 'package:solari/features/auth/presentation/cubits/signin/signin_cubit.dart';
 import 'package:solari/features/auth/presentation/cubits/signout/signout_cubit.dart';
@@ -23,9 +22,6 @@ List<BlocProvider<Cubit<Object>>> authBlocs() => <BlocProvider<Cubit<Object>>>[
       ),
       BlocProvider<SignOutCubit>(
         create: (BuildContext context) => sl<SignOutCubit>(),
-      ),
-      BlocProvider<ForgetPasswordCubit>(
-        create: (BuildContext context) => sl<ForgetPasswordCubit>(),
       ),
       BlocProvider<VerfiyCodeCubit>(
         create: (BuildContext context) => sl<VerfiyCodeCubit>(),

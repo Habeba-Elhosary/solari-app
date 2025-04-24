@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fpdart/fpdart.dart';
@@ -30,13 +29,12 @@ class SignUpCubit extends Cubit<SignUpState> {
     response.fold(
       (Failure failure) {
         emit(SignUpError(message: failure.message));
-        showErrorToast(tr(failure.message));
+        showErrorToast(failure.message);
       },
       (Unit verificationCodeResponse) {
         emit(SignUpSuccess());
         // appNavigator.push(
         //   screen: OTPVerficationScreen(
-
         //       isForgetPassword: false,
         //       // forceSendOTP: false,
         //       // phone: phone,

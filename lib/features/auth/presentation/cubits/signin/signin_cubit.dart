@@ -35,7 +35,7 @@ class SignInCubit extends Cubit<SignInState> {
       emit(SignInError(message: failure.message));
       showErrorToast(failure.message);
     }, (SignInResponse response) {
-      if (response.data?.otpVerified == 0) {
+      if (response.data?.otpVerified == false) {
         appNavigator.push(
           screen: OTPVerficationScreen(
             isForgetPassword: false,

@@ -22,9 +22,13 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
       showErrorToast(fail.message);
       emit(FrogetPasswordError(message: fail.message));
     }, (ForgetPasswordResponse response) {
-      emit(ForgetPasswordSuccess(
+      showSuccessToast(response.message);
+      emit(
+        ForgetPasswordSuccess(
           otpToken: response.data?.otpToken ?? '',
-          message: response.message ?? ''));
+          message: response.message ?? '',
+        ),
+      );
       VerificatonCodeTimerStream.counterValue = 60;
       VerificatonCodeTimerStream.autoDecrement();
     });

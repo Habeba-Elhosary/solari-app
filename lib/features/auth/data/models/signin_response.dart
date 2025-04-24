@@ -29,7 +29,7 @@ class AuthData {
   final String name;
   final String email;
   final String? otpToken;
-  final int otpVerified;
+  final bool otpVerified;
   final String token;
 
   AuthData({

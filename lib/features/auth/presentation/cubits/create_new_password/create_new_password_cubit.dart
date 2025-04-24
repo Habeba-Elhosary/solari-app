@@ -26,7 +26,7 @@ class CreateNewPasswordCubit extends Cubit<CreateNewPasswordState> {
       ),
     );
     response.fold((Failure failure) {
-      showErorrToast(tr(failure.message));
+      showErrorToast(failure.message);
       emit(CreateNewPasswordError(message: failure.message));
     }, (Unit success) {
       showSuccessToast(tr('password_changed_successfully'));
@@ -34,6 +34,4 @@ class CreateNewPasswordCubit extends Cubit<CreateNewPasswordState> {
       appNavigator.popToFirst();
     });
   }
-
-  void showErorrToast(String tr) {}
 }

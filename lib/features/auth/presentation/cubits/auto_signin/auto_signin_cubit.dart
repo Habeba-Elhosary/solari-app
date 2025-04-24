@@ -25,7 +25,7 @@ class AutoSignInCubit extends Cubit<AutoSignInState> {
       },
       (SignInResponse response) async {
         await Future<dynamic>.delayed(const Duration(seconds: 2));
-        if (response.data?.otpVerified == 1) {
+        if (response.data?.otpVerified == true) {
           sl<SignInCubit>().setUser = response.data!;
           emit(AutoSignInHasUser());
         } else {
