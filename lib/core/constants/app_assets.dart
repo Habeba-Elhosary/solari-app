@@ -7,4 +7,12 @@ class AppAssets {
   static const String onboarding3 = 'assets/images/onboarding3.png';
   static const String noInternet = 'assets/images/no_internet.png';
   static const String loading = 'assets/images/loading.gif';
+  static const String home = 'assets/images/home.svg';
+  static const String homeBold = 'assets/images/homeBold.svg';
+  static const String analytics = 'assets/images/analytics.svg';
+  static const String analyticsBold = 'assets/images/analyticsBold.svg';
+  static const String panels = 'assets/images/panels.svg';
+  static const String panelsBold = 'assets/images/panelsBold.svg';
+  static const String profile = 'assets/images/profile.svg';
+  static const String profileBold = 'assets/images/profileBold.svg';
 }
