@@ -39,5 +39,8 @@
   "home" : "Home",
   "profile" : "Profile",
   "analytics" : "Analytics",
-  "panels" : "Panels"
+  "panels" : "Panels",
+  "generated_power" : "Generated Power",
+  "total_daily_generation" : "Total Daily Generation",
+  "current_temperature" : "Current Temperature"
 }

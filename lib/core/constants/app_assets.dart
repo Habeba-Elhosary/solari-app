@@ -15,4 +15,8 @@ class AppAssets {
   static const String panelsBold = 'assets/images/panelsBold.svg';
   static const String profile = 'assets/images/profile.svg';
   static const String profileBold = 'assets/images/profileBold.svg';
+  static const String notifications = 'assets/images/notifications.svg';
+  static const String power = 'assets/images/power.png';
+  static const String sun = 'assets/images/sun.png';
+  static const String cloud = 'assets/images/cloud.png';
 }
