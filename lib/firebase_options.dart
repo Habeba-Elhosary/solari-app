@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,9 +28,15 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
-        return windows;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for windows - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -40,19 +49,9 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDvhJkNS6VFYnK1MiZE5HnIJqA-dBv3KM8',
-    appId: '1:741998073243:web:13c373f9d41dc50b49bd3e',
-    messagingSenderId: '741998073243',
-    projectId: 'solari-app',
-    authDomain: 'solari-app.firebaseapp.com',
-    storageBucket: 'solari-app.firebasestorage.app',
-    measurementId: 'G-5BGP0LR0WQ',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCvmF23HcDUZ-x3tahR1WeL1s1MvjsPhPM',
-    appId: '1:741998073243:android:658690c189534ef349bd3e',
+    appId: '1:741998073243:android:719d1d408b59916e49bd3e',
     messagingSenderId: '741998073243',
     projectId: 'solari-app',
     storageBucket: 'solari-app.firebasestorage.app',
@@ -60,29 +59,10 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCyPJ_ZAd7vZgJk64bpSKZ29dJCIJE_as4',
-    appId: '1:741998073243:ios:efee0e68e3e7504f49bd3e',
+    appId: '1:741998073243:ios:d55a2edfa178584249bd3e',
     messagingSenderId: '741998073243',
     projectId: 'solari-app',
     storageBucket: 'solari-app.firebasestorage.app',
-    iosBundleId: 'com.example.solari',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCyPJ_ZAd7vZgJk64bpSKZ29dJCIJE_as4',
-    appId: '1:741998073243:ios:efee0e68e3e7504f49bd3e',
-    messagingSenderId: '741998073243',
-    projectId: 'solari-app',
-    storageBucket: 'solari-app.firebasestorage.app',
-    iosBundleId: 'com.example.solari',
-  );
-
-  static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyDvhJkNS6VFYnK1MiZE5HnIJqA-dBv3KM8',
-    appId: '1:741998073243:web:ad166c9e9ede843849bd3e',
-    messagingSenderId: '741998073243',
-    projectId: 'solari-app',
-    authDomain: 'solari-app.firebaseapp.com',
-    storageBucket: 'solari-app.firebasestorage.app',
-    measurementId: 'G-RREG9R6FYF',
+    iosBundleId: 'com.solari.solari',
   );
 }

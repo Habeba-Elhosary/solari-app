@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:741998073243:android:658690c189534ef349bd3e",
+        "mobilesdk_app_id": "1:741998073243:android:719d1d408b59916e49bd3e",
         "android_client_info": {
-          "package_name": "com.example.solari"
+          "package_name": "com.solari.solari"
         }
       },
       "oauth_client": [],
