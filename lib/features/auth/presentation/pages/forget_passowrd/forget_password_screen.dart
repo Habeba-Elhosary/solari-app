@@ -9,6 +9,7 @@ import 'package:solari/core/constants/app_text_styles.dart';
 import 'package:solari/core/constants/size_configuration.dart';
 import 'package:solari/core/utils/app_validator/app_validator.dart';
 import 'package:solari/core/widgets/app_spacer.dart';
+import 'package:solari/core/widgets/toast.dart';
 import 'package:solari/features/auth/presentation/cubits/forget_password/forget_password_cubit.dart';
 import 'package:solari/features/auth/presentation/pages/verify_otp/verify_otp_screen.dart';
 import 'package:solari/injection_container.dart';
@@ -76,7 +77,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     BlocConsumer<ForgetPasswordCubit, ForgetPasswordState>(
                       listener: (context, state) {
                         if (state is ForgetPasswordSuccess) {
-                          appNavigator.popToFirst();
+                          showSuccessToast(state.message);
                           appNavigator.push(
                             screen: OTPVerficationScreen(
                               isForgetPassword: true,

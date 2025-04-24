@@ -13,7 +13,11 @@ final class ForgetPasswordLoading extends ForgetPasswordState {}
 
 final class ForgetPasswordSuccess extends ForgetPasswordState {
   final String otpToken;
-  const ForgetPasswordSuccess({required this.otpToken});
+  final String message;
+  const ForgetPasswordSuccess({
+    required this.otpToken,
+    required this.message,
+  });
 }
 
 final class FrogetPasswordError extends ForgetPasswordState {
