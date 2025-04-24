@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:solari/core/constants/app_colors.dart';
 import 'package:solari/core/constants/app_fonts.dart';
 import 'package:solari/core/constants/app_text_styles.dart';
+import 'package:solari/features/analytics/presentation/pages/analytics_screen.dart';
 import 'package:solari/features/auth/presentation/cubits/signin/signin_cubit.dart';
 import 'package:solari/features/home/presentation/cubit/nav_bar/nav_bar_cubit.dart';
 import 'package:solari/features/home/presentation/pages/home_screen.dart';
@@ -25,7 +26,7 @@ class MainScreen extends StatelessWidget {
                     return HomeScreen();
                   }
                   if (state.currentTab == 1) {
-                    // return ProfileScreen();
+                    return AnalyticsScreen();
                   }
                   if (state.currentTab == 2) {
                     // return AnalyticsScreen();
