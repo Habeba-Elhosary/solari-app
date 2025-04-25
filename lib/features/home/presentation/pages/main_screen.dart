@@ -8,6 +8,7 @@ import 'package:solari/features/analytics/presentation/pages/analytics_screen.da
 import 'package:solari/features/auth/presentation/cubits/signin/signin_cubit.dart';
 import 'package:solari/features/home/presentation/cubit/nav_bar/nav_bar_cubit.dart';
 import 'package:solari/features/home/presentation/pages/home_screen.dart';
+import 'package:solari/features/panels/presentation/pages/panels_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -29,7 +30,7 @@ class MainScreen extends StatelessWidget {
                     return AnalyticsScreen();
                   }
                   if (state.currentTab == 2) {
-                    // return AnalyticsScreen();
+                    return PanelsScreen();
                   }
                   if (state.currentTab == 3) {
                     // return PanelsScreen();

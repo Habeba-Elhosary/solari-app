@@ -45,7 +45,7 @@ class _PerformanceMetricsChartState extends State<PerformanceMetricsChart> {
       margin: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 8.sp),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12.sp),
+        borderRadius: BorderRadius.circular(20.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black12,

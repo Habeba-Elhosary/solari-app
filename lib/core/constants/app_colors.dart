@@ -6,7 +6,7 @@ class AppColors {
   static const Color red = Color(0XFFF24805);
   static const Color green = Color(0XFF2F9E44);
   static const Color scaffoldBackgroundColor = Color(0xFFF8F9FA);
-
+  static const Color orange = Color(0XFFF08C00);
   static const Color success = Color(0xFF10A94B);
   static const Color failed = Color(0xFFFF1900);
   static const Color info = Color(0xFF296CAF);

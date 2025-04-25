@@ -15,7 +15,7 @@ class HomeTemperatureSection extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.sp),
+        borderRadius: BorderRadius.circular(20.r),
         color: AppColors.white,
         boxShadow: [
           BoxShadow(

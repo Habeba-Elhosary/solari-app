@@ -3,49 +3,24 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:solari/core/constants/app_colors.dart';
 import 'package:solari/core/constants/app_fonts.dart';
 import 'package:solari/core/constants/app_text_styles.dart';
+import 'package:solari/core/enums/panel_status.dart';
 
 class HomePanelsSection extends StatelessWidget {
   HomePanelsSection({super.key});
 
   final List<Map<String, dynamic>> items = [
-    {'id': 'A100', 'status': 'Healthy'},
-    {'id': 'A101', 'status': 'Underperforming'},
-    {'id': 'A110', 'status': 'Healthy'},
-    {'id': 'A111', 'status': 'Faulted'},
+    {'id': 'A100', 'status': PanelStatus.healthy},
+    {'id': 'A101', 'status': PanelStatus.poor},
+    {'id': 'A110', 'status': PanelStatus.healthy},
+    {'id': 'A111', 'status': PanelStatus.faulted},
   ];
-
-  Color _getStatusColor(String status) {
-    switch (status) {
-      case 'Healthy':
-        return Color(0xFFEBFBEE);
-      case 'Underperforming':
-        return Color(0XFFFFF9DB);
-      case 'Faulted':
-        return Color(0xFFFFF5F5);
-      default:
-        return Color(0xFFEBFBEE);
-    }
-  }
-
-  Color _getStatusTextColor(String status) {
-    switch (status) {
-      case 'Healthy':
-        return AppColors.green;
-      case 'Underperforming':
-        return Color(0XFFF08C00);
-      case 'Faulted':
-        return Color(0XFFF03E3E);
-      default:
-        return AppColors.green;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.sp),
+        borderRadius: BorderRadius.circular(20.sp),
         color: AppColors.white,
         boxShadow: [
           BoxShadow(
@@ -76,7 +51,7 @@ class HomePanelsSection extends StatelessWidget {
                       .copyWith(fontFamily: AppFonts.robotoSlab),
                 ),
                 Text(
-                  'status',
+                  'Status',
                   style: TextStyles.semiBold16
                       .copyWith(fontFamily: AppFonts.robotoSlab),
                 ),
@@ -88,9 +63,13 @@ class HomePanelsSection extends StatelessWidget {
             physics: NeverScrollableScrollPhysics(),
             itemCount: items.length,
             separatorBuilder: (context, index) => Divider(
-                thickness: 2.sp, color: AppColors.scaffoldBackgroundColor),
+              thickness: 2.sp,
+              color: AppColors.scaffoldBackgroundColor,
+            ),
             itemBuilder: (context, index) {
               final item = items[index];
+              final PanelStatus status = item['status'];
+
               return Padding(
                 padding:
                     EdgeInsets.symmetric(vertical: 10.sp, horizontal: 16.sp),
@@ -108,13 +87,13 @@ class HomePanelsSection extends StatelessWidget {
                         vertical: 4.sp,
                       ),
                       decoration: BoxDecoration(
-                        color: _getStatusColor(item['status']),
+                        color: status.backgroundColor,
                         borderRadius: BorderRadius.circular(20.sp),
                       ),
                       child: Text(
-                        item['status'],
+                        status.label,
                         style: TextStyles.regular12.copyWith(
-                          color: _getStatusTextColor(item['status']),
+                          color: status.textColor,
                         ),
                       ),
                     ),
