@@ -47,5 +47,6 @@
   "predicted_energy_for_the_day":"Predicted energy for the day",
   "performance_metrics":"Performance Metrics",
   "actual" : "Actual",
-  "expected" : "Expected"
+  "expected" : "Expected",
+  "panel_details" : "Panel Details"
 }
