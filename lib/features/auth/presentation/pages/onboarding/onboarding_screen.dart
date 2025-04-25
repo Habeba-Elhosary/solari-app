@@ -20,7 +20,7 @@ class OnboardingScreen extends StatefulWidget {
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
-  int _currentPage = 0;
+  int? _currentPage;
 
   final List<Map<String, String>> onboardingData = [
     {
@@ -42,6 +42,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       'image': AppAssets.onboarding3,
     },
   ];
+  @override
+  void initState() {
+    super.initState();
+    _currentPage = 0;
+  }
 
   @override
   Widget build(BuildContext context) {

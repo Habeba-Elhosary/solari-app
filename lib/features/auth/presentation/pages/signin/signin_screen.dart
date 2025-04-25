@@ -108,34 +108,28 @@ class _SignInScreenState extends State<SignInScreen> {
                         BlocBuilder<SignInCubit, SignInState>(
                           builder:
                               (BuildContext context, SignInState signInState) {
-                            return Visibility(
-                              visible: signInState is! SignInLoading,
-                              replacement: const Center(
-                                child: CircularProgressIndicator.adaptive(),
-                              ),
-                              child: ValueListenableBuilder<bool>(
-                                valueListenable: isFormValid,
-                                builder: (context, isValid, child) {
-                                  return Visibility(
-                                    replacement: const Center(child: Loading()),
-                                    visible: SignInState is! SignInLoading,
-                                    child: ElevatedButton(
-                                      onPressed: isValid
-                                          ? () {
-                                              context
-                                                  .read<SignInCubit>()
-                                                  .signInEvent(
-                                                    email: emailController.text,
-                                                    password:
-                                                        passwordController.text,
-                                                  );
-                                            }
-                                          : null,
-                                      child: Text(tr('sign_in')),
-                                    ),
-                                  );
-                                },
-                              ),
+                            return ValueListenableBuilder<bool>(
+                              valueListenable: isFormValid,
+                              builder: (context, isValid, child) {
+                                return Visibility(
+                                  replacement: const Center(child: Loading()),
+                                  visible: SignInState is! SignInLoading,
+                                  child: ElevatedButton(
+                                    onPressed: isValid
+                                        ? () {
+                                            context
+                                                .read<SignInCubit>()
+                                                .signInEvent(
+                                                  email: emailController.text,
+                                                  password:
+                                                      passwordController.text,
+                                                );
+                                          }
+                                        : null,
+                                    child: Text(tr('sign_in')),
+                                  ),
+                                );
+                              },
                             );
                           },
                         ),

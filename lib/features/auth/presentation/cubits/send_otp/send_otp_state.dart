@@ -12,7 +12,8 @@ final class SendOtpInitial extends SendOtpState {}
 final class SendOtpLoading extends SendOtpState {}
 
 final class SendOtpSuccess extends SendOtpState {
-  const SendOtpSuccess();
+  final String otpToken;
+  const SendOtpSuccess({required this.otpToken});
 }
 
 final class SendOtpError extends SendOtpState {

@@ -48,5 +48,6 @@
   "performance_metrics":"Performance Metrics",
   "actual" : "Actual",
   "expected" : "Expected",
-  "panel_details" : "Panel Details"
+  "panel_details" : "Panel Details",
+  "sign_out_success"  : "You have successfully logged out"
 }

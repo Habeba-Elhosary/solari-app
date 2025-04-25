@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,9 +20,9 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 class OTPVerficationScreen extends StatefulWidget {
   final bool isForgetPassword;
   final String? email;
-  final String otpToken;
+  String otpToken;
 
-  const OTPVerficationScreen({
+  OTPVerficationScreen({
     super.key,
     required this.isForgetPassword,
     this.email,
@@ -194,6 +196,9 @@ class _OTPVerficationScreenState extends State<OTPVerficationScreen> {
                     ] else ...[
                       BlocBuilder<SendOtpCubit, SendOtpState>(
                         builder: (BuildContext context, SendOtpState state) {
+                          if (state is SendOtpSuccess) {
+                            widget.otpToken = state.otpToken;
+                          }
                           if (state is SendOtpLoading) {
                             return const Center(
                                 child: CircularProgressIndicator.adaptive());

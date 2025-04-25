@@ -18,8 +18,43 @@ import 'package:solari/features/home/presentation/cubit/nav_bar/nav_bar_cubit.da
 import 'package:solari/features/home/presentation/pages/main_screen.dart';
 import 'package:solari/injection_container.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    switch (state) {
+      case AppLifecycleState.resumed:
+        break;
+      case AppLifecycleState.detached:
+        break;
+
+      case AppLifecycleState.inactive:
+        break;
+      case AppLifecycleState.hidden:
+        break;
+      case AppLifecycleState.paused:
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,20 +107,7 @@ class MyApp extends StatelessWidget {
                   ...context.localizationDelegates,
                 ],
                 navigatorKey: sl<AppNavigator>().navigatorKey,
-                home: BlocBuilder<AutoSignInCubit, AutoSignInState>(
-                  builder: (context, state) {
-                    if (state is AutoSignInHasUser) {
-                      return const MainScreen();
-                    }
-                    if (state is AutoSignInNoUser) {
-                      return const OnboardingScreen();
-                    }
-                    if (state is AutoSignInSeenIntro) {
-                      return const SignInScreen();
-                    }
-                    return const SplashScreen();
-                  },
-                ),
+                home: SolariApp(),
                 builder: (context, child) {
                   handleErrorScreen(context);
                   child = botToastBuilder(context, child!);
@@ -96,6 +118,30 @@ class MyApp extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+}
+
+class SolariApp extends StatelessWidget {
+  const SolariApp({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<AutoSignInCubit, AutoSignInState>(
+      builder: (context, state) {
+        if (state is AutoSignInHasUser) {
+          return const MainScreen();
+        }
+        if (state is AutoSignInNoUser) {
+          return const OnboardingScreen();
+        }
+        if (state is AutoSignInSeenIntro) {
+          return const SignInScreen();
+        }
+        return const SplashScreen();
+      },
     );
   }
 }

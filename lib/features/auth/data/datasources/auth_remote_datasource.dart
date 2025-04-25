@@ -17,11 +17,12 @@ String verfiyCodeAPI(bool isForgetPassword) {
   }
   return route;
 }
+
 const String signOutAPI = 'auth/sign/out';
+const String createNewPasswordAPI = 'password/reset';
 
 const String signUpAPI = '/client-api/v1/auth/register';
 const String deleteAccountAPI = '/client-api/v1/auth/delete-account';
-const String createNewPasswordAPI = '/client-api/v1/auth/reset-password';
 
 abstract class AuthRemoteDataSource {
   Future<SignInResponse> signIn(SignInParams params);

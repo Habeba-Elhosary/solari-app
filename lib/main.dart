@@ -7,14 +7,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:solari/core/utils/app_bloc_observer/bloc_observer.dart';
 import 'package:solari/firebase_options.dart';
 import 'package:solari/injection_container.dart';
-import 'package:solari/my_app.dart';
+import 'package:solari/solari_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await EasyLocalization.ensureInitialized();
   await ServiceLocator.init();
   Bloc.observer = MyBlocObserver();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,

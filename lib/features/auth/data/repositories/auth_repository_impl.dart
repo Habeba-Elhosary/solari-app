@@ -6,6 +6,7 @@ import 'package:solari/core/errors/failures.dart';
 import 'package:solari/features/auth/data/models/forget_password_response.dart';
 import 'package:solari/features/auth/data/models/signin_response.dart';
 import 'package:solari/features/auth/data/models/verify_otp_response.dart';
+import 'package:solari/features/auth/presentation/cubits/signin/signin_cubit.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../datasources/auth_local_datasource.dart';
 import '../datasources/auth_remote_datasource.dart';
@@ -37,6 +38,8 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       final (String phone, String password) =
           await authLocalDataSource.getCacheUserCredentials();
+      await waitForFcmToken();
+
       final SignInResponse signInResponse = await authRemoteDataSource.signIn(
         SignInParams(
           email: phone,

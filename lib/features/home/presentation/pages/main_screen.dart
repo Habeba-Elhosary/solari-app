@@ -6,6 +6,7 @@ import 'package:solari/core/constants/app_fonts.dart';
 import 'package:solari/core/constants/app_text_styles.dart';
 import 'package:solari/features/analytics/presentation/pages/analytics_screen.dart';
 import 'package:solari/features/auth/presentation/cubits/signin/signin_cubit.dart';
+import 'package:solari/features/auth/presentation/cubits/signout/signout_cubit.dart';
 import 'package:solari/features/home/presentation/cubit/nav_bar/nav_bar_cubit.dart';
 import 'package:solari/features/home/presentation/pages/home_screen.dart';
 import 'package:solari/features/panels/presentation/pages/panels_screen.dart';
@@ -33,7 +34,17 @@ class MainScreen extends StatelessWidget {
                     return PanelsScreen();
                   }
                   if (state.currentTab == 3) {
-                    // return PanelsScreen();
+                    return Center(
+                        child: BlocBuilder<SignOutCubit, SignOutState>(
+                      builder: (context, state) {
+                        return ElevatedButton(
+                          onPressed: () {
+                            context.read<SignOutCubit>().signOutEvent();
+                          },
+                          child: Text('logout'),
+                        );
+                      },
+                    ));
                   }
                   return Container();
                 },

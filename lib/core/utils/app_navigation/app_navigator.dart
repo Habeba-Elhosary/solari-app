@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:solari/my_app.dart';
+import 'package:solari/solari_app.dart';
 import '../../widgets/app_dialogs.dart';
 
 class AppNavigator {
