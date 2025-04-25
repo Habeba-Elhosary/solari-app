@@ -24,12 +24,19 @@ abstract class AuthRepository {
 class SignInParams {
   final String email;
   final String password;
-  SignInParams({required this.email, required this.password});
+  final String fcmToken;
+
+  SignInParams({
+    required this.email,
+    required this.password,
+    required this.fcmToken,
+  });
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
       'email': email,
       'password': password,
+      'fcm': fcmToken
     };
   }
 }

@@ -1,13 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_notifications_handler/firebase_notifications_handler.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:solari/core/errors/exceptions.dart';
 import 'package:solari/core/errors/failures.dart';
 import 'package:solari/features/auth/data/models/forget_password_response.dart';
 import 'package:solari/features/auth/data/models/signin_response.dart';
 import 'package:solari/features/auth/data/models/verify_otp_response.dart';
-// import 'package:solari/features/auth/domain/entities/signin_response.dart';
-// import '../../domain/entities/forget_password_reponse.dart';
-// import '../../domain/entities/verification_code_reponse.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../datasources/auth_local_datasource.dart';
 import '../datasources/auth_remote_datasource.dart';
@@ -40,7 +38,11 @@ class AuthRepositoryImpl implements AuthRepository {
       final (String phone, String password) =
           await authLocalDataSource.getCacheUserCredentials();
       final SignInResponse signInResponse = await authRemoteDataSource.signIn(
-        SignInParams(email: phone, password: password),
+        SignInParams(
+          email: phone,
+          password: password,
+          fcmToken: FirebaseNotificationsHandler.fcmToken ?? '',
+        ),
       );
       return right(signInResponse);
     } on ServerException catch (error) {

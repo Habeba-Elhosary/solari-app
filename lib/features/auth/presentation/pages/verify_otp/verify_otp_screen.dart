@@ -75,8 +75,9 @@ class _OTPVerficationScreenState extends State<OTPVerficationScreen> {
                     const AppSpacer(heightRatio: 0.5),
                     Text(
                       tr('please_enter_the_code_sent_to_your_email'),
-                      style: TextStyles.bold14
-                          .copyWith(fontFamily: AppFonts.robotoSlab),
+                      style: TextStyles.bold14.copyWith(
+                          fontFamily: AppFonts.robotoSlab,
+                          color: AppColors.greyDark),
                     ),
                     const AppSpacer(heightRatio: 1),
                     Padding(

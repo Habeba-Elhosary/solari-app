@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:firebase_notifications_handler/firebase_notifications_handler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:solari/core/errors/failures.dart';
@@ -29,6 +30,7 @@ class SignInCubit extends Cubit<SignInState> {
       SignInParams(
         email: email,
         password: password,
+        fcmToken: FirebaseNotificationsHandler.fcmToken ?? '',
       ),
     );
     response.fold((Failure failure) {
