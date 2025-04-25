@@ -1,0 +1,2 @@
+/Users/muhammadreda/True/solari-app/android/app/.cxx/RelWithDebInfo/5f244q54/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/muhammadreda/True/solari-app/android/app/.cxx/RelWithDebInfo/5f244q54/arm64-v8a/CMakeFiles/rebuild_cache.dir
