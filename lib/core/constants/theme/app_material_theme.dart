@@ -7,9 +7,9 @@ import 'package:solari/core/constants/size_configuration.dart';
 
 class AppMaterialTheme {
   static AppBarTheme appBarTheme = AppBarTheme(
-    backgroundColor: AppColors.white,
-    elevation: 0.0,
+    backgroundColor: AppColors.scaffoldBackgroundColor,
     titleTextStyle: TextStyles.bold16,
+    elevation: 0.0,
     centerTitle: true,
   );
 
@@ -58,6 +58,7 @@ class AppMaterialTheme {
 
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
+    useMaterial3: false,
     actionIconTheme: ActionIconThemeData(
       backButtonIconBuilder: (context) {
         return Icon(
@@ -68,7 +69,7 @@ class AppMaterialTheme {
       },
     ),
     fontFamily: AppFonts.roboto,
-    scaffoldBackgroundColor: AppColors.white,
+    scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor,
     textTheme: TextTheme(titleMedium: TextStyles.medium14),
     appBarTheme: appBarTheme,
     inputDecorationTheme: inputDecorationTheme,

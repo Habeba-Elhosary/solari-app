@@ -56,7 +56,7 @@ class HomeTemperatureSection extends StatelessWidget {
               Text(
                 'High intense',
                 style: TextStyles.semiBold14.copyWith(
-                  color: Color(0XFFF24805),
+                  color: AppColors.red,
                   fontFamily: AppFonts.roboto,
                 ),
               ),

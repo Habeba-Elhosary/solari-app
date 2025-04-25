@@ -19,4 +19,5 @@ class AppAssets {
   static const String power = 'assets/images/power.png';
   static const String sun = 'assets/images/sun.png';
   static const String cloud = 'assets/images/cloud.png';
+  static const String energy = 'assets/images/energy.png';
 }

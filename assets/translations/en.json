@@ -42,5 +42,10 @@
   "panels" : "Panels",
   "generated_power" : "Generated Power",
   "total_daily_generation" : "Total Daily Generation",
-  "current_temperature" : "Current Temperature"
+  "current_temperature" : "Current Temperature",
+  "generating" :"Generating",
+  "predicted_energy_for_the_day":"Predicted energy for the day",
+  "performance_metrics":"Performance Metrics",
+  "actual" : "Actual",
+  "expected" : "Expected"
 }

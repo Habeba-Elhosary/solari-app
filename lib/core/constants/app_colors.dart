@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class AppColors {
   static const Color white = Colors.white;
   static const Color black = Color(0XFF1A1A1A);
-  static const Color red = Colors.red;
-  static const Color green = Colors.green;
+  static const Color red = Color(0XFFF24805);
+  static const Color green = Color(0XFF2F9E44);
   static const Color scaffoldBackgroundColor = Color(0xFFF8F9FA);
 
   static const Color success = Color(0xFF10A94B);

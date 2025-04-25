@@ -30,13 +30,13 @@ class HomePanelsSection extends StatelessWidget {
   Color _getStatusTextColor(String status) {
     switch (status) {
       case 'Healthy':
-        return Color(0xff2F9E44);
+        return AppColors.green;
       case 'Underperforming':
         return Color(0XFFF08C00);
       case 'Faulted':
         return Color(0XFFF03E3E);
       default:
-        return Color(0xff2F9E44);
+        return AppColors.green;
     }
   }
 

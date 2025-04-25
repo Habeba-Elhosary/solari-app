@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:solari/core/constants/app_assets.dart';
+import 'package:solari/core/constants/app_colors.dart';
 import 'package:solari/core/constants/app_fonts.dart';
 import 'package:solari/core/constants/app_text_styles.dart';
 import 'package:solari/core/constants/size_configuration.dart';
@@ -50,8 +51,8 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                   const AppSpacer(heightRatio: 0.5),
                   Text(
                     tr('create_new_password_description'),
-                    style: TextStyles.bold14
-                        .copyWith(fontFamily: AppFonts.robotoSlab),
+                    style:
+                        TextStyles.bold14.copyWith(color: AppColors.greyDark),
                   ),
                   const AppSpacer(heightRatio: 1),
                   PasswordTextFormField(
