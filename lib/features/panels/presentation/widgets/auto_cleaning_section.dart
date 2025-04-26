@@ -12,7 +12,7 @@ class AutoCleaningSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isCleaning = false;
+    bool isCleaning = true;
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
