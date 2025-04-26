@@ -44,7 +44,7 @@ class ProfileScreen extends StatelessWidget {
                 Container(
                   width: double.infinity,
                   padding:
-                      EdgeInsets.symmetric(vertical: 15.sp, horizontal: 24.sp),
+                      EdgeInsets.symmetric(vertical: 20.sp, horizontal: 24.sp),
                   margin: EdgeInsets.only(left: 16.sp, right: 16.sp),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20.r),
@@ -100,7 +100,7 @@ class ProfileScreen extends StatelessWidget {
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20.sp),
+                    borderRadius: BorderRadius.circular(20.r),
                     color: AppColors.white,
                     boxShadow: [
                       BoxShadow(
