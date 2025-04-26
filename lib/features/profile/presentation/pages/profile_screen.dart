@@ -8,7 +8,9 @@ import 'package:solari/core/constants/app_colors.dart';
 import 'package:solari/core/constants/app_fonts.dart';
 import 'package:solari/core/constants/app_text_styles.dart';
 import 'package:solari/core/widgets/app_spacer.dart';
+import 'package:solari/features/profile/presentation/pages/notifications_screen.dart';
 import 'package:solari/features/profile/presentation/widgets/profile_item.dart';
+import 'package:solari/injection_container.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -28,8 +30,9 @@ class ProfileScreen extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(right: 16.sp),
             child: GestureDetector(
-              // TODO
-              onTap: () {},
+              onTap: () {
+                appNavigator.push(screen: NotificationsScreen());
+              },
               child: SvgPicture.asset(AppAssets.notifications),
             ),
           )
@@ -50,14 +53,12 @@ class ProfileScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20.r),
                     color: AppColors.primary,
                   ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          //TODO
-                        },
-                        child: Container(
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
                           height: 70.sp,
                           width: 70.sp,
                           decoration: BoxDecoration(
@@ -72,28 +73,28 @@ class ProfileScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                      ),
-                      AppSpacer(widthRatio: 0.5),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Karim Ali",
-                            style: TextStyles.regular18.copyWith(
-                                color: AppColors.white,
-                                fontFamily: AppFonts.robotoSlab),
-                          ),
-                          AppSpacer(heightRatio: 0.2),
-                          Text(
-                            "Technician",
-                            style: TextStyles.medium14
-                                .copyWith(color: AppColors.white),
-                          ),
-                        ],
-                      ),
-                      Spacer(),
-                      SvgPicture.asset(AppAssets.edit)
-                    ],
+                        AppSpacer(widthRatio: 0.5),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Karim Ali",
+                              style: TextStyles.regular18.copyWith(
+                                  color: AppColors.white,
+                                  fontFamily: AppFonts.robotoSlab),
+                            ),
+                            AppSpacer(heightRatio: 0.2),
+                            Text(
+                              "Technician",
+                              style: TextStyles.medium14
+                                  .copyWith(color: AppColors.white),
+                            ),
+                          ],
+                        ),
+                        Spacer(),
+                        SvgPicture.asset(AppAssets.edit)
+                      ],
+                    ),
                   ),
                 ),
                 AppSpacer(heightRatio: 0.5),

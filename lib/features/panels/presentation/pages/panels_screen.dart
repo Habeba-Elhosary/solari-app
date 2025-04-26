@@ -8,6 +8,8 @@ import 'package:solari/core/constants/app_fonts.dart';
 import 'package:solari/core/constants/app_text_styles.dart';
 import 'package:solari/core/widgets/app_spacer.dart';
 import 'package:solari/features/panels/presentation/widgets/all_panels_section.dart';
+import 'package:solari/features/profile/presentation/pages/notifications_screen.dart';
+import 'package:solari/injection_container.dart';
 
 class PanelsScreen extends StatelessWidget {
   const PanelsScreen({super.key});
@@ -27,8 +29,9 @@ class PanelsScreen extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(right: 16.sp),
             child: GestureDetector(
-              // TODO
-              onTap: () {},
+              onTap: () {
+                appNavigator.push(screen: NotificationsScreen());
+              },
               child: SvgPicture.asset(AppAssets.notifications),
             ),
           )

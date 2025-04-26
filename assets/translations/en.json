@@ -78,5 +78,6 @@
   "edit_profile": "Edit Profile",
   "add_tech" : "Add Technician",
   "add_system" : "Add System",
-  "sign_out" : "Sign Out"
+  "sign_out" : "Sign Out",
+  "notifications" : "Notifications"
 }

@@ -10,6 +10,8 @@ import 'package:solari/core/widgets/app_spacer.dart';
 import 'package:solari/features/analytics/presentation/widgets/generating_chart.dart';
 import 'package:solari/features/analytics/presentation/widgets/performance_metrics.dart';
 import 'package:solari/features/analytics/presentation/widgets/predicted_energy.dart';
+import 'package:solari/features/profile/presentation/pages/notifications_screen.dart';
+import 'package:solari/injection_container.dart';
 
 class AnalyticsScreen extends StatelessWidget {
   const AnalyticsScreen({super.key});
@@ -29,8 +31,9 @@ class AnalyticsScreen extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(right: 16.sp),
             child: GestureDetector(
-              // TODO
-              onTap: () {},
+              onTap: () {
+                appNavigator.push(screen: NotificationsScreen());
+              },
               child: SvgPicture.asset(AppAssets.notifications),
             ),
           )

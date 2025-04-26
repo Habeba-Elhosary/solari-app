@@ -6,6 +6,8 @@ import 'package:solari/core/constants/app_assets.dart';
 import 'package:solari/core/constants/app_colors.dart';
 import 'package:solari/core/constants/app_fonts.dart';
 import 'package:solari/core/constants/app_text_styles.dart';
+import 'package:solari/features/profile/presentation/pages/notifications_screen.dart';
+import 'package:solari/injection_container.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});
@@ -35,7 +37,12 @@ class HomeHeader extends StatelessWidget {
           ],
         ),
         Spacer(),
-        SvgPicture.asset(AppAssets.notifications)
+        GestureDetector(
+          onTap: () {
+            appNavigator.push(screen: NotificationsScreen());
+          },
+          child: SvgPicture.asset(AppAssets.notifications),
+        )
       ],
     );
   }
