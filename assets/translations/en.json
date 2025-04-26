@@ -79,5 +79,7 @@
   "add_tech" : "Add Technician",
   "add_system" : "Add System",
   "sign_out" : "Sign Out",
-  "notifications" : "Notifications"
+  "notifications" : "Notifications",
+  "are_you_sure" : "Are you sure that you want to sign out ?"
+
 }

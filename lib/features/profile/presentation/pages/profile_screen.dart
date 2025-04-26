@@ -8,6 +8,7 @@ import 'package:solari/core/constants/app_colors.dart';
 import 'package:solari/core/constants/app_fonts.dart';
 import 'package:solari/core/constants/app_text_styles.dart';
 import 'package:solari/core/widgets/app_spacer.dart';
+import 'package:solari/features/auth/presentation/widgets/signout_dialog.dart';
 import 'package:solari/features/profile/presentation/pages/notifications_screen.dart';
 import 'package:solari/features/profile/presentation/widgets/profile_item.dart';
 import 'package:solari/injection_container.dart';
@@ -135,7 +136,9 @@ class ProfileScreen extends StatelessWidget {
                       ProfileItem(
                         asset: AppAssets.logout,
                         title: tr('sign_out'),
-                        onTap: () {},
+                        onTap: () {
+                          appNavigator.showDialog(child: LogoutDialog());
+                        },
                       ),
                     ],
                   ),

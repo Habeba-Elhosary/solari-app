@@ -35,17 +35,6 @@ class MainScreen extends StatelessWidget {
                   }
                   if (state.currentTab == 3) {
                     return ProfileScreen();
-                    // return Center(
-                    //     child: BlocBuilder<SignOutCubit, SignOutState>(
-                    //   builder: (context, state) {
-                    //     return ElevatedButton(
-                    //       onPressed: () {
-                    //         context.read<SignOutCubit>().signOutEvent();
-                    //       },
-                    //       child: Text('logout'),
-                    //     );
-                    //   },
-                    // ));
                   }
                   return Container();
                 },

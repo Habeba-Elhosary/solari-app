@@ -26,7 +26,7 @@ class SignOutCubit extends Cubit<SignOutState> {
       sl<AutoSignInCubit>().signOut();
       emit(SignOutSuccess());
       sl<NavBarCubit>().updateIndex(0);
-      // appNavigator.pop();
+      appNavigator.pop();
     });
   }
 }
