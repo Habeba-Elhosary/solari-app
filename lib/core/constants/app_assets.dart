@@ -25,4 +25,8 @@ class AppAssets {
   static const String upperArrow = 'assets/images/upper_arrow.svg';
   static const String waterLevel = 'assets/images/water_level.png';
   static const String cleaningMode = 'assets/images/cleaning_mode.png';
+  static const String edit = 'assets/images/edit.svg';
+  static const String logout = 'assets/images/logout.svg';
+  static const String addTech = 'assets/images/add.svg';
+  static const String addSystem = 'assets/images/add_system.svg';
 }

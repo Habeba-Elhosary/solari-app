@@ -74,5 +74,9 @@
   "connection_timed_out_please_check_your_internet_speed_and_try_again": "Connection timed out. Please check your internet speed and try again.",
   "there_was_an_error_responding_please_try_again_later": "There was an error responding. Please try again later.",
   "the_order_has_been_cancelled_please_try_again": "The order has been cancelled. Please try again.",
-  "error_something_went_wrong": "Something went wrong. Please try again."
+  "error_something_went_wrong": "Something went wrong. Please try again.",
+  "edit_profile": "Edit Profile",
+  "add_tech" : "Add Technician",
+  "add_system" : "Add System",
+  "sign_out" : "Sign Out"
 }
