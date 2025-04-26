@@ -114,25 +114,26 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       ),
                     ),
                   ),
-                  IconButton(
-                    onPressed: () {
-                      if (_currentPage == onboardingData.length - 1) {
-                        appNavigator.push(screen: SignInScreen());
-                      } else {
-                        _pageController.nextPage(
-                          duration: 300.ms,
-                          curve: Curves.easeInOut,
-                        );
-                      }
-                    },
-                    style: IconButton.styleFrom(
-                      backgroundColor: AppColors.white,
-                      shape: const CircleBorder(),
-                    ),
-                    icon: Icon(
-                      Icons.arrow_forward_rounded,
-                      color: AppColors.primary,
-                      size: 26.sp,
+                  Material(
+                    color: AppColors.white,
+                    shape: const CircleBorder(),
+                    clipBehavior: Clip.hardEdge,
+                    child: IconButton(
+                      onPressed: () {
+                        if (_currentPage == onboardingData.length - 1) {
+                          appNavigator.push(screen: SignInScreen());
+                        } else {
+                          _pageController.nextPage(
+                            duration: 300.ms,
+                            curve: Curves.easeInOut,
+                          );
+                        }
+                      },
+                      icon: Icon(
+                        Icons.arrow_forward_rounded,
+                        color: AppColors.primary,
+                        size: 26.sp,
+                      ),
                     ),
                   )
                 ],

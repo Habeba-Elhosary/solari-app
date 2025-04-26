@@ -21,4 +21,8 @@ class AppAssets {
   static const String cloud = 'assets/images/cloud.png';
   static const String energy = 'assets/images/energy.png';
   static const String panel = 'assets/images/panel.png';
+  static const String panelPerformance = 'assets/images/panel_performance.png';
+  static const String upperArrow = 'assets/images/upper_arrow.svg';
+  static const String waterLevel = 'assets/images/water_level.png';
+  static const String cleaningMode = 'assets/images/cleaning_mode.png';
 }

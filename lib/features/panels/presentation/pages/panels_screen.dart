@@ -35,44 +35,45 @@ class PanelsScreen extends StatelessWidget {
         ],
       ),
       body: SafeArea(
-          child: Padding(
-        padding: EdgeInsets.all(16.sp),
-        child: Column(
-          children: [
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.all(24.sp),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20.r),
-                color: AppColors.primary,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'All 4 panels are active',
-                    style: TextStyles.bold22.copyWith(
-                      fontFamily: AppFonts.robotoSlab,
-                      color: AppColors.white,
+        child: Padding(
+          padding: EdgeInsets.all(16.sp),
+          child: Column(
+            children: [
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.all(24.sp),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.r),
+                  color: AppColors.primary,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'All 4 panels are active',
+                      style: TextStyles.bold22.copyWith(
+                        fontFamily: AppFonts.robotoSlab,
+                        color: AppColors.white,
+                      ),
                     ),
-                  ),
-                  AppSpacer(heightRatio: 0.4),
-                  Text(
-                    'The system temperature is 24°C \nSolar tracking system is  is activated ',
-                    style: TextStyles.regular14.copyWith(
-                      fontFamily: AppFonts.robotoSlab,
-                      color: AppColors.white,
-                      height: 2.sp,
+                    AppSpacer(heightRatio: 0.4),
+                    Text(
+                      'The system temperature is 24°C \nSolar tracking system is  is activated ',
+                      style: TextStyles.regular14.copyWith(
+                        fontFamily: AppFonts.robotoSlab,
+                        color: AppColors.white,
+                        height: 2.sp,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            AppSpacer(heightRatio: 0.7),
-            AllPanelsSection(),
-          ],
+              AppSpacer(heightRatio: 0.7),
+              AllPanelsSection(),
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }

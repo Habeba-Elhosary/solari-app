@@ -8,7 +8,6 @@ import 'package:solari/core/utils/app_navigation/app_navigator.dart';
 import 'package:solari/core/widgets/handle_error_screen.dart';
 import 'package:solari/features/auth/auth_cubits.dart';
 import 'package:solari/features/auth/presentation/cubits/auto_signin/auto_signin_cubit.dart';
-import 'package:solari/features/auth/presentation/pages/onboarding/onboarding_screen.dart';
 import 'package:solari/features/auth/presentation/pages/signin/signin_screen.dart';
 import 'package:solari/features/auth/presentation/pages/splash/splash_screen.dart';
 import 'package:solari/features/check_internet/cubit/check_internet_cubit.dart';
@@ -16,6 +15,7 @@ import 'package:solari/features/check_internet/cubit/check_internet_state.dart';
 import 'package:solari/features/check_internet/pages/no_internet_dialog.dart';
 import 'package:solari/features/home/presentation/cubit/nav_bar/nav_bar_cubit.dart';
 import 'package:solari/features/home/presentation/pages/main_screen.dart';
+import 'package:solari/features/panels/presentation/pages/panel_details_screen.dart';
 import 'package:solari/injection_container.dart';
 
 class MyApp extends StatefulWidget {
@@ -135,7 +135,8 @@ class SolariApp extends StatelessWidget {
           return const MainScreen();
         }
         if (state is AutoSignInNoUser) {
-          return const OnboardingScreen();
+          // return const OnboardingScreen();
+          return const PanelDetailsScreen();
         }
         if (state is AutoSignInSeenIntro) {
           return const SignInScreen();
