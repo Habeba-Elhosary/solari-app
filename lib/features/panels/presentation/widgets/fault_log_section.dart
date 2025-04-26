@@ -7,7 +7,9 @@ import 'package:solari/core/constants/app_colors.dart';
 import 'package:solari/core/constants/app_fonts.dart';
 import 'package:solari/core/constants/app_text_styles.dart';
 import 'package:solari/core/widgets/app_spacer.dart';
+import 'package:solari/features/panels/presentation/pages/fault_log_screen.dart';
 import 'package:solari/features/panels/presentation/widgets/fault_log_entry.dart';
+import 'package:solari/injection_container.dart';
 
 class FaultLogSection extends StatelessWidget {
   const FaultLogSection({super.key});
@@ -61,17 +63,22 @@ class FaultLogSection extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Text(
-                tr('fault_log'),
-                style: TextStyles.bold22.copyWith(
-                  fontFamily: AppFonts.robotoSlab,
+          GestureDetector(
+            onTap: () {
+              appNavigator.push(screen: const FaultLogScreen());
+            },
+            child: Row(
+              children: [
+                Text(
+                  tr('fault_log'),
+                  style: TextStyles.bold22.copyWith(
+                    fontFamily: AppFonts.robotoSlab,
+                  ),
                 ),
-              ),
-              Spacer(),
-              SvgPicture.asset(AppAssets.upperArrow, height: 17.sp)
-            ],
+                Spacer(),
+                SvgPicture.asset(AppAssets.upperArrow, height: 17.sp)
+              ],
+            ),
           ),
           AppSpacer(heightRatio: 0.5),
           ListView.separated(

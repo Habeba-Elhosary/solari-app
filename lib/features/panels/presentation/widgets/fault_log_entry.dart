@@ -22,7 +22,7 @@ class FaultLogEntry extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
           padding: EdgeInsets.all(8.sp),
@@ -47,6 +47,7 @@ class FaultLogEntry extends StatelessWidget {
                   fontFamily: AppFonts.robotoSlab,
                 ),
               ),
+              AppSpacer(heightRatio: 0.2),
               Text(
                 description,
                 style: TextStyles.regular12.copyWith(
@@ -59,6 +60,7 @@ class FaultLogEntry extends StatelessWidget {
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               time,
@@ -67,6 +69,7 @@ class FaultLogEntry extends StatelessWidget {
                 fontFamily: AppFonts.robotoSlab,
               ),
             ),
+            AppSpacer(heightRatio: 0.2),
             Text(
               date,
               style: TextStyles.regular12.copyWith(
