@@ -5,7 +5,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:solari/core/errors/failures.dart';
 import 'package:solari/core/usecases/no_params.dart';
 import 'package:solari/core/widgets/toast.dart';
-import 'package:solari/features/home/presentation/cubit/nav_bar/nav_bar_cubit.dart';
+import 'package:solari/features/home/presentation/cubitS/nav_bar/nav_bar_cubit.dart';
 import '../../../../../injection_container.dart';
 import '../../../domain/usecases/signout.dart';
 import '../auto_signin/auto_signin_cubit.dart';

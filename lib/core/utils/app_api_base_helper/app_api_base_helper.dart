@@ -1,12 +1,27 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:dio_smart_retry/dio_smart_retry.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:solari/core/errors/exceptions.dart';
 import 'package:solari/core/flavors/flavors_config.dart';
 
 enum DataFormat { formData, rawData }
+
+List<Duration> generateExponentialDelays() {
+  const int maxRetries = 50;
+  const int initialDelaySeconds = 1;
+  const int maxDelaySeconds = 300;
+  final List<Duration> delays = [];
+  for (int i = 0; i < maxRetries; i++) {
+    final int delaySeconds = initialDelaySeconds * (1 << i); // 2^i
+    delays.add(Duration(
+        seconds:
+            delaySeconds > maxDelaySeconds ? maxDelaySeconds : delaySeconds));
+  }
+  return delays;
+}
 
 class ApiBaseHelper {
   final Dio dio;
@@ -24,16 +39,36 @@ class ApiBaseHelper {
     dio.options.connectTimeout = const Duration(milliseconds: 30000);
     dio.options.receiveTimeout = const Duration(milliseconds: 30000);
     dio.interceptors.clear();
-    dio.interceptors.add(
-      PrettyDioLogger(
-        requestHeader: true,
-        requestBody: true,
-        responseBody: true,
-        responseHeader: false,
-        error: true,
-        compact: true,
-        maxWidth: 90,
-      ),
+    dio.interceptors.addAll(
+      [
+        PrettyDioLogger(
+          requestHeader: true,
+          requestBody: true,
+          responseBody: true,
+          responseHeader: false,
+          error: true,
+          compact: true,
+          maxWidth: 90,
+          enabled: true,
+          request: true,
+        ),
+        RetryInterceptor(
+          dio: dio,
+          logPrint: (message) => log(message),
+          retries: 50,
+          retryDelays: generateExponentialDelays(),
+          retryEvaluator: (DioException error, int attempt) {
+            if (error.type == DioExceptionType.connectionError ||
+                error.type == DioExceptionType.receiveTimeout ||
+                error.type == DioExceptionType.sendTimeout ||
+                error.type == DioExceptionType.unknown ||
+                error.error is HttpException) {
+              return true;
+            }
+            return false;
+          },
+        ),
+      ],
     );
   }
 
@@ -65,8 +100,11 @@ class ApiBaseHelper {
       if (token != null) {
         this.token = token;
       }
-      final Response response =
-          await dio.get(url, data: body, queryParameters: queryParameters);
+      final Response response = await dio.get(
+        url,
+        data: body,
+        queryParameters: queryParameters,
+      );
       final responseJson = _returnResponse(response);
       return responseJson;
     } on SocketException {
@@ -105,8 +143,11 @@ class ApiBaseHelper {
       } else {
         formattedBody = body;
       }
-      response = await dio.post(url,
-          data: formattedBody, queryParameters: queryParameters);
+      response = await dio.post(
+        url,
+        data: formattedBody,
+        queryParameters: queryParameters,
+      );
       responseJson = _returnResponse(response);
       return responseJson;
     } on SocketException {
@@ -188,8 +229,9 @@ class ApiBaseHelper {
       case 400:
       case 422:
         throw ServerException(
-            message: response.data['message'],
-            errorMap: response.data['errors']);
+          message: response.data['message'],
+          errorMap: response.data['errors'],
+        );
       case 401:
         throw ServerException(message: response.data['message'] ?? tr('error'));
       case 403:
@@ -212,7 +254,8 @@ String handleException(Exception error) {
       case DioExceptionType.receiveTimeout:
       case DioExceptionType.connectionTimeout:
         return tr(
-            'connection_timed_out_please_check_your_internet_speed_and_try_again');
+          'connection_timed_out_please_check_your_internet_speed_and_try_again',
+        );
       case DioExceptionType.badResponse:
         return dioError.response?.data['message'] ??
             tr('there_was_an_error_responding_please_try_again_later');

@@ -6,13 +6,25 @@ import 'package:solari/core/constants/app_fonts.dart';
 import 'package:solari/core/constants/app_text_styles.dart';
 import 'package:solari/features/analytics/presentation/pages/analytics_screen.dart';
 import 'package:solari/features/auth/presentation/cubits/signin/signin_cubit.dart';
-import 'package:solari/features/home/presentation/cubit/nav_bar/nav_bar_cubit.dart';
+import 'package:solari/features/home/presentation/cubitS/nav_bar/nav_bar_cubit.dart';
+import 'package:solari/features/home/presentation/cubits/system_home/system_home_cubit.dart';
 import 'package:solari/features/home/presentation/pages/home_screen.dart';
 import 'package:solari/features/panels/presentation/pages/panels_screen.dart';
 import 'package:solari/features/profile/presentation/pages/profile_screen.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<SystemHomeCubit>().getSystemHomeEvent();
+  }
 
   @override
   Widget build(BuildContext context) {
