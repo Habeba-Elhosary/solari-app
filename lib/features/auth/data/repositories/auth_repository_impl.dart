@@ -24,7 +24,7 @@ class AuthRepositoryImpl implements AuthRepository {
       await authLocalDataSource.cacheUserAccessToken(
           token: user.data?.token ?? '');
       await authLocalDataSource.cacheUserCredentials(
-        phone: params.email,
+        email: params.email,
         password: params.password,
       );
       return right(user);
@@ -106,7 +106,8 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, Unit>> createNewPassword(
       CreateNewPasswordParams params) async {
     try {
-      return right(await authRemoteDataSource.createNewPassword(params));
+      final String email = await authLocalDataSource.getCacheUserEmail();
+      return right(await authRemoteDataSource.createNewPassword(params, email));
     } on ServerException catch (error) {
       return left(ServerFailure.formServerException(error));
     }
@@ -116,6 +117,7 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, ForgetPasswordResponse>> forgetPassword(
       ForgetPasswordParams params) async {
     try {
+      await authLocalDataSource.cacheUserEmail(email: params.email);
       final ForgetPasswordResponse data =
           await authRemoteDataSource.forgetPassword(params);
       return right(data);

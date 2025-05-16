@@ -39,7 +39,9 @@ class VerfiyCodeCubit extends Cubit<VerfiyCodeState> {
       },
       (VerifyOtpResponse success) {
         if (isForgetPassword) {
-          appNavigator.pushReplacement(screen: const CreateNewPasswordScreen());
+          appNavigator.pushReplacement(
+              screen: CreateNewPasswordScreen(
+                  resetToken: success.data?.resetToken ?? ''));
         } else {
           appNavigator.popToFirst();
           sl<AutoSignInCubit>().autoSignInEvent();

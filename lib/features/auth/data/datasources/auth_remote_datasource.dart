@@ -33,7 +33,7 @@ abstract class AuthRemoteDataSource {
 
   Future<String> signUp(SignUpParams params);
   Future<Unit> deleteAccount();
-  Future<Unit> createNewPassword(CreateNewPasswordParams params);
+  Future<Unit> createNewPassword(CreateNewPasswordParams params, String email);
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -97,11 +97,15 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<Unit> createNewPassword(CreateNewPasswordParams params) async {
+  Future<Unit> createNewPassword(
+      CreateNewPasswordParams params, String email) async {
     try {
       await apiBaseHelper.post(
         url: createNewPasswordAPI,
-        body: params.toJson(),
+        body: {
+          'email': email,
+          ...params.toJson(),
+        },
       );
       return unit;
     } catch (e) {

@@ -16,13 +16,13 @@ class CreateNewPasswordCubit extends Cubit<CreateNewPasswordState> {
 
   Future<void> createNewPasswordEvent({
     required String password,
-    required String confirmPassword,
+    required String resetToken,
   }) async {
     emit(CreateNewPasswordLoading());
     final Either<Failure, Unit> response = await createNewPasswordUseCase(
       CreateNewPasswordParams(
         password: password,
-        confirmPassword: confirmPassword,
+        resetToken: resetToken,
       ),
     );
     response.fold((Failure failure) {

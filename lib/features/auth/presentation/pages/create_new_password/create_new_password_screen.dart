@@ -13,7 +13,8 @@ import '../../../../../core/widgets/app_spacer.dart';
 import '../../cubits/create_new_password/create_new_password_cubit.dart';
 
 class CreateNewPasswordScreen extends StatefulWidget {
-  const CreateNewPasswordScreen({super.key});
+  final String resetToken;
+  const CreateNewPasswordScreen({super.key, required this.resetToken});
 
   @override
   State<CreateNewPasswordScreen> createState() =>
@@ -77,7 +78,7 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                           .read<CreateNewPasswordCubit>()
                           .createNewPasswordEvent(
                               password: passwordController.text,
-                              confirmPassword: confirmPasswordController.text);
+                              resetToken: widget.resetToken);
                     },
                     child: Text(tr('confirm')),
                   )

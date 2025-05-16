@@ -103,13 +103,13 @@ class SignUpParams {
 // ======================= CREATE NEW PASSWORD PARAMS ==========================
 class CreateNewPasswordParams {
   final String password;
-  final String confirmPassword;
+  final String resetToken;
   CreateNewPasswordParams({
     required this.password,
-    required this.confirmPassword,
+    required this.resetToken,
   });
 
   Map<String, dynamic> toJson() {
-    return {'password': password, 'password_confirmation': confirmPassword};
+    return {'password': password, 'reset_token': resetToken};
   }
 }

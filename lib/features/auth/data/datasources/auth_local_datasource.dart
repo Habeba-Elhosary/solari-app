@@ -6,19 +6,23 @@ import '../../../../injection_container.dart';
 const String _accessTokenKey = 'access_token_key';
 const String _deviceTokenKey = 'device_token_key';
 const String _passwordKey = 'password_key';
-const String _phoneKey = 'phone_key';
+const String _emailKey = 'email_key';
 
 abstract class AuthLocalDataSource {
   Future<void> cacheUserAccessToken({required String token});
   Future<void> cacheUserDeviceToken({required String? deviceToken});
   Future<void> cacheUserCredentials({
-    required String phone,
+    required String email,
     required String password,
   });
+  Future<void> cacheUserEmail({
+    required String email,
+  });
 
-  Future<(String phone, String password)> getCacheUserCredentials();
+  Future<(String email, String password)> getCacheUserCredentials();
   Future<String> getCacheUserAccessToken();
   Future<String> getCacheUserDeviceToken();
+  Future<String> getCacheUserEmail();
 
   Future<void> clearData();
 }
@@ -78,10 +82,10 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
 
   @override
   Future<void> cacheUserCredentials(
-      {required String phone, required String password}) async {
+      {required String email, required String password}) async {
     try {
       await secureStorage.write(key: _passwordKey, value: password);
-      await secureStorage.write(key: _phoneKey, value: phone);
+      await secureStorage.write(key: _emailKey, value: email);
     } catch (e) {
       log(e.toString());
       throw CacheException();
@@ -91,7 +95,7 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   @override
   Future<(String, String)> getCacheUserCredentials() async {
     try {
-      final String? phone = await secureStorage.read(key: _phoneKey);
+      final String? phone = await secureStorage.read(key: _emailKey);
       final String? password = await secureStorage.read(key: _passwordKey);
       if (phone == null || password == null) {
         throw CacheException();
@@ -111,6 +115,30 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
       await sharedPreferences.clear();
     } catch (e) {
       log(e.toString());
+      throw CacheException();
+    }
+  }
+
+  @override
+  Future<void> cacheUserEmail({required String email}) async {
+    try {
+      await secureStorage.write(key: _emailKey, value: email);
+    } catch (e) {
+      log(e.toString());
+      throw CacheException();
+    }
+  }
+
+  @override
+  Future<String> getCacheUserEmail() async {
+    try {
+      final String? email = await secureStorage.read(key: _emailKey);
+      if (email != null) {
+        return email;
+      } else {
+        throw CacheException();
+      }
+    } on CacheException {
       throw CacheException();
     }
   }
