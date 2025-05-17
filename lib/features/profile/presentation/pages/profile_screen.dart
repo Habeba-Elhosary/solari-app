@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:solari/core/constants/app_assets.dart';
@@ -8,6 +9,7 @@ import 'package:solari/core/constants/app_colors.dart';
 import 'package:solari/core/constants/app_fonts.dart';
 import 'package:solari/core/constants/app_text_styles.dart';
 import 'package:solari/core/widgets/app_spacer.dart';
+import 'package:solari/features/auth/presentation/cubits/signin/signin_cubit.dart';
 import 'package:solari/features/auth/presentation/widgets/signout_dialog.dart';
 import 'package:solari/features/profile/presentation/pages/notifications_screen.dart';
 import 'package:solari/features/profile/presentation/widgets/profile_item.dart';
@@ -18,6 +20,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.read<SignInCubit>().user;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -79,12 +82,13 @@ class ProfileScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Karim Ali",
+                              user.name,
                               style: TextStyles.regular18.copyWith(
                                   color: AppColors.white,
                                   fontFamily: AppFonts.robotoSlab),
                             ),
                             AppSpacer(heightRatio: 0.2),
+                            //TODO: add role
                             Text(
                               "Technician",
                               style: TextStyles.medium14
