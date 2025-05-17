@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:solari/core/constants/app_colors.dart';
 import 'package:solari/core/constants/app_fonts.dart';
 import 'package:solari/core/constants/app_text_styles.dart';
+import 'package:solari/core/enums/panel_status.dart';
 import 'package:solari/features/home/domain/entities/get_system_home_response.dart';
 import 'package:solari/features/home/presentation/cubits/system_home/system_home_cubit.dart';
 
@@ -12,7 +14,6 @@ class HomePanelsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -62,9 +63,7 @@ class HomePanelsSection extends StatelessWidget {
                 );
               }
               if (state is SystemHomeLoading) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
+                return buildCellShimmerList();
               }
               if (state is SystemHomeSuccess) {
                 final List<Cell> items = state.getSystemHomeResponse.data.cells;
@@ -78,7 +77,7 @@ class HomePanelsSection extends StatelessWidget {
                   ),
                   itemBuilder: (context, index) {
                     final item = items[index];
-                    // final PanelStatus status = item.status;
+                    final PanelStatus status = item.status;
 
                     return Padding(
                       padding: EdgeInsets.symmetric(
@@ -91,22 +90,22 @@ class HomePanelsSection extends StatelessWidget {
                             style: TextStyles.regular14
                                 .copyWith(fontFamily: AppFonts.roboto),
                           ),
-                          // Container(
-                          //   padding: EdgeInsets.symmetric(
-                          //     horizontal: 12.sp,
-                          //     vertical: 4.sp,
-                          //   ),
-                          //   decoration: BoxDecoration(
-                          //     color: status.backgroundColor,
-                          //     borderRadius: BorderRadius.circular(20.sp),
-                          //   ),
-                          //   child: Text(
-                          //     status.label,
-                          //     style: TextStyles.regular12.copyWith(
-                          //       color: status.textColor,
-                          //     ),
-                          //   ),
-                          // ),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 12.sp,
+                              vertical: 4.sp,
+                            ),
+                            decoration: BoxDecoration(
+                              color: status.backgroundColor,
+                              borderRadius: BorderRadius.circular(20.sp),
+                            ),
+                            child: Text(
+                              status.label,
+                              style: TextStyles.regular12.copyWith(
+                                color: status.textColor,
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     );
@@ -118,6 +117,61 @@ class HomePanelsSection extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget buildCellShimmerList() {
+    return ListView.separated(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: 3,
+      separatorBuilder: (context, index) => Divider(
+        thickness: 2.sp,
+        color: AppColors.scaffoldBackgroundColor,
+      ),
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: 10.sp,
+            horizontal: 16.sp,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Shimmer.fromColors(
+                baseColor: Colors.grey.shade300,
+                highlightColor: Colors.grey.shade100,
+                child: Container(
+                  height: 14.sp,
+                  width: 100.sp,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(4.sp),
+                  ),
+                ),
+              ),
+              Shimmer.fromColors(
+                baseColor: Colors.grey.shade300,
+                highlightColor: Colors.grey.shade100,
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 12.sp,
+                    vertical: 4.sp,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20.sp),
+                  ),
+                  child: SizedBox(
+                    width: 40.sp,
+                    height: 12.sp,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

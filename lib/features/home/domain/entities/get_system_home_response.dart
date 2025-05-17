@@ -1,3 +1,5 @@
+import 'package:solari/core/enums/panel_status.dart';
+
 class GetSystemHomeResponse {
   final int status;
   final String? message;
@@ -57,7 +59,7 @@ class HomeSystemData {
 
 class Cell {
   final String name;
-  final String status;
+  final PanelStatus status;
 
   Cell({
     required this.name,
@@ -66,7 +68,7 @@ class Cell {
 
   factory Cell.fromJson(Map<String, dynamic> json) => Cell(
         name: json["name"],
-        status: json["status"],
+        status: PanelStatus.fromStringKey(json["status"]),
       );
 
   Map<String, dynamic> toJson() => {

@@ -20,7 +20,7 @@ class AllPanelsSection extends StatelessWidget {
     {
       'id': 'A111',
       'power': '12 kWh',
-      'status': PanelStatus.faulted,
+      'status': PanelStatus.poor,
     },
     {
       'id': 'A110',
