@@ -30,4 +30,5 @@ class AppAssets {
   static const String addTech = 'assets/images/add.svg';
   static const String addSystem = 'assets/images/add_system.svg';
   static const String notificationBlue = 'assets/images/notification_blue.svg';
+  static const String addPanel = 'assets/images/add_panel.svg';
 }

@@ -80,6 +80,7 @@
   "add_system" : "Add System",
   "sign_out" : "Sign Out",
   "notifications" : "Notifications",
+  "add_panel" : "Add Panel",
   "are_you_sure" : "Are you sure that you want to sign out ?"
 
 }
