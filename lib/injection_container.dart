@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:solari/core/utils/app_api_base_helper/app_api_base_helper.dart';
 import 'package:solari/core/utils/app_navigation/app_navigator.dart';
 import 'package:solari/features/auth/auth_injection.dart';
+import 'package:solari/features/general/general_injection.dart';
 import 'package:solari/features/home/home_injection.dart';
 
 final GetIt sl = GetIt.instance;
@@ -15,6 +16,7 @@ abstract class ServiceLocator {
     // features
     initAuthInjection();
     initHomeInjection();
+    initGeneralInjection();
 
     // core
     _injectSharedPreferences();

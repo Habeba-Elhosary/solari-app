@@ -10,10 +10,11 @@ class HomeRepositoryImpl implements HomeRepository {
 
   HomeRepositoryImpl({required this.homeRemoteDataSource});
   @override
-  Future<Either<Failure, GetSystemHomeResponse>> getSystemHome() async {
+  Future<Either<Failure, GetSystemHomeResponse>> getSystemHome(
+      {required int systemId}) async {
     try {
       final GetSystemHomeResponse employeeHomeResponse =
-          await homeRemoteDataSource.getSystemHome();
+          await homeRemoteDataSource.getSystemHome(systemId: systemId);
       return right(employeeHomeResponse);
     } on ServerException catch (error) {
       return left(ServerFailure.formServerException(error));

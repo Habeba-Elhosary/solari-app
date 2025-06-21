@@ -2,8 +2,8 @@ import 'dart:developer';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:solari/core/constants/app_colors.dart';
-import 'package:solari/core/constants/app_text_styles.dart';
 
 abstract class BaseSelectableEntity extends Equatable {
   final int id;
@@ -135,15 +135,21 @@ class _CoreSingleSelectorDropdownState<
         return DropdownButtonFormField<SelectorItem>(
           value: value,
           validator: widget.validator,
+          decoration: InputDecoration(
+              label: Text(widget.label),
+              enabledBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: AppColors.primary),
+                borderRadius: BorderRadius.circular(15.r),
+              )),
           icon: const Icon(
             Icons.expand_more_rounded,
-            color: AppColors.warning,
+            color: AppColors.primary,
           ),
           onChanged: (SelectorItem? value) {
             this.value = value;
             widget.onChanged(value as SelectorItem);
           },
-          hint: Text(widget.hintText ?? '', style: TextStyles.light14),
+          // hint: Text(widget.hintText ?? '', style: TextStyles.light14),
           items: widget.options
               .map(
                 (SelectorItem e) => DropdownMenuItem<SelectorItem>(
