@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+
 class Validator {
   static String? defaultValidator(String? value) {
     if (value == null || value.trim().isEmpty) {
@@ -81,6 +82,10 @@ class Validator {
       }
       if (value.length < 8) {
         return tr('error_password_validation');
+      }
+      final specialCharRegex = RegExp(r'[!@#$%^&*(),.?":{}|<>]');
+      if (!specialCharRegex.hasMatch(value)) {
+        return tr('error_password_special_char');
       }
     }
     return null;

@@ -1,6 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:solari/core/widgets/single_drop_down_selector.dart';
 import 'package:solari/core/widgets/toast.dart';
+import 'package:solari/features/general/domain/entities/all_systems_response.dart';
 import 'package:solari/features/profile/domain/repositories/profile_repository.dart';
 import 'package:solari/features/profile/domain/usecases/add_technician_usecase.dart';
 import 'package:solari/injection_container.dart';
@@ -11,11 +14,20 @@ class AddTechnicianCubit extends Cubit<AddTechnicianState> {
   AddTechnicianCubit({required this.addTechnician})
       : super(AddTechnicianInitial());
 
+  System? system;
+
+  void selectCompany({
+    required BaseSelectableEntity entity,
+  }) {
+    emit(AddTechnicianLoading());
+    system = entity as System;
+    emit(AddTechnicianInitial());
+  }
+
   Future<void> addTechnicianEvent({
     required String technicianName,
     required String technicianEmail,
     required String technicianPassword,
-    required int systemId,
   }) async {
     emit(AddTechnicianLoading());
     final result = await addTechnician(
@@ -23,7 +35,7 @@ class AddTechnicianCubit extends Cubit<AddTechnicianState> {
         name: technicianName,
         email: technicianEmail,
         password: technicianPassword,
-        systemId: systemId,
+        systemId: system!.id,
       ),
     );
     result.fold((failure) {
@@ -31,7 +43,7 @@ class AddTechnicianCubit extends Cubit<AddTechnicianState> {
       showErrorToast(failure.message);
     }, (r) {
       emit(AddTechnicianSuccess());
-      showSuccessToast('test2323');
+      showSuccessToast(tr('technician_added_successfully'));
       appNavigator.pop();
     });
   }
