@@ -19,6 +19,8 @@
   "resend_code": "Resend Code",
   "cache_failure": "Cache Failure",
   "select_system": "Select System",
+  "panel_name": "Panel Name",
+  "panel_id": "Panel ID",
   "otp_will_be_sent_in": "OTP will be sent in",
   "no_internet_title": "Please check your internet connection to access app services",
   "no_internet_subTitle": "Access to internet services",
