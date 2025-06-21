@@ -25,6 +25,7 @@
   "system_name": "System Name",
   "system_id": "System ID",
   "location": "Location",
+  "panel_added_successfully":"Panel was added successfully",
   "select_technician": "Select Technician",
   "otp_will_be_sent_in": "OTP will be sent in",
   "no_internet_title": "Please check your internet connection to access app services",

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:solari/core/constants/app_colors.dart';
+import 'package:solari/core/constants/app_text_styles.dart';
 
 abstract class BaseSelectableEntity extends Equatable {
   final int id;
@@ -133,14 +134,20 @@ class _CoreSingleSelectorDropdownState<
           );
         }
         return DropdownButtonFormField<SelectorItem>(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           value: value,
           validator: widget.validator,
           decoration: InputDecoration(
-              label: Text(widget.label),
-              enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: AppColors.primary),
-                borderRadius: BorderRadius.circular(15.r),
-              )),
+            label: Text(widget.label, style: TextStyles.regular14),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16.r),
+              borderSide: BorderSide(color: AppColors.primary, width: 1.sp),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16.r),
+              borderSide: BorderSide(color: Color(0XFFE9ECEF), width: 1.sp),
+            ),
+          ),
           icon: const Icon(
             Icons.expand_more_rounded,
             color: AppColors.primary,

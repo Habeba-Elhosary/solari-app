@@ -68,7 +68,7 @@ class Cell {
 
   factory Cell.fromJson(Map<String, dynamic> json) => Cell(
         name: json["name"],
-        status: PanelStatus.fromStringKey(json["status"]),
+        status: PanelStatus.fromStringKey(json["status"] ?? "Healthy"),
       );
 
   Map<String, dynamic> toJson() => {
