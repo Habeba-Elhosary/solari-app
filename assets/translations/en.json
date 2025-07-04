@@ -23,6 +23,7 @@
   "panel_id": "Panel ID",
   "add_technician": "Add Technician",
   "system_name": "System Name",
+  "password_changed_successfully" : "Password changed successfully",
   "system_id": "System ID",
   "location": "Location",
   "system_added_successfully": "System was added successfully",

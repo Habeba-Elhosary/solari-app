@@ -10,6 +10,7 @@ import 'package:solari/core/constants/app_fonts.dart';
 import 'package:solari/core/constants/app_text_styles.dart';
 import 'package:solari/core/constants/size_configuration.dart';
 import 'package:solari/core/widgets/app_spacer.dart';
+import 'package:solari/core/widgets/loading.dart';
 import 'package:solari/features/auth/presentation/cubits/forget_password/forget_password_cubit.dart';
 import 'package:solari/features/auth/presentation/cubits/send_otp/send_otp_cubit.dart';
 import 'package:solari/features/auth/presentation/cubits/verfiy_code/verfiy_code_cubit.dart';
@@ -111,24 +112,32 @@ class _OTPVerficationScreenState extends State<OTPVerficationScreen> {
                       ),
                     ),
                     const AppSpacer(heightRatio: 1),
-                    ElevatedButton(
-                      onPressed: () {
-                        if (widget.isForgetPassword) {
-                          context.read<VerfiyCodeCubit>().verfiyCodeEvent(
-                                isForgetPassword: widget.isForgetPassword,
-                                email: widget.email!,
-                                otp: otpController.text,
-                                otpToken: widget.otpToken,
-                              );
-                        } else {
-                          context.read<VerfiyCodeCubit>().verfiyCodeEvent(
-                                isForgetPassword: widget.isForgetPassword,
-                                otp: otpController.text,
-                                otpToken: widget.otpToken,
-                              );
-                        }
+                    BlocBuilder<VerfiyCodeCubit, VerfiyCodeState>(
+                      builder: (context, state) {
+                        return Visibility(
+                          visible: state is! VerfiyCodeLoading,
+                          replacement: Center(child: Loading()),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              if (widget.isForgetPassword) {
+                                context.read<VerfiyCodeCubit>().verfiyCodeEvent(
+                                      isForgetPassword: widget.isForgetPassword,
+                                      email: widget.email!,
+                                      otp: otpController.text,
+                                      otpToken: widget.otpToken,
+                                    );
+                              } else {
+                                context.read<VerfiyCodeCubit>().verfiyCodeEvent(
+                                      isForgetPassword: widget.isForgetPassword,
+                                      otp: otpController.text,
+                                      otpToken: widget.otpToken,
+                                    );
+                              }
+                            },
+                            child: Text(tr('confirm')),
+                          ),
+                        );
                       },
-                      child: Text(tr('confirm')),
                     ),
                     const AppSpacer(heightRatio: 1.5),
                     if (widget.isForgetPassword) ...[
