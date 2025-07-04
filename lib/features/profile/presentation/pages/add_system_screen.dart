@@ -60,7 +60,7 @@ class AddSystemScreen extends StatelessWidget {
               AppSpacer(heightRatio: 0.7),
               TextFormField(
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (String? value) => Validator.numbers(value),
+                validator: (String? value) => Validator.name(value),
                 keyboardType: TextInputType.name,
                 cursorColor: AppColors.primary,
                 onTapOutside: (PointerDownEvent event) {

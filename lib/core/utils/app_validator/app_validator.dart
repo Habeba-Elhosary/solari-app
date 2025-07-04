@@ -15,9 +15,9 @@ class Validator {
       if (value.isEmpty) {
         return tr('error_filed_required');
       }
-      if (value.split(' ').length < 3) {
-        return tr('name_must_trio');
-      }
+      // if (value.split(' ').length < 3) {
+      //   return tr('name_must_trio');
+      // }
       if (value.length < 3) {
         return tr('name_short_input');
       }

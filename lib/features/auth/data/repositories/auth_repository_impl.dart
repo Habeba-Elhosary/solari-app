@@ -39,12 +39,11 @@ class AuthRepositoryImpl implements AuthRepository {
       final (String phone, String password) =
           await authLocalDataSource.getCacheUserCredentials();
       await waitForFcmToken();
-
       final SignInResponse signInResponse = await authRemoteDataSource.signIn(
         SignInParams(
           email: phone,
           password: password,
-          fcmToken: FirebaseNotificationsHandler.fcmToken ?? '',
+          fcmToken: FirebaseNotificationsHandler.fcmToken ?? 'x',
         ),
       );
       return right(signInResponse);

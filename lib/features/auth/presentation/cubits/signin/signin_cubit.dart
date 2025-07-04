@@ -40,7 +40,7 @@ class SignInCubit extends Cubit<SignInState> {
       SignInParams(
         email: email,
         password: password,
-        fcmToken: FirebaseNotificationsHandler.fcmToken ?? '',
+        fcmToken: FirebaseNotificationsHandler.fcmToken ?? 'x',
       ),
     );
     response.fold((Failure failure) {
