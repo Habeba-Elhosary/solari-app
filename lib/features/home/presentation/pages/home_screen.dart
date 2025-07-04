@@ -59,8 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             if (allSystemsCubit.systems.isNotEmpty &&
                                 systemHomeCubit.system == null) {
                               final firstSystem = allSystemsCubit.systems.first;
-                              systemHomeCubit.selectCompany(
-                                  entity: firstSystem);
+                              systemHomeCubit.selectSystem(entity: firstSystem);
                             }
                           },
                           child: CoreSingleSelectorDropdown<
@@ -75,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             onChanged: (System value) {
                               context
                                   .read<SystemHomeCubit>()
-                                  .selectCompany(entity: value);
+                                  .selectSystem(entity: value);
                             },
                             label: tr('select_system'),
                             initState: () {

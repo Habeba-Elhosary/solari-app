@@ -77,7 +77,7 @@ class AddSystemScreen extends StatelessWidget {
                     Validator.defaultValidator(value?.name),
                 options: context.watch<AllSystemsCubit>().systems,
                 onChanged: (System value) {
-                  context.read<SystemHomeCubit>().selectCompany(entity: value);
+                  context.read<SystemHomeCubit>().selectSystem(entity: value);
                 },
                 label: tr('select_technician'),
                 initState: () {

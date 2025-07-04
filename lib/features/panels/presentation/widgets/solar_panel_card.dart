@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:solari/core/constants/app_assets.dart';
 import 'package:solari/core/constants/app_colors.dart';
 import 'package:solari/core/constants/app_fonts.dart';
@@ -10,7 +11,8 @@ import 'package:solari/features/panels/presentation/pages/panel_details_screen.d
 import 'package:solari/injection_container.dart';
 
 class SolarPanelCard extends StatelessWidget {
-  final String id;
+  final int id;
+  final String name;
   final String power;
   final String statusLabel;
   final Color textColor;
@@ -19,6 +21,7 @@ class SolarPanelCard extends StatelessWidget {
   const SolarPanelCard({
     super.key,
     required this.id,
+    required this.name,
     required this.power,
     required this.statusLabel,
     required this.textColor,
@@ -52,7 +55,7 @@ class SolarPanelCard extends StatelessWidget {
                 ),
                 AppSpacer(widthRatio: 0.4),
                 Text(
-                  id,
+                  name,
                   style: TextStyles.regular16
                       .copyWith(fontFamily: AppFonts.robotoSlab),
                 ),
@@ -94,6 +97,29 @@ class SolarPanelCard extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class SolarPanelCardShimmer extends StatelessWidget {
+  const SolarPanelCardShimmer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey.shade300,
+      highlightColor: Colors.grey.shade100,
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.grey.shade300,
+            width: 1,
+          ),
+          borderRadius: BorderRadius.circular(20.r),
+          color: AppColors.white,
+        ),
+        padding: EdgeInsets.all(16.sp),
       ),
     );
   }

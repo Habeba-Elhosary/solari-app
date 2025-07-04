@@ -8,9 +8,6 @@ import 'package:solari/core/constants/app_text_styles.dart';
 import 'package:solari/core/utils/app_validator/app_validator.dart';
 import 'package:solari/core/widgets/app_spacer.dart';
 import 'package:solari/core/widgets/password_text_form_field.dart';
-import 'package:solari/core/widgets/single_drop_down_selector.dart';
-import 'package:solari/features/general/domain/entities/all_systems_response.dart';
-import 'package:solari/features/general/presentation/cubits/all_systems/all_systems_cubit.dart';
 import 'package:solari/features/profile/presentation/cubits/add_technician/add_technician_cubit.dart';
 import 'package:solari/injection_container.dart';
 
@@ -82,26 +79,6 @@ class _AddTechnicianScreenState extends State<AddTechnicianScreen> {
                         labelText: tr('password'),
                         controller: passwordController,
                         validator: (String? value) => Validator.password(value),
-                      ),
-                      AppSpacer(heightRatio: 0.7),
-                      CoreSingleSelectorDropdown<
-                          AllSystemsCubit,
-                          AllSystemsState,
-                          AllSystemsLoading,
-                          AllSystemsError,
-                          System>(
-                        validator: (System? value) =>
-                            Validator.defaultValidator(value?.name),
-                        options: context.watch<AllSystemsCubit>().systems,
-                        onChanged: (System value) {
-                          context
-                              .read<AddTechnicianCubit>()
-                              .selectCompany(entity: value);
-                        },
-                        label: tr('select_system'),
-                        initState: () {
-                          context.read<AllSystemsCubit>().getAllSystemsEvent();
-                        },
                       ),
                       AppSpacer(heightRatio: 1),
                       BlocBuilder<AddTechnicianCubit, AddTechnicianState>(

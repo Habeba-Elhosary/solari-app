@@ -12,13 +12,13 @@ class SystemHomeCubit extends Cubit<SystemHomeState> {
 
   System? system;
 
-  void selectCompany({
+  void selectSystem({
     required BaseSelectableEntity entity,
   }) {
-    emit(SystemHomeLoading());
+    emit(SystemHomeInitial());
     system = entity as System;
     getSystemHomeEvent();
-    emit(SystemHomeInitial());
+    emit(SystemHomeLoading());
   }
 
   Future<void> getSystemHomeEvent() async {

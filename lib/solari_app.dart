@@ -18,6 +18,7 @@ import 'package:solari/features/general/presentation/cubits/all_systems/all_syst
 import 'package:solari/features/home/presentation/cubitS/nav_bar/nav_bar_cubit.dart';
 import 'package:solari/features/home/presentation/cubits/system_home/system_home_cubit.dart';
 import 'package:solari/features/home/presentation/pages/main_screen.dart';
+import 'package:solari/features/panels/presentation/cubits/all_panels/all_panels_cubit.dart';
 import 'package:solari/injection_container.dart';
 
 class MyApp extends StatefulWidget {
@@ -70,6 +71,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         ),
         BlocProvider<SystemHomeCubit>(
           create: (BuildContext context) => sl<SystemHomeCubit>(),
+        ),
+        BlocProvider<AllPanelsCubit>(
+          create: (BuildContext context) => sl<AllPanelsCubit>(),
         ),
         BlocProvider<AllSystemsCubit>(
           create: (BuildContext context) => sl<AllSystemsCubit>(),

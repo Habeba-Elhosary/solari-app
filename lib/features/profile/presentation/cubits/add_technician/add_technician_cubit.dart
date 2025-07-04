@@ -1,9 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:solari/core/widgets/single_drop_down_selector.dart';
 import 'package:solari/core/widgets/toast.dart';
-import 'package:solari/features/general/domain/entities/all_systems_response.dart';
 import 'package:solari/features/profile/domain/repositories/profile_repository.dart';
 import 'package:solari/features/profile/domain/usecases/add_technician_usecase.dart';
 import 'package:solari/injection_container.dart';
@@ -13,17 +11,6 @@ class AddTechnicianCubit extends Cubit<AddTechnicianState> {
   final AddTechnician addTechnician;
   AddTechnicianCubit({required this.addTechnician})
       : super(AddTechnicianInitial());
-
-  System? system;
-
-  void selectCompany({
-    required BaseSelectableEntity entity,
-  }) {
-    emit(AddTechnicianLoading());
-    system = entity as System;
-    emit(AddTechnicianInitial());
-  }
-
   Future<void> addTechnicianEvent({
     required String technicianName,
     required String technicianEmail,
@@ -35,7 +22,6 @@ class AddTechnicianCubit extends Cubit<AddTechnicianState> {
         name: technicianName,
         email: technicianEmail,
         password: technicianPassword,
-        systemId: system!.id,
       ),
     );
     result.fold((failure) {
