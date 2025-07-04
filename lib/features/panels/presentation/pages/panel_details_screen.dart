@@ -95,6 +95,7 @@ class PanelDetailsScreen extends StatelessWidget {
                         ),
                         AppSpacer(heightRatio: 0.7),
                         FaultLogSection(
+                          panelId: panelId,
                           faults: state.panelDetailsResponse.data.faults,
                         ),
                         AppSpacer(heightRatio: 0.7),

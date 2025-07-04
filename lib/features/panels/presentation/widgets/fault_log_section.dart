@@ -13,8 +13,10 @@ import 'package:solari/features/panels/presentation/widgets/fault_log_entry.dart
 import 'package:solari/injection_container.dart';
 
 class FaultLogSection extends StatelessWidget {
+  final int panelId;
   final List<Fault>? faults;
-  const FaultLogSection({super.key, this.faults});
+  const FaultLogSection({super.key, this.faults, required this.panelId});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,7 +41,7 @@ class FaultLogSection extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              appNavigator.push(screen: const FaultLogScreen());
+              appNavigator.push(screen: FaultLogScreen(panelId: panelId));
             },
             child: Row(
               children: [
@@ -76,12 +78,7 @@ class FaultLogSection extends StatelessWidget {
             Center(
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 16.sp),
-                child: Text(
-                  tr('No Faults Found'),
-                  style: TextStyles.regular16.copyWith(
-                    fontFamily: AppFonts.robotoSlab,
-                  ),
-                ),
+                child: Text(tr('No Faults Found')),
               ),
             ),
           ]

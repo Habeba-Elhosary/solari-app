@@ -4,6 +4,7 @@ import 'package:solari/core/errors/failures.dart';
 import 'package:solari/features/panels/data/datasources/panels_remote_datasource.dart';
 import 'package:solari/features/panels/domain/entities/all_panels_response.dart';
 import 'package:solari/features/panels/domain/entities/panel_details_response.dart';
+import 'package:solari/features/panels/domain/entities/panel_faults_response.dart';
 import 'package:solari/features/panels/domain/repositories/panels_repository.dart';
 
 class PanelsRepositoryImpl implements PanelsRepository {
@@ -27,6 +28,18 @@ class PanelsRepositoryImpl implements PanelsRepository {
     try {
       final PanelDetailsResponse response =
           await panelsRemoteDatasource.getPanelDetails(panelId);
+      return right(response);
+    } on ServerException catch (error) {
+      return left(ServerFailure.formServerException(error));
+    }
+  }
+
+  @override
+  Future<Either<Failure, PanelFaultsResponse>> getPanelFaults(
+      int panelId) async {
+    try {
+      final PanelFaultsResponse response =
+          await panelsRemoteDatasource.getPanelFaults(panelId);
       return right(response);
     } on ServerException catch (error) {
       return left(ServerFailure.formServerException(error));
