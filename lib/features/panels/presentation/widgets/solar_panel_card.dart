@@ -31,7 +31,7 @@ class SolarPanelCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => appNavigator.push(screen: PanelDetailsScreen()),
+      onTap: () => appNavigator.push(screen: PanelDetailsScreen(panelId: id)),
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(

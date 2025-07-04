@@ -2,7 +2,9 @@ import 'package:solari/features/panels/data/datasources/panels_remote_datasource
 import 'package:solari/features/panels/data/repositories/panels_repository_impl.dart';
 import 'package:solari/features/panels/domain/repositories/panels_repository.dart';
 import 'package:solari/features/panels/domain/usecases/all_panels_usecase.dart';
+import 'package:solari/features/panels/domain/usecases/panel_details_usecase.dart';
 import 'package:solari/features/panels/presentation/cubits/all_panels/all_panels_cubit.dart';
+import 'package:solari/features/panels/presentation/cubits/panel_details/panel_details_cubit.dart';
 import 'package:solari/injection_container.dart';
 
 void initPanelsInjection() async {
@@ -12,9 +14,13 @@ void initPanelsInjection() async {
       allPanelsUsecase: sl(),
     ),
   );
+  sl.registerFactory<PanelDetailsCubit>(
+    () => PanelDetailsCubit(panelDetailsUsecase: sl()),
+  );
 
   //* UseCases
   sl.registerLazySingleton(() => AllPanelsUsecase(repository: sl()));
+  sl.registerLazySingleton(() => PanelDetailsUsecase(repository: sl()));
 
   //* Repositories
   sl.registerLazySingleton<PanelsRepository>(

@@ -36,7 +36,6 @@ class AllPanelsSection extends StatelessWidget {
           if (state is AllPanelsSuccess) {
             return GridView.builder(
               shrinkWrap: true,
-              physics: const BouncingScrollPhysics(),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 16.sp,

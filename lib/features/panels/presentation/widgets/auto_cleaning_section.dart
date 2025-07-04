@@ -8,7 +8,8 @@ import 'package:solari/core/constants/app_text_styles.dart';
 import 'package:solari/core/widgets/app_spacer.dart';
 
 class AutoCleaningSection extends StatelessWidget {
-  const AutoCleaningSection({super.key});
+  final num waterLevel;
+  const AutoCleaningSection({super.key, required this.waterLevel});
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +67,7 @@ class AutoCleaningSection extends StatelessWidget {
                         ),
                         Positioned(
                           bottom: 20.sp,
-                          child: Text('55%',
+                          child: Text('$waterLevel%',
                               style: TextStyles.bold20.copyWith(
                                 fontFamily: AppFonts.robotoSlab,
                                 color: AppColors.white,

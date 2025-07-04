@@ -9,7 +9,18 @@ import 'package:solari/core/widgets/app_spacer.dart';
 import 'package:solari/features/panels/presentation/widgets/performance_item.dart';
 
 class PanelPerformance extends StatelessWidget {
-  const PanelPerformance({super.key});
+  final String current;
+  final String voltage;
+  final String power;
+  final String todayEnergy;
+
+  const PanelPerformance({
+    super.key,
+    required this.current,
+    required this.voltage,
+    required this.power,
+    required this.todayEnergy,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -47,22 +58,22 @@ class PanelPerformance extends StatelessWidget {
                 children: [
                   PerformanceItem(
                     title: '${tr('current')} :',
-                    value: '12 A',
+                    value: current,
                   ),
                   AppSpacer(heightRatio: 0.3),
                   PerformanceItem(
                     title: "${tr('voltage')} :",
-                    value: '4 V',
+                    value: voltage,
                   ),
                   AppSpacer(heightRatio: 0.3),
                   PerformanceItem(
                     title: "${tr('power')} :",
-                    value: '4.8 kw',
+                    value: power,
                   ),
                   AppSpacer(heightRatio: 0.3),
                   PerformanceItem(
                     title: "${tr('energy')} :",
-                    value: '5 kwh',
+                    value: todayEnergy,
                   ),
                 ],
               ),
