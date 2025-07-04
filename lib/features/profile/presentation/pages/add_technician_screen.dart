@@ -7,6 +7,7 @@ import 'package:solari/core/constants/app_fonts.dart';
 import 'package:solari/core/constants/app_text_styles.dart';
 import 'package:solari/core/utils/app_validator/app_validator.dart';
 import 'package:solari/core/widgets/app_spacer.dart';
+import 'package:solari/core/widgets/loading.dart';
 import 'package:solari/core/widgets/password_text_form_field.dart';
 import 'package:solari/features/profile/presentation/cubits/add_technician/add_technician_cubit.dart';
 import 'package:solari/injection_container.dart';
@@ -81,27 +82,23 @@ class _AddTechnicianScreenState extends State<AddTechnicianScreen> {
                         validator: (String? value) => Validator.password(value),
                       ),
                       AppSpacer(heightRatio: 1),
-                      BlocBuilder<AddTechnicianCubit, AddTechnicianState>(
-                        builder: (context, state) {
-                          if (state is AddTechnicianLoading) {
-                            return CircularProgressIndicator.adaptive();
-                          }
-                          return ElevatedButton(
-                              onPressed: () {
-                                if (!_formKey.currentState!.validate()) {
-                                  return;
-                                }
-                                context
-                                    .read<AddTechnicianCubit>()
-                                    .addTechnicianEvent(
-                                      technicianName: nameController.text,
-                                      technicianEmail: emailController.text,
-                                      technicianPassword:
-                                          passwordController.text,
-                                    );
-                              },
-                              child: Text(tr('add_technician')));
-                        },
+                      Visibility(
+                        visible: state is! AddTechnicianLoading,
+                        replacement: Loading(),
+                        child: ElevatedButton(
+                            onPressed: () {
+                              if (!_formKey.currentState!.validate()) {
+                                return;
+                              }
+                              context
+                                  .read<AddTechnicianCubit>()
+                                  .addTechnicianEvent(
+                                    technicianName: nameController.text,
+                                    technicianEmail: emailController.text,
+                                    technicianPassword: passwordController.text,
+                                  );
+                            },
+                            child: Text(tr('add_technician'))),
                       )
                     ],
                   ),

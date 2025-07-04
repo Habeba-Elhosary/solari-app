@@ -15,6 +15,7 @@ import 'package:solari/features/check_internet/cubit/check_internet_cubit.dart';
 import 'package:solari/features/check_internet/cubit/check_internet_state.dart';
 import 'package:solari/features/check_internet/pages/no_internet_dialog.dart';
 import 'package:solari/features/general/presentation/cubits/all_systems/all_systems_cubit.dart';
+import 'package:solari/features/general/presentation/cubits/all_technicians/all_technicians_cubit.dart';
 import 'package:solari/features/home/presentation/cubitS/nav_bar/nav_bar_cubit.dart';
 import 'package:solari/features/home/presentation/cubits/system_home/system_home_cubit.dart';
 import 'package:solari/features/home/presentation/pages/main_screen.dart';
@@ -77,6 +78,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         ),
         BlocProvider<AllSystemsCubit>(
           create: (BuildContext context) => sl<AllSystemsCubit>(),
+        ),
+        BlocProvider<AllTechniciansCubit>(
+          create: (BuildContext context) => sl<AllTechniciansCubit>(),
         ),
       ],
       child: BlocConsumer<InternetConnectionCubit, InternetConnectionState>(
