@@ -22,6 +22,7 @@ class SystemHomeCubit extends Cubit<SystemHomeState> {
   }
 
   Future<void> getSystemHomeEvent() async {
+    if (system == null) return;
     emit(SystemHomeLoading());
     final result = await getSystemHome(system!.id);
     result.fold(

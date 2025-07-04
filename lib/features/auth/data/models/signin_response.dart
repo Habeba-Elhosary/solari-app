@@ -1,3 +1,4 @@
+import 'package:solari/core/utils/enums/user_types.dart';
 import 'package:solari/core/utils/responses/core_response.dart';
 
 class SignInResponse extends ApiResponse<AuthData> {
@@ -31,6 +32,7 @@ class AuthData {
   final String? otpToken;
   final bool otpVerified;
   final String token;
+  final UserType userType;
 
   AuthData({
     required this.name,
@@ -38,6 +40,7 @@ class AuthData {
     required this.otpToken,
     required this.otpVerified,
     required this.token,
+    required this.userType,
   });
 
   factory AuthData.fromJson(Map<String, dynamic> json) {
@@ -47,6 +50,7 @@ class AuthData {
       otpToken: json['otp_token'],
       otpVerified: json['otp_verified'],
       token: json['token'],
+      userType: UserType.fromStringKey(json['role'] ?? ''),
     );
   }
 

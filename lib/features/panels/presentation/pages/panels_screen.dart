@@ -9,8 +9,10 @@ import 'package:solari/core/constants/app_colors.dart';
 import 'package:solari/core/constants/app_fonts.dart';
 import 'package:solari/core/constants/app_text_styles.dart';
 import 'package:solari/core/utils/app_validator/app_validator.dart';
+import 'package:solari/core/utils/enums/user_types.dart';
 import 'package:solari/core/widgets/app_spacer.dart';
 import 'package:solari/core/widgets/single_drop_down_selector.dart';
+import 'package:solari/features/auth/presentation/cubits/signin/signin_cubit.dart';
 import 'package:solari/features/general/domain/entities/all_systems_response.dart';
 import 'package:solari/features/general/presentation/cubits/all_systems/all_systems_cubit.dart';
 import 'package:solari/features/panels/presentation/cubits/all_panels/all_panels_cubit.dart';
@@ -34,6 +36,7 @@ class _PanelsScreenState extends State<PanelsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.read<SignInCubit>().user;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -60,38 +63,42 @@ class _PanelsScreenState extends State<PanelsScreen> {
           padding: EdgeInsets.all(16.sp),
           child: Column(
             children: [
-              BlocListener<AllSystemsCubit, AllSystemsState>(
-                listenWhen: (prev, curr) => curr is AllSystemsLoaded,
-                listener: (context, state) {
-                  final allPanelsCubit = context.read<AllPanelsCubit>();
-                  final allSystemsCubit = context.read<AllSystemsCubit>();
+              if (user.userType == UserType.manager) ...[
+                BlocListener<AllSystemsCubit, AllSystemsState>(
+                  listenWhen: (prev, curr) => curr is AllSystemsLoaded,
+                  listener: (context, state) {
+                    final allPanelsCubit = context.read<AllPanelsCubit>();
+                    final allSystemsCubit = context.read<AllSystemsCubit>();
 
-                  if (allSystemsCubit.systems.isNotEmpty &&
-                      allPanelsCubit.system == null) {
-                    final firstSystem = allSystemsCubit.systems.first;
-                    allPanelsCubit.selectSystem(entity: firstSystem);
-                  }
-                },
-                child: CoreSingleSelectorDropdown<
-                    AllSystemsCubit,
-                    AllSystemsState,
-                    AllSystemsLoading,
-                    AllSystemsError,
-                    System>(
-                  validator: (System? value) =>
-                      Validator.defaultValidator(value?.name),
-                  options: context.watch<AllSystemsCubit>().systems,
-                  onChanged: (System value) {
-                    context.read<AllPanelsCubit>().selectSystem(entity: value);
+                    if (allSystemsCubit.systems.isNotEmpty &&
+                        allPanelsCubit.system == null) {
+                      final firstSystem = allSystemsCubit.systems.first;
+                      allPanelsCubit.selectSystem(entity: firstSystem);
+                    }
                   },
-                  label: tr('select_system'),
-                  initState: () {
-                    context.read<AllSystemsCubit>().getAllSystemsEvent();
-                  },
-                  initValue: context.read<AllPanelsCubit>().system,
+                  child: CoreSingleSelectorDropdown<
+                      AllSystemsCubit,
+                      AllSystemsState,
+                      AllSystemsLoading,
+                      AllSystemsError,
+                      System>(
+                    validator: (System? value) =>
+                        Validator.defaultValidator(value?.name),
+                    options: context.watch<AllSystemsCubit>().systems,
+                    onChanged: (System value) {
+                      context
+                          .read<AllPanelsCubit>()
+                          .selectSystem(entity: value);
+                    },
+                    label: tr('select_system'),
+                    initState: () {
+                      context.read<AllSystemsCubit>().getAllSystemsEvent();
+                    },
+                    initValue: context.read<AllPanelsCubit>().system,
+                  ),
                 ),
-              ),
-              AppSpacer(heightRatio: 0.7),
+                AppSpacer(heightRatio: 0.7),
+              ],
               BlocBuilder<AllPanelsCubit, AllPanelsState>(
                 builder: (context, state) {
                   if (state is AllPanelsLoading) {
