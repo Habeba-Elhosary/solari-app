@@ -112,8 +112,8 @@ class _SignInScreenState extends State<SignInScreen> {
                               valueListenable: isFormValid,
                               builder: (context, isValid, child) {
                                 return Visibility(
+                                  visible: signInState is! SignInLoading,
                                   replacement: const Center(child: Loading()),
-                                  visible: SignInState is! SignInLoading,
                                   child: ElevatedButton(
                                     onPressed: isValid
                                         ? () {

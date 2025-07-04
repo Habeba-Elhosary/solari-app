@@ -9,6 +9,7 @@ import 'package:solari/core/constants/app_text_styles.dart';
 import 'package:solari/core/constants/size_configuration.dart';
 import 'package:solari/core/utils/app_validator/app_validator.dart';
 import 'package:solari/core/widgets/app_spacer.dart';
+import 'package:solari/core/widgets/loading.dart';
 import 'package:solari/features/auth/presentation/cubits/forget_password/forget_password_cubit.dart';
 import 'package:solari/features/auth/presentation/pages/verify_otp/verify_otp_screen.dart';
 import 'package:solari/injection_container.dart';
@@ -30,80 +31,74 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
       body: BlocProvider<ForgetPasswordCubit>(
         create: (BuildContext context) => sl<ForgetPasswordCubit>(),
         child: SafeArea(
-          child: Padding(
+          child: SingleChildScrollView(
             padding: SizeConfig.paddingSymmetric.copyWith(top: 10.sp),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                Expanded(
-                  flex: 4,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Image.asset(
-                        AppAssets.appLogoBlue,
-                        height: 130.sp,
-                      ),
-                      const AppSpacer(heightRatio: 3),
-                      Text(
-                        tr('do_you_forgot_password'),
-                        style: TextStyles.bold18
-                            .copyWith(fontFamily: AppFonts.robotoSlab),
-                      ),
-                      const AppSpacer(heightRatio: 0.5),
-                      Text(
-                        tr('forgot_password_description'),
-                        style: TextStyles.bold14
-                            .copyWith(color: AppColors.greyDark),
-                      ),
-                      const AppSpacer(heightRatio: 1),
-                      Form(
-                        key: _formKey,
-                        child: TextFormField(
-                          onTapOutside: (PointerDownEvent event) {
-                            FocusScope.of(context).unfocus();
-                          },
-                          cursorColor: AppColors.primary,
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          controller: emailController,
-                          keyboardType: TextInputType.emailAddress,
-                          validator: (String? value) => Validator.email(value),
-                          decoration: InputDecoration(
-                            labelText: tr('email'),
-                          ),
-                        ),
-                      ),
-                      const AppSpacer(heightRatio: 1),
-                      BlocConsumer<ForgetPasswordCubit, ForgetPasswordState>(
-                        listener: (context, state) {
-                          if (state is ForgetPasswordSuccess) {
-                            appNavigator.push(
-                              screen: OTPVerficationScreen(
-                                isForgetPassword: true,
-                                email: emailController.text,
-                                otpToken: state.otpToken,
-                              ),
-                            );
-                          }
-                        },
-                        builder: (context, state) {
-                          return ElevatedButton(
-                            onPressed: () {
-                              if (!_formKey.currentState!.validate()) {
-                                return;
-                              }
-                              context
-                                  .read<ForgetPasswordCubit>()
-                                  .forgetPasswordEvent(
-                                      email: emailController.text);
-                            },
-                            child: Text(tr('send_code')),
-                          );
-                        },
-                      ),
-                    ],
+                Image.asset(
+                  AppAssets.appLogoBlue,
+                  height: 130.sp,
+                ),
+                const AppSpacer(heightRatio: 3),
+                Text(
+                  tr('do_you_forgot_password'),
+                  style: TextStyles.bold18
+                      .copyWith(fontFamily: AppFonts.robotoSlab),
+                ),
+                const AppSpacer(heightRatio: 0.5),
+                Text(
+                  tr('forgot_password_description'),
+                  style: TextStyles.bold14.copyWith(color: AppColors.greyDark),
+                ),
+                const AppSpacer(heightRatio: 1),
+                Form(
+                  key: _formKey,
+                  child: TextFormField(
+                    onTapOutside: (PointerDownEvent event) {
+                      FocusScope.of(context).unfocus();
+                    },
+                    cursorColor: AppColors.primary,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    controller: emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    validator: (String? value) => Validator.email(value),
+                    decoration: InputDecoration(
+                      labelText: tr('email'),
+                    ),
                   ),
+                ),
+                const AppSpacer(heightRatio: 1),
+                BlocConsumer<ForgetPasswordCubit, ForgetPasswordState>(
+                  listener: (context, state) {
+                    if (state is ForgetPasswordSuccess) {
+                      appNavigator.push(
+                        screen: OTPVerficationScreen(
+                          isForgetPassword: true,
+                          email: emailController.text,
+                          otpToken: state.otpToken,
+                        ),
+                      );
+                    }
+                  },
+                  builder: (context, state) {
+                    return Visibility(
+                      visible: state is! ForgetPasswordLoading,
+                      replacement: const Center(child: Loading()),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (!_formKey.currentState!.validate()) {
+                            return;
+                          }
+                          context
+                              .read<ForgetPasswordCubit>()
+                              .forgetPasswordEvent(email: emailController.text);
+                        },
+                        child: Text(tr('send_code')),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
