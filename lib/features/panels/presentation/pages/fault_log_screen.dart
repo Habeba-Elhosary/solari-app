@@ -53,9 +53,8 @@ class FaultLogScreen extends StatelessWidget {
                             child: FaultLogEntry(
                               title: state.faults[index].title,
                               description: state.faults[index].desc,
-                              //TODO : get time and date
-                              time: '10:00 AM',
-                              date: '10-2-25',
+                              time: state.faults[index].time,
+                              date: state.faults[index].date,
                             ),
                           ),
                           separatorBuilder: (context, index) =>

@@ -68,9 +68,8 @@ class FaultLogSection extends StatelessWidget {
                 return FaultLogEntry(
                   title: log.title,
                   description: log.desc,
-                  // TODO : GET IT FROM BACK
-                  time: '',
-                  date: '',
+                  time: log.time,
+                  date: log.date,
                 );
               },
             ),

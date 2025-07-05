@@ -66,14 +66,20 @@ class Data {
 class Fault {
   final String title;
   final String desc;
+  final String date;
+  final String time;
 
   Fault({
     required this.title,
     required this.desc,
+    required this.date,
+    required this.time,
   });
 
   factory Fault.fromJson(Map<String, dynamic> json) => Fault(
         title: json["title"],
         desc: json["desc"],
+        date: json["date"],
+        time: json["time"],
       );
 }
