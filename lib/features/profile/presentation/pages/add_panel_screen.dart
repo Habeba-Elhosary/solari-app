@@ -151,6 +151,7 @@ class _AddPanelScreenState extends State<AddPanelScreen> {
                         onTap: () async {
                           Position? position = await getAndSetLocation();
                           if (position == null) return;
+                          // ignore: use_build_context_synchronously
                           Future.microtask(() => context
                               .read<AddPanelCubit>()
                               .setPosition(p: position));

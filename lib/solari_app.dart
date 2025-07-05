@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:solari/core/constants/theme/app_material_theme.dart';
 import 'package:solari/core/utils/app_navigation/app_navigator.dart';
 import 'package:solari/core/widgets/handle_error_screen.dart';
+import 'package:solari/features/analytics/presentation/cubits/analytics_cubit.dart';
 import 'package:solari/features/auth/auth_cubits.dart';
 import 'package:solari/features/auth/presentation/cubits/auto_signin/auto_signin_cubit.dart';
 import 'package:solari/features/auth/presentation/pages/onboarding/onboarding_screen.dart';
@@ -81,6 +82,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         ),
         BlocProvider<AllTechniciansCubit>(
           create: (BuildContext context) => sl<AllTechniciansCubit>(),
+        ),
+        BlocProvider<AnalyticsCubit>(
+          create: (context) => sl<AnalyticsCubit>()..getAllAnalyticsEvent(),
         ),
       ],
       child: BlocConsumer<InternetConnectionCubit, InternetConnectionState>(

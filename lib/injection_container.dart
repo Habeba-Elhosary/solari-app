@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:solari/core/utils/app_api_base_helper/app_api_base_helper.dart';
 import 'package:solari/core/utils/app_navigation/app_navigator.dart';
+import 'package:solari/features/analytics/analytics_injection.dart';
 import 'package:solari/features/auth/auth_injection.dart';
 import 'package:solari/features/general/general_injection.dart';
 import 'package:solari/features/home/home_injection.dart';
@@ -21,6 +22,7 @@ abstract class ServiceLocator {
     initGeneralInjection();
     initProfileInjection();
     initPanelsInjection();
+    initAnalyticsInjection();
 
     // core
     _injectSharedPreferences();

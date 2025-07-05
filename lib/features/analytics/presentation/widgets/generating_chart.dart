@@ -71,6 +71,7 @@ class GeneratingChart extends StatelessWidget {
           SizedBox(
             height: 250.sp,
             child: SingleChildScrollView(
+              padding: EdgeInsets.all(10.sp),
               scrollDirection: Axis.horizontal,
               child: SizedBox(
                 width: 800.sp,
