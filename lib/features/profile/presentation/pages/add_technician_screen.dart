@@ -50,8 +50,7 @@ class _AddTechnicianScreenState extends State<AddTechnicianScreen> {
                       TextFormField(
                         controller: nameController,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (String? value) =>
-                            Validator.defaultValidator(value),
+                        validator: (String? value) => Validator.name(value),
                         keyboardType: TextInputType.name,
                         cursorColor: AppColors.primary,
                         onTapOutside: (PointerDownEvent event) {
@@ -66,7 +65,7 @@ class _AddTechnicianScreenState extends State<AddTechnicianScreen> {
                         controller: emailController,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (String? value) => Validator.email(value),
-                        keyboardType: TextInputType.name,
+                        keyboardType: TextInputType.emailAddress,
                         cursorColor: AppColors.primary,
                         onTapOutside: (PointerDownEvent event) {
                           FocusScope.of(context).unfocus();

@@ -26,6 +26,7 @@ class AddPanelCubit extends Cubit<AddPanelState> {
   Future<void> addPanelEvent({
     required String name,
     required int panelId,
+    required int maxCapacity,
   }) async {
     emit(AddPanelLoading());
     final result = await addPanel(
@@ -33,6 +34,7 @@ class AddPanelCubit extends Cubit<AddPanelState> {
         panelName: name,
         panelId: panelId,
         systemId: system!.id,
+        maxCapacity: maxCapacity,
       ),
     );
     result.fold((failure) {

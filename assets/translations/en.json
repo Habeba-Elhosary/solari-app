@@ -26,6 +26,7 @@
   "password_changed_successfully" : "Password changed successfully",
   "system_id": "System ID",
   "location": "Location",
+  "max_capacity": "Max Capacity",
   "system_added_successfully": "System was added successfully",
   "panel_added_successfully":"Panel was added successfully",
   "technician_added_successfully":"Technician was added successfully",

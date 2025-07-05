@@ -52,8 +52,7 @@ class _AddSystemScreenState extends State<AddSystemScreen> {
                       TextFormField(
                         controller: systemNameController,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (String? value) =>
-                            Validator.defaultValidator(value),
+                        validator: (String? value) => Validator.name(value),
                         keyboardType: TextInputType.name,
                         cursorColor: AppColors.primary,
                         onTapOutside: (PointerDownEvent event) {
@@ -68,7 +67,7 @@ class _AddSystemScreenState extends State<AddSystemScreen> {
                         controller: systemIdController,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (String? value) => Validator.numbers(value),
-                        keyboardType: TextInputType.name,
+                        keyboardType: TextInputType.number,
                         cursorColor: AppColors.primary,
                         onTapOutside: (PointerDownEvent event) {
                           FocusScope.of(context).unfocus();
@@ -82,7 +81,7 @@ class _AddSystemScreenState extends State<AddSystemScreen> {
                         controller: locationController,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (String? value) => Validator.name(value),
-                        keyboardType: TextInputType.name,
+                        keyboardType: TextInputType.text,
                         cursorColor: AppColors.primary,
                         onTapOutside: (PointerDownEvent event) {
                           FocusScope.of(context).unfocus();

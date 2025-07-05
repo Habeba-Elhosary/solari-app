@@ -23,6 +23,8 @@ class AddPanelScreen extends StatefulWidget {
 class _AddPanelScreenState extends State<AddPanelScreen> {
   final TextEditingController panelNameController = TextEditingController();
   final TextEditingController panelIdController = TextEditingController();
+  final TextEditingController maxCapacityController = TextEditingController();
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -49,8 +51,7 @@ class _AddPanelScreenState extends State<AddPanelScreen> {
                       TextFormField(
                         controller: panelNameController,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (String? value) =>
-                            Validator.defaultValidator(value),
+                        validator: (String? value) => Validator.name(value),
                         keyboardType: TextInputType.name,
                         cursorColor: AppColors.primary,
                         onTapOutside: (PointerDownEvent event) {
@@ -65,13 +66,27 @@ class _AddPanelScreenState extends State<AddPanelScreen> {
                         controller: panelIdController,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (String? value) => Validator.numbers(value),
-                        keyboardType: TextInputType.name,
+                        keyboardType: TextInputType.number,
                         cursorColor: AppColors.primary,
                         onTapOutside: (PointerDownEvent event) {
                           FocusScope.of(context).unfocus();
                         },
                         decoration: InputDecoration(
                           label: Text(tr('panel_id')),
+                        ),
+                      ),
+                      AppSpacer(heightRatio: 0.7),
+                      TextFormField(
+                        controller: maxCapacityController,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        validator: (String? value) => Validator.numbers(value),
+                        keyboardType: TextInputType.number,
+                        cursorColor: AppColors.primary,
+                        onTapOutside: (PointerDownEvent event) {
+                          FocusScope.of(context).unfocus();
+                        },
+                        decoration: InputDecoration(
+                          label: Text(tr('max_capacity')),
                         ),
                       ),
                       AppSpacer(heightRatio: 0.7),
@@ -106,11 +121,13 @@ class _AddPanelScreenState extends State<AddPanelScreen> {
                                   return;
                                 }
                                 context.read<AddPanelCubit>().addPanelEvent(
-                                      name: panelNameController.text,
-                                      panelId: int.tryParse(
-                                              panelIdController.text) ??
-                                          0,
-                                    );
+                                    name: panelNameController.text,
+                                    panelId:
+                                        int.tryParse(panelIdController.text) ??
+                                            0,
+                                    maxCapacity: int.tryParse(
+                                            maxCapacityController.text) ??
+                                        0);
                               },
                               child: Text(tr('add_panel')));
                         },

@@ -11,11 +11,13 @@ class AddPanelParams {
   final String panelName;
   final int panelId;
   final int systemId;
+  final int maxCapacity;
 
   AddPanelParams({
     required this.panelName,
     required this.panelId,
     required this.systemId,
+    required this.maxCapacity,
   });
 
   Map<String, dynamic> toJson() {
@@ -23,6 +25,7 @@ class AddPanelParams {
       'name': panelName,
       'cell_id': panelId,
       'system_id': systemId,
+      'max_capacity': maxCapacity
     };
   }
 }
