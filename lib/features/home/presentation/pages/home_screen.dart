@@ -24,6 +24,25 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   final user = context.read<SignInCubit>().user;
+
+  //   if (user.userType == UserType.manager) {
+  //     // هيعمل load لما يفتح الدروب داون
+  //     // مش محتاجين نعمل حاجة هنا
+  //   } else {
+  //     // technician أو غيره: نجيب السيستمز ونبعت أول واحد تلقائيًا
+  //     final allSystemsCubit = context.read<AllSystemsCubit>();
+  //     allSystemsCubit.getAllSystemsEvent().then((_) {
+  //       final systems = allSystemsCubit.systems;
+  //       if (systems.isNotEmpty) {
+  //         context.read<SystemHomeCubit>().selectSystem(entity: systems.first);
+  //       }
+  //     });
+  //   }
+  // }
   @override
   void initState() {
     super.initState();

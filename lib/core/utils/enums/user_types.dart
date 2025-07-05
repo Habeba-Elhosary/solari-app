@@ -1,18 +1,18 @@
 // ignore_for_file: constant_identifier_names
 
-const String FOLLOW_UP = 'follow_up';
+const String CLIENT = 'client';
 const String TECHNICIAN = 'technician';
 const String MANAGER = 'manager';
 
 enum UserType {
-  folllowUp,
+  client,
   technician,
   manager;
 
   String getServerString() {
     switch (this) {
-      case UserType.folllowUp:
-        return FOLLOW_UP;
+      case UserType.client:
+        return CLIENT;
       case UserType.technician:
         return TECHNICIAN;
       case UserType.manager:
@@ -22,14 +22,14 @@ enum UserType {
 
   static UserType fromStringKey(String key) {
     switch (key) {
-      case FOLLOW_UP:
-        return UserType.folllowUp;
+      case CLIENT:
+        return UserType.client;
       case TECHNICIAN:
         return UserType.technician;
       case MANAGER:
         return UserType.manager;
       default:
-        return UserType.folllowUp;
+        return UserType.technician;
     }
   }
 }
