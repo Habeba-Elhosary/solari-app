@@ -8,6 +8,7 @@ import 'package:solari/core/constants/app_assets.dart';
 import 'package:solari/core/constants/app_colors.dart';
 import 'package:solari/core/constants/app_fonts.dart';
 import 'package:solari/core/constants/app_text_styles.dart';
+import 'package:solari/core/utils/enums/user_types.dart';
 import 'package:solari/core/widgets/app_spacer.dart';
 import 'package:solari/features/auth/presentation/cubits/signin/signin_cubit.dart';
 import 'package:solari/features/auth/presentation/widgets/signout_dialog.dart';
@@ -94,9 +95,8 @@ class ProfileScreen extends StatelessWidget {
                                   fontFamily: AppFonts.robotoSlab),
                             ),
                             AppSpacer(heightRatio: 0.2),
-                            //TODO: add role
                             Text(
-                              "Technician",
+                              user.userType.getServerString(),
                               style: TextStyles.medium14
                                   .copyWith(color: AppColors.white),
                             ),
@@ -135,20 +135,22 @@ class ProfileScreen extends StatelessWidget {
                           appNavigator.push(screen: EditProfileScreen());
                         },
                       ),
-                      ProfileItem(
-                        asset: AppAssets.addTech,
-                        title: tr('add_tech'),
-                        onTap: () {
-                          appNavigator.push(screen: AddTechnicianScreen());
-                        },
-                      ),
-                      ProfileItem(
-                        asset: AppAssets.addSystem,
-                        title: tr('add_system'),
-                        onTap: () {
-                          appNavigator.push(screen: AddSystemScreen());
-                        },
-                      ),
+                      if (user.userType == UserType.manager) ...[
+                        ProfileItem(
+                          asset: AppAssets.addTech,
+                          title: tr('add_tech'),
+                          onTap: () {
+                            appNavigator.push(screen: AddTechnicianScreen());
+                          },
+                        ),
+                        ProfileItem(
+                          asset: AppAssets.addSystem,
+                          title: tr('add_system'),
+                          onTap: () {
+                            appNavigator.push(screen: AddSystemScreen());
+                          },
+                        ),
+                      ],
                       ProfileItem(
                         asset: AppAssets.addPanel,
                         title: tr('add_panel'),
