@@ -6,6 +6,7 @@ import 'package:solari/core/constants/app_colors.dart';
 import 'package:solari/core/constants/app_fonts.dart';
 import 'package:solari/core/constants/app_text_styles.dart';
 import 'package:solari/core/constants/size_configuration.dart';
+import 'package:solari/core/widgets/loading.dart';
 import 'package:solari/injection_container.dart';
 import '../../../../../core/widgets/app_spacer.dart';
 import '../cubits/signout/signout_cubit.dart';
@@ -28,18 +29,26 @@ class LogoutDialog extends StatelessWidget {
         ),
         Row(
           children: <Widget>[
-            Expanded(
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.red,
-                ),
-                onPressed: () {
-                  context.read<SignOutCubit>().signOutEvent();
-                },
-                child: Text(
-                  tr('sign_out'),
-                ),
-              ),
+            BlocBuilder<SignOutCubit, SignOutState>(
+              builder: (context, state) {
+                return Visibility(
+                  visible: state is! SignOutLoading,
+                  replacement: Expanded(child: Loading()),
+                  child: Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.red,
+                      ),
+                      onPressed: () {
+                        context.read<SignOutCubit>().signOutEvent();
+                      },
+                      child: Text(
+                        tr('sign_out'),
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
             const AppSpacer(widthRatio: 0.3),
             Expanded(
