@@ -54,6 +54,10 @@ class AppMaterialTheme {
       borderRadius: BorderRadius.circular(16.r),
       borderSide: BorderSide(color: Color(0XFFE9ECEF), width: 1.sp),
     ),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(16.r),
+      borderSide: BorderSide(color: Color(0XFFE9ECEF), width: 1.sp),
+    ),
   );
 
   static ThemeData lightTheme = ThemeData(

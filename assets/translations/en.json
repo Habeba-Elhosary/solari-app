@@ -27,6 +27,7 @@
   "system_id": "System ID",
   "location": "Location",
   "max_capacity": "Max Capacity",
+  "tap_here_to_set_location": "Tap here to set location",
   "system_added_successfully": "System was added successfully",
   "panel_added_successfully":"Panel was added successfully",
   "technician_added_successfully":"Technician was added successfully",
