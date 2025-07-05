@@ -22,6 +22,7 @@ class AllPanelsCubit extends Cubit<AllPanelsState> {
   }
 
   Future<void> getAllPanelsEvent() async {
+    if (system == null) return;
     emit(AllPanelsLoading());
     final result = await allPanelsUsecase(system!.id);
     result.fold(

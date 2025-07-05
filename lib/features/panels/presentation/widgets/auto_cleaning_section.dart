@@ -9,11 +9,16 @@ import 'package:solari/core/widgets/app_spacer.dart';
 
 class AutoCleaningSection extends StatelessWidget {
   final num waterLevel;
-  const AutoCleaningSection({super.key, required this.waterLevel});
+  final bool isCleaning;
+
+  const AutoCleaningSection({
+    super.key,
+    required this.waterLevel,
+    required this.isCleaning,
+  });
 
   @override
   Widget build(BuildContext context) {
-    bool isCleaning = true;
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,

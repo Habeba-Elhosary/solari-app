@@ -30,6 +30,7 @@ class Data {
   final String todayEnergy;
   final List<Fault>? faults;
   final num waterLevel;
+  final bool isCleaning;
   final DateTime nextCleaningTime;
 
   Data({
@@ -43,6 +44,7 @@ class Data {
     required this.todayEnergy,
     required this.faults,
     required this.waterLevel,
+    required this.isCleaning,
     required this.nextCleaningTime,
   });
 
@@ -60,6 +62,7 @@ class Data {
             : List<Fault>.from(json["faults"].map((x) => Fault.fromJson(x))),
         waterLevel: json["water_level"],
         nextCleaningTime: DateTime.parse(json["next_cleaning_time"]),
+        isCleaning: json["is_cleaning"] == 1 ? true : false,
       );
 }
 

@@ -100,6 +100,8 @@ class PanelDetailsScreen extends StatelessWidget {
                         ),
                         AppSpacer(heightRatio: 0.7),
                         AutoCleaningSection(
+                          isCleaning:
+                              state.panelDetailsResponse.data.isCleaning,
                           waterLevel:
                               state.panelDetailsResponse.data.waterLevel,
                         ),
