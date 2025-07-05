@@ -43,23 +43,31 @@ class FaultLogScreen extends StatelessWidget {
                   padding: EdgeInsets.all(16.sp),
                   child: state.faults.isEmpty
                       ? Center(child: Text(tr('No Faults Found')))
-                      : ListView.separated(
-                          itemBuilder: (context, index) => Container(
-                            padding: EdgeInsets.all(10.sp),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16.r),
-                              color: AppColors.white,
+                      : RefreshIndicator(
+                          color: AppColors.primary,
+                          onRefresh: () async {
+                            context
+                                .read<PanelFaultsCubit>()
+                                .getPanelFaultsEvent(panelId);
+                          },
+                          child: ListView.separated(
+                            itemBuilder: (context, index) => Container(
+                              padding: EdgeInsets.all(10.sp),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(16.r),
+                                color: AppColors.white,
+                              ),
+                              child: FaultLogEntry(
+                                title: state.faults[index].title,
+                                description: state.faults[index].desc,
+                                time: state.faults[index].time,
+                                date: state.faults[index].date,
+                              ),
                             ),
-                            child: FaultLogEntry(
-                              title: state.faults[index].title,
-                              description: state.faults[index].desc,
-                              time: state.faults[index].time,
-                              date: state.faults[index].date,
-                            ),
+                            separatorBuilder: (context, index) =>
+                                AppSpacer(heightRatio: 0.3),
+                            itemCount: state.faults.length,
                           ),
-                          separatorBuilder: (context, index) =>
-                              AppSpacer(heightRatio: 0.3),
-                          itemCount: state.faults.length,
                         ),
                 ),
               );

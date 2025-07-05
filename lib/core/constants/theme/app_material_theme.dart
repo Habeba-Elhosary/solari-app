@@ -57,6 +57,7 @@ class AppMaterialTheme {
   );
 
   static ThemeData lightTheme = ThemeData(
+    indicatorColor: AppColors.primary,
     brightness: Brightness.light,
     useMaterial3: false,
     actionIconTheme: ActionIconThemeData(
@@ -74,6 +75,8 @@ class AppMaterialTheme {
     appBarTheme: appBarTheme,
     inputDecorationTheme: inputDecorationTheme,
     elevatedButtonTheme: elevatedButtonTheme,
+    progressIndicatorTheme:
+        ProgressIndicatorThemeData(color: AppColors.primary),
   );
 
   static ThemeData darkTheme = ThemeData(
