@@ -103,7 +103,7 @@ class ProfileScreen extends StatelessWidget {
                           ],
                         ),
                         Spacer(),
-                        SvgPicture.asset(AppAssets.edit)
+                        SvgPicture.asset(AppAssets.edit, height: 23.sp),
                       ],
                     ),
                   ),
